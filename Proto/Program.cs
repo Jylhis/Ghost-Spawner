@@ -22,7 +22,12 @@ namespace Proto
                 //Get window surface
                 var gScreenSurface = SDL.SDL_GetWindowSurface( gWindow );
             }
-            while (true) { }
+            var gHelloWorld = SDL.SDL_LoadBMP("test.bmp");
+            if (gHelloWorld == null)
+            {
+                Console.WriteLine("Unable to load image %s! SDL Error: %s\n", "02_getting_an_image_on_the_screen/hello_world.bmp", SDL.SDL_GetError());
+            }
+            //while (true) { }
 
             // Aloita game loop
         }
