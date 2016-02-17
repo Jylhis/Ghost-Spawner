@@ -16,5 +16,9 @@ namespace Proto
             {1,1,1,1}
         };
 
+        public Room()
+        {
+
+        }
     }
 }

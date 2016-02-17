@@ -16,5 +16,10 @@ namespace Proto
             {1,0,0,1},
             {1,1,1,1} */
         };
+
+        public Area()
+        {
+            // Create rooms: Room room = new Room();
+        }
     }
 }
