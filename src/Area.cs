@@ -23,4 +23,15 @@ namespace src
             // Create rooms: Room room = new Room();
         }
     }
+
+	class Room 
+	{
+		int x;
+		int y;
+		// level? difficulty?
+		void generate()
+		{
+
+		}
+	}
 }

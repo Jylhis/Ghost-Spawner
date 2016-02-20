@@ -9,5 +9,9 @@ namespace src
 {
     class Enemy : Character
     {
+		public Enemy()
+		{
+
+		}
     }
 }

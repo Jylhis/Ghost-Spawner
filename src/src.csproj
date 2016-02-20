@@ -71,8 +71,8 @@
     <Compile Include="Area.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Room.cs" />
     <Compile Include="Weapon.cs" />
+    <Compile Include="Camera.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -84,7 +84,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SDL2.dll" />
     <Content Include="Resources\BENCH.bmp" />
     <Content Include="Resources\test.bmp" />
     <Content Include="Resources\BENCH.GIF" />

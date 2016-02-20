@@ -38,7 +38,7 @@ Global
 		$1.DirectoryNamespaceAssociation = None
 		$1.ResourceNamePolicy = FileFormatDefault
 		$0.StandardHeader = $2
-		$2.Text = @Copyright ${Year} ${CopyrightHolder}\n
+		$2.Text = Copyright ${Year} ${CopyrightHolder}
 		$2.IncludeInNewFiles = True
 		$0.NameConventionPolicy = $3
 		$3.Rules = $4
