@@ -14,7 +14,6 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -72,12 +71,6 @@
     <Compile Include="Area.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Room.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
@@ -91,14 +84,39 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\test.bmp" />
     <Content Include="SDL2.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Content Include="Resources\BENCH.bmp" />
+    <Content Include="Resources\test.bmp" />
+    <Content Include="Resources\BENCH.GIF" />
+    <Content Include="Resources\CLIFFVEG.bmp" />
+    <Content Include="Resources\CLIFSHD.bmp" />
+    <Content Include="Resources\CLIFVEG2.bmp" />
+    <Content Include="Resources\ENCINT.GIF" />
+    <Content Include="Resources\FENCDAM.bmp" />
+    <Content Include="Resources\FENCE.bmp" />
+    <Content Include="Resources\FENCSHD1.bmp" />
+    <Content Include="Resources\FENCSHD2.bmp" />
+    <Content Include="Resources\GRS2ROC.bmp" />
+    <Content Include="Resources\INVEN3.TIF" />
+    <Content Include="Resources\KITCHEN.GIF" />
+    <Content Include="Resources\PAVE.bmp" />
+    <Content Include="Resources\RUIN.bmp" />
+    <Content Include="Resources\TABLE1.GIF" />
+    <Content Include="Resources\TEST5B.bmp" />
+    <Content Include="Resources\TEST7B.bmp" />
+    <Content Include="Resources\TOWNBOT.bmp" />
+    <Content Include="Resources\TOWNBOT2.bmp" />
+    <Content Include="Resources\TOWNDOOR.bmp" />
+    <Content Include="Resources\TOWNJNT.bmp" />
+    <Content Include="Resources\TOWNJNT2.bmp" />
+    <Content Include="Resources\TOWNSHD1.bmp" />
+    <Content Include="Resources\TOWNTOP.bmp" />
+    <Content Include="Resources\TOWNWIN.bmp" />
+    <Content Include="Resources\TREE.GIF" />
+    <Content Include="Resources\VILDAM.bmp" />
+    <Content Include="Resources\VILFLR.bmp" />
+    <Content Include="Resources\VILINT.bmp" />
+    <Content Include="Resources\VILSHD.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

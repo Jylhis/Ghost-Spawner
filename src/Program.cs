@@ -6,31 +6,57 @@ using System.Text;
 using System.Threading.Tasks;
 using SDL2;
 
-namespace Proto
+namespace src
 {
     class Program
     {
-        static void Main(string[] args)
-        {
-            SDL.SDL_Init(SDL.SDL_INIT_EVERYTHING);
-            var gWindow = SDL.SDL_CreateWindow("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED,800, 600, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
-            if(gWindow == null)
-            {
-                Console.WriteLine( "Window could not be created! SDL_Error: {0}\n", SDL.SDL_GetError() );
-            }
-            else
-            {
-                //Get window surface
-                var gScreenSurface = SDL.SDL_GetWindowSurface( gWindow );
-            }
-            var gHelloWorld = SDL.SDL_LoadBMP("test.bmp");
-            if (gHelloWorld == null)
-            {
-                Console.WriteLine("Unable to load image %s! SDL Error: %s\n", "02_getting_an_image_on_the_screen/hello_world.bmp", SDL.SDL_GetError());
-            }
-            //while (true) { }
+		static int Main(string[] args)
+		{
+			IntPtr window = IntPtr.Zero;
 
-            // Aloita game loop
-        }
+			// Init stuff
+			bool quit = false;
+			SDL.SDL_Event e;
+
+			window = Init(window);
+
+			IntPtr surface = SDL.SDL_GetWindowSurface( window );
+			IntPtr image = SDL.SDL_LoadBMP ("Media/test.bmp");  // Load image
+			SDL.SDL_BlitSurface(image, IntPtr.Zero, surface, IntPtr.Zero);
+			SDL.SDL_UpdateWindowSurface (window);
+
+			//  Main game loop
+			while (!quit) {
+				// Handle events
+				while (SDL.SDL_PollEvent (out e) != 0) {
+					//User requests quit
+					if (e.type == SDL.SDL_EventType.SDL_QUIT) {
+						return 0;
+					}
+				}
+			}
+
+			// Free stuff from memory
+			SDL.SDL_FreeSurface (surface);
+			SDL.SDL_DestroyWindow (window);
+
+			SDL.SDL_Quit ();
+
+			return 0;
+		}
+		static IntPtr Init(IntPtr window) {
+			SDL.SDL_Init(SDL.SDL_INIT_VIDEO);
+			window = SDL.SDL_CreateWindow(
+				"Peli",
+				SDL.SDL_WINDOWPOS_UNDEFINED, 
+				SDL.SDL_WINDOWPOS_UNDEFINED,
+				800, 600, 
+				SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
+			if (window == IntPtr.Zero) {
+				Console.WriteLine("Could not create window: " + SDL.SDL_GetError());
+
+			}
+			return window;
+		}
     }
 }
