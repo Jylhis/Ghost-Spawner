@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src", "Proto\src.csproj", "{C5E2A132-C0FF-40EE-B429-41CD98ADDF4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src", "src\src.csproj", "{C5E2A132-C0FF-40EE-B429-41CD98ADDF4B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sdl2", "sdl2\sdl2.csproj", "{434126FF-0089-4894-973B-F671091A8F6C}"
 EndProject
