@@ -12,24 +12,37 @@ namespace src
     {
 		static int Main(string[] args)
 		{
-			IntPtr window = IntPtr.Zero;
-
 			// Init stuff
-			bool quit = false;
-			SDL.SDL_Event e;
+			bool quit = false; // Quit game
+			SDL.SDL_Event e; // Catch events
 			Player player = new Player();  // Create player
 			Area level = new Area(); // Create Level
 
+			// Start SDL
+			if (SDL.SDL_Init (SDL.SDL_INIT_VIDEO) != 0) {
+				Console.WriteLine("Could not start SDL: " + SDL.SDL_GetError());
+			}
 
-			window = Init(window);
+			// Create window
+			IntPtr window = SDL.SDL_CreateWindow("Peli",SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED,800, 600, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
+			if (window == IntPtr.Zero) {
+				Console.WriteLine("Could not create window: " + SDL.SDL_GetError());
+			}
 
-			IntPtr surface = SDL.SDL_GetWindowSurface( window );
-			IntPtr image = SDL.SDL_LoadBMP ("Media/test.bmp");  // Load image
-			SDL.SDL_BlitSurface(image, IntPtr.Zero, surface, IntPtr.Zero);
-			SDL.SDL_UpdateWindowSurface (window);
+			// Create Renderer
+			IntPtr renderer = SDL.SDL_CreateRenderer(window, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
+			if (renderer == IntPtr.Zero) {
+				Console.WriteLine("Could not create renderer: " + SDL.SDL_GetError());
+			}
 
 			//  Main game loop
+			// https://stackoverflow.com/questions/21007329/what-is-a-sdl-renderer
 			while (!quit) {
+
+				// Render to window
+				SDL.SDL_RenderClear(renderer);
+				// FIXME: SDL.SDL_RenderCopy(renderer,texture, null, null);
+				SDL.SDL_RenderPresent(renderer);
 
 				// Handle events
 				while (SDL.SDL_PollEvent (out e) != 0) {
@@ -47,26 +60,14 @@ namespace src
 			}
 
 			// Free stuff from memory
-			SDL.SDL_FreeSurface (surface);
+			// FIXME: SDL.SDL_DestroyTexture(texture);
+			SDL.SDL_DestroyRenderer(renderer);
 			SDL.SDL_DestroyWindow (window);
 			SDL.SDL_Quit ();  // Quit everything SDL
 
 			return 0;
 		}
 
-		static IntPtr Init(IntPtr window) {
-			SDL.SDL_Init(SDL.SDL_INIT_VIDEO);
-			window = SDL.SDL_CreateWindow(
-				"Peli",
-				SDL.SDL_WINDOWPOS_UNDEFINED, 
-				SDL.SDL_WINDOWPOS_UNDEFINED,
-				800, 600, 
-				SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN);
-			if (window == IntPtr.Zero) {
-				Console.WriteLine("Could not create window: " + SDL.SDL_GetError());
 
-			}
-			return window;
-		}
     }
 }

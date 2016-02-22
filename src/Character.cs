@@ -11,8 +11,7 @@ namespace src
     class Character
     {
 		// Coordinates
-		public int x;
-		public int y;
+		public SDL.SDL_Rect size;
 		private struct velocity {
 			public static int x;
 			public static int y;
@@ -23,7 +22,13 @@ namespace src
         public int Attack;
         private bool IsKill;
         private Weapon weapon;
-		// Sprite sprite;
+		private string sprite = "player.bmp";
+
+
+		public Character() {
+			IntPtr bmp = SDL.SDL_LoadBMP (sprite);
+			// FIXME: SDL.SDL_CreateTexture (src.Program.renderer, bmp, SDL.SDL_TextureAccess.SDL_TEXTUREACCESS_STATIC, size.w, size.h);
+		}
         
 		public int Health{
             get{return health;}
@@ -40,7 +45,7 @@ namespace src
 		}
 
 		public void Render() {
-
+			// Render sprite
 		}
 
 		private void attack() {
@@ -48,6 +53,7 @@ namespace src
 
 		public void OnEvent(SDL.SDL_Event e) {
 			// map keyboard & controller
+
 
 		}
 
