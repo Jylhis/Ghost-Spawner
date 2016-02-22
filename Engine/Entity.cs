@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SDL2;
 
-namespace src
+namespace Engine
 {
     class Entity
     {
@@ -23,16 +23,12 @@ namespace src
 			public static int x;
 			public static int y;
 		}
-		public struct maxVel {
-			public static int x;
-			public static int y;
-		}
+		public int maxVel;
 		protected int level;
 		protected int health;
         public int Defense;
         public int Attack;
 		protected bool IsKill;
-		protected Weapon weapon;
 		protected string sprite = "character.bmp";
 		public IntPtr Texture;
 		public bool flip = false;
@@ -55,6 +51,7 @@ namespace src
                 }
             }
         }
+
 		/// <summary>
 		/// Increase level by 1.
 		/// </summary>
@@ -62,7 +59,8 @@ namespace src
 			level++;
 		}
 
-		private void attack() {
+		private void attack(Entity other) {
+			other.health -= this.Attack-other.Defense;
 		}
 
 	}

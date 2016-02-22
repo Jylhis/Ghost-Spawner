@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SDL2;
+using Engine;
 
 namespace src
 {
-    class Weapon
+    class Enemy : Entity
     {
-        private int damage;
-        private int speed;
-        private int type;
+		
+
     }
 }

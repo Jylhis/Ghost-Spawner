@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{72C67841-EE77-42DE-9FA5-71400BE5583E}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Engine</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entity.cs" />
+  </ItemGroup>
+</Project>
