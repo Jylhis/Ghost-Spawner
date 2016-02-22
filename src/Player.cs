@@ -8,15 +8,28 @@ using SDL2;
 
 namespace src
 {
-    class Player : Character
+    class Player : Entity
     {
 		
+		new string sprite = "Resources/Player.bmp";
+		public Player(ref IntPtr renderer) {
+			
+			size.w = 55;
+			size.h = 55;
+			
+			IntPtr bmp = SDL.SDL_LoadBMP (sprite);
+			if (bmp == IntPtr.Zero) {
+				Console.WriteLine (" - SDL_LoadBMP Error: " + SDL.SDL_GetError());
+			}
 
-		public Player() {
-
+			Texture = SDL.SDL_CreateTextureFromSurface (renderer, bmp);
+			SDL.SDL_FreeSurface (bmp);
+			if (Texture == IntPtr.Zero) {
+				Console.WriteLine (" - SDL_CreateTextureFromSurface Error: " + SDL.SDL_GetError());
+			}
 		}
 
-		new public void OnEvent(SDL.SDL_Event e) {
+		public void OnEvent(SDL.SDL_Event e) {
 			// map keyboard & controller
 		}
         
