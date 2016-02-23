@@ -1,29 +1,26 @@
 ﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+using SDL2;
+using System;
 
 namespace src
 {
-    class Program
-    {
-		static int Main(string[] args)
+	class Program
+	{
+		static int Main (string[] args)
 		{
-			// Init
-			Game game = new Game();
+			Game game = new Game ("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 800, 600, false);
             
-			Player player = new Player(10, 10, 55, 55, "player", ref game);  // Create player
+			Player player = new Player (10, 10, 55, 55, "player", ref game);
 
-			//  Main game loop
 			while (game.IsRunning) {
-                game.HandleEvents();
-                game.Update();
-
-                player.Update();
-
-                game.Render(ref player);
-
-                
+				game.HandleEvents ();
+				game.Update ();
+				game.Render ();
 			}
-			game.Clean();
+
+			game = null;
+
 			return 0;
 		}
-    }
+	}
 }

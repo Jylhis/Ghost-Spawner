@@ -8,28 +8,33 @@ using SDL2;
 
 namespace src
 {
-    public class Player : GameObject
-    {
-		int maxVel = 10;
-        Game game;
-	
-		public Player(int x, int y, int h, int w, string tid, ref Game peli) : base(x, y, h, w, tid) {
-            // Load(x, y, h, w, tid);
-            game = peli;
-            game.LoadTexture("Resources/Player.bmp", "player");
+	public class Player : GameObject
+	{
+		//int maxVel = 10;
+		Game game;
+
+		public Player (int x, int y, int h, int w, string tid, ref Game peli) : base (x, y, h, w, tid)
+		{
+			Console.WriteLine ("Init: "+this);
+			game = peli;
+			if (game.LoadTexture ("Resources/Player.bmp", "player")) {
+				Console.WriteLine ("LoadTexture success from: " + this);
+			}
            
-        }
+		}
 
-        public new void Draw()
-        {
-            base.Draw(ref game);
+		public void Draw ()
+		{
+			base.Draw (ref game);
+			Console.WriteLine ("Calls gameObject Draw from: "+this);
 
-        }
-        public new void Update()
-        {
-            
+		}
 
-            /*If a key was pressed
+		public new void Update ()
+		{
+			Console.WriteLine ("Updated: " + this);
+
+			/*If a key was pressed
             if (e.type == SDL.SDL_EventType.SDL_KEYDOWN && e.key.repeat == 0)
             {
                 //Adjust the velocity
@@ -55,11 +60,13 @@ namespace src
                 }
             }*/
 
-        }
-        public new void Clean()
-        {
-            base.Clean();
-        }
+		}
+
+		public new void Clean ()
+		{
+			base.Clean ();
+			Console.WriteLine ("Calls gameObject Clean from: "+this);
+		}
         
-    }
+	}
 }

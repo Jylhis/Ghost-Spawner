@@ -13,23 +13,32 @@ namespace src
 		/// <summary>
 		/// True if program is running.
 		/// </summary>
-		public bool IsRunning = true;
-		/// <summary>
-		/// The renderer.
-		/// </summary>
-		public IntPtr Renderer;
-        public IntPtr Texture;
+		public bool IsRunning = false;
 		/// <summary>
 		/// The window.
 		/// </summary>
 		public IntPtr Window;
 		/// <summary>
+		/// The renderer.
+		/// </summary>
+		public IntPtr Renderer;
+		/// <summary>
+		/// The texture.
+		/// </summary>
+		public IntPtr Texture;
+		/// <summary>
 		/// Events.
 		/// </summary>
 		public SDL.SDL_Event Events;
-        public int currentFrame;
-        public Dictionary<string, IntPtr> textureDict;
-        
+		/// <summary>
+		/// The current frame.
+		/// </summary>
+		public int currentFrame;
+		/// <summary>
+		/// The texture dict.
+		/// </summary>
+		public Dictionary<string, IntPtr> textureDict;
+
 
 		/// <summary>
 		/// Polls the events.
@@ -48,116 +57,178 @@ namespace src
 		/// <summary>
 		/// Initializes a new instance of the <see cref="src.Game"/> class.
 		/// </summary>
-		public Game()
+		public Game (string title, int x, int y, int w, int h, bool fullscreen)
 		{
+			SDL.SDL_WindowFlags flags = 0;
+			if (fullscreen) {
+				flags = SDL.SDL_WindowFlags.SDL_WINDOW_FULLSCREEN;
+			}
+			Console.WriteLine ("Constructor");
 			// Start SDL
 			if (SDL.SDL_Init (SDL.SDL_INIT_VIDEO) != 0) {
 				Console.WriteLine ("Could not start SDL: " + SDL.SDL_GetError ());
 			} else {
-
+				Console.WriteLine ("SDL started");
 				// Create window
-				Window = SDL.SDL_CreateWindow ("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL.SDL_WindowFlags.SDL_WINDOW_SHOWN|SDL.SDL_WindowFlags.SDL_WINDOW_INPUT_FOCUS);
+				Window = SDL.SDL_CreateWindow (title, x, y, w, h,flags);
 				if (Window == IntPtr.Zero) {
 					Console.WriteLine ("Could not create window: " + SDL.SDL_GetError ());
 				} else {
-
+					Console.WriteLine ("Window started");
 					// Create Renderer
-					// https://stackoverflow.com/questions/21007329/what-is-a-sdl-renderer
-					Renderer = SDL.SDL_CreateRenderer (this.Window, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
+					Renderer = SDL.SDL_CreateRenderer (Window, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
 					if (Renderer == IntPtr.Zero) {
 						Console.WriteLine ("Could not create renderer: " + SDL.SDL_GetError ());
-					} 
+					} else {
+						Console.WriteLine ("Renderer started");
+						IsRunning = true;
+						SDL.SDL_SetRenderDrawColor (Renderer, 0, 0, 0, 0);
+					}
 				}
 			}
-            textureDict = new Dictionary<string, IntPtr>();
-        }
+			textureDict = new Dictionary<string, IntPtr> ();
+		}
 
-        public void Update()
-        {
-            currentFrame = (int)((SDL.SDL_GetTicks() / 100) % 6);
-        }
+		/// <summary>
+		/// Update this instance.
+		/// </summary>
+		public void Update ()
+		{
+			//Console.WriteLine ("Update");
+			currentFrame = (int)((SDL.SDL_GetTicks () / 100) % 6);
+		}
 
-        public void HandleEvents()
-        {
-            // Handle events
-            if (PollEvents)
-            {
-                switch(Events.type)
-                {
-                    case SDL.SDL_EventType.SDL_QUIT: IsRunning = false; break;
-                    case SDL.SDL_EventType.SDL_KEYDOWN:
-                    case SDL.SDL_EventType.SDL_KEYUP: break;
-                    default: break;
-                }
-            }
-        }
+		/// <summary>
+		/// Handles the events.
+		/// </summary>
+		public void HandleEvents ()
+		{
+			//Console.WriteLine ("HandleEvents");
+			// Handle events
+			if (PollEvents) {
+				switch (Events.type) {
+				case SDL.SDL_EventType.SDL_QUIT:
+					Console.WriteLine ("Event QUIT");
+					IsRunning = false;
+					break;
+				case SDL.SDL_EventType.SDL_KEYDOWN:
+					Console.WriteLine ("Event Key_DOWN");
+					break;
+				case SDL.SDL_EventType.SDL_KEYUP:
+					Console.WriteLine ("Event Key_UP");
+					break;
+				default:
+					break;
+				}
+			}
+		}
 
-        public void Render(ref Player player)
-        {
-            // Render to window
-            SDL.SDL_RenderClear(Renderer);
+		/// <summary>
+		/// Render this instance.
+		/// </summary>
+		public void Render ()
+		{
+			//Console.WriteLine ("Render");
 
-            player.Draw();
+			// Render to window
+			SDL.SDL_RenderClear (Renderer);
 
-            SDL.SDL_RenderPresent(Renderer);
-        }
+			// TODO: Put everything in Renderer
 
-        public bool LoadTexture(string path, string id)
-        {
-            IntPtr bmp = SDL.SDL_LoadBMP(path);
-            if (bmp == IntPtr.Zero)
-            {
-                Console.WriteLine(" - SDL_LoadBMP Error: " + SDL.SDL_GetError());
-            }
+			SDL.SDL_RenderPresent (Renderer);
+		}
 
-            Texture = SDL.SDL_CreateTextureFromSurface(Renderer, bmp);
-            SDL.SDL_FreeSurface(bmp);
-            if (Texture != IntPtr.Zero)
-            {
-                textureDict[id] = Texture;
-                return true;
-            }
-            return false;
-        }
+		/// <summary>
+		/// Loads the texture.
+		/// </summary>
+		/// <returns><c>true</c>, if texture was loaded, <c>false</c> otherwise.</returns>
+		/// <param name="path">Path.</param>
+		/// <param name="id">Identifier.</param>
+		public bool LoadTexture (string path, string id)
+		{
+			Console.WriteLine ("LoadTexture: path: "+path+", id: "+id);
+			IntPtr bmp = SDL.SDL_LoadBMP (path);
+			if (bmp == IntPtr.Zero) {
+				Console.WriteLine (" - SDL_LoadBMP Error: " + SDL.SDL_GetError ());
+			} else {
+				Console.WriteLine ("BMP loaded");
+			}
 
-        public void DrawTexture(string id, int x, int y, int w, int h, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
-        {
-            SDL.SDL_Rect srcRect;
-            SDL.SDL_Rect destRect;
+			Texture = SDL.SDL_CreateTextureFromSurface (Renderer, bmp);
+			SDL.SDL_FreeSurface (bmp);
+			if (Texture != IntPtr.Zero) {
+				textureDict [id] = Texture;
 
-            srcRect.x = 0;
-            srcRect.y = 0;
-            srcRect.w = destRect.w = w;
-            srcRect.h = destRect.h = h;
-            destRect.x = x;
-            destRect.y = y;
+				if (textureDict [id] != IntPtr.Zero) {
+					Console.WriteLine ("Texture putted in Dict");
+				} else {
+					Console.WriteLine ("Error putting texture int dict");
+				}
+				return true;
+			}
+			return false;
+		}
 
-            SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0, IntPtr.Zero, flip);
-        }
+		/// <summary>
+		/// Draws the texture.
+		/// </summary>
+		/// <param name="id">Identifier.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="w">The width.</param>
+		/// <param name="h">The height.</param>
+		/// <param name="flip">Flip.</param>
+		public void DrawTexture (string id, int x, int y, int w, int h, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
+		{
+			Console.WriteLine ("DrawTexture");
+			SDL.SDL_Rect srcRect;
+			SDL.SDL_Rect destRect;
 
-        public void DrawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
-        {
-            SDL.SDL_Rect srcRect;
-            SDL.SDL_Rect destRect;
+			srcRect.x = 0;
+			srcRect.y = 0;
+			srcRect.w = destRect.w = w;
+			srcRect.h = destRect.h = h;
+			destRect.x = x;
+			destRect.y = y;
 
-            srcRect.x = w * currentFrame;
-            srcRect.y = h * (currentRow - 1);
-            srcRect.w = destRect.w = w;
-            srcRect.h = destRect.h = h;
-            destRect.x = x;
-            destRect.y = y; 
+			SDL.SDL_RenderCopyEx (Renderer, textureDict [id], ref srcRect, ref destRect, 0, IntPtr.Zero, flip);
+		}
 
-            SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0, IntPtr.Zero, flip);
-        }
+		/// <summary>
+		/// Draws the frame.
+		/// </summary>
+		/// <param name="id">Identifier.</param>
+		/// <param name="x">The x coordinate.</param>
+		/// <param name="y">The y coordinate.</param>
+		/// <param name="w">The width.</param>
+		/// <param name="h">The height.</param>
+		/// <param name="currentRow">Current row.</param>
+		/// <param name="currentFrame">Current frame.</param>
+		/// <param name="flip">Flip.</param>
+		public void DrawFrame (string id, int x, int y, int w, int h, int currentRow, int currentFrame, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
+		{
+			Console.WriteLine ("DrawFrame");
+			SDL.SDL_Rect srcRect;
+			SDL.SDL_Rect destRect;
 
+			srcRect.x = w * currentFrame;
+			srcRect.y = h * (currentRow - 1);
+			srcRect.w = destRect.w = w;
+			srcRect.h = destRect.h = h;
+			destRect.x = x;
+			destRect.y = y; 
 
-        /// <summary>
-        /// Free everything from memory and closes SDL.
-        /// </summary>
-        public void Clean(){
+			SDL.SDL_RenderCopyEx (Renderer, textureDict [id], ref srcRect, ref destRect, 0, IntPtr.Zero, flip);
+		}
+
+		/// <summary>
+		/// Free everything from memory and closes SDL.
+		/// </summary
+		~Game() {
+			Console.WriteLine ("Destructor");
 			// Free stuff from memory
-			SDL.SDL_DestroyRenderer(Renderer);
 			SDL.SDL_DestroyWindow (Window);
+			SDL.SDL_DestroyRenderer (Renderer);
 			SDL.SDL_Quit ();  // Quit everything SDL
 		}
 	}
