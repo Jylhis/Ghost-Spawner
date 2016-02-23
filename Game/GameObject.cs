@@ -51,10 +51,10 @@ namespace src
 		/// Draw the instance.
 		/// </summary>
 		/// <param name="game">Game.</param>
-		public void Draw (ref Game game)
+		public void Draw ()
 		{
 			Console.WriteLine ("Draw: "+this);
-			game.DrawFrame (this.id, this.sizePos.x, this.sizePos.y, this.sizePos.w, this.sizePos.h, this.currentRow, this.currentFrame);
+			TextureManager.Instance.DrawFrame (this.id, this.sizePos.x, this.sizePos.y, this.sizePos.w, this.sizePos.h, this.currentRow, this.currentFrame, Program.game.Renderer);
 		}
 
 		/// <summary>

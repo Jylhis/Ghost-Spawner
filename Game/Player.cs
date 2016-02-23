@@ -11,21 +11,20 @@ namespace src
 	public class Player : GameObject
 	{
 		//int maxVel = 10;
-		Game game;
+		//Game game;
 
-		public Player (int x, int y, int h, int w, string tid, ref Game peli) : base (x, y, h, w, tid)
+		public Player (int x, int y, int h, int w, string tid) : base (x, y, h, w, tid)
 		{
 			Console.WriteLine ("Init: "+this);
-			game = peli;
-			if (game.LoadTexture ("Resources/Player.bmp", "player")) {
+			if (TextureManager.Instance.LoadTexture ("Resources/Player.bmp", "player",Program.game.Renderer)) {
 				Console.WriteLine ("LoadTexture success from: " + this);
 			}
            
 		}
 
-		public void Draw ()
+		new public void Draw ()
 		{
-			base.Draw (ref game);
+			base.Draw ();
 			Console.WriteLine ("Calls gameObject Draw from: "+this);
 
 		}
@@ -33,7 +32,7 @@ namespace src
 		public new void Update ()
 		{
 			Console.WriteLine ("Updated: " + this);
-
+			sizePos.x+=100;
 			/*If a key was pressed
             if (e.type == SDL.SDL_EventType.SDL_KEYDOWN && e.key.repeat == 0)
             {

@@ -30,11 +30,6 @@ namespace src
 		/// The current frame.
 		/// </summary>
 		public int currentFrame;
-		/// <summary>
-		/// The texture dict.
-		/// </summary>
-		public Dictionary<string, IntPtr> textureDict;
-
 
 		/// <summary>
 		/// Polls the events.
@@ -82,7 +77,7 @@ namespace src
 					}
 				}
 			}
-			textureDict = new Dictionary<string, IntPtr> ();
+
 		}
 
 		/// <summary>
@@ -130,98 +125,14 @@ namespace src
 			// Render to window
 			SDL.SDL_RenderClear (Renderer);
 
-			DrawTexture ("player", 0, 0, 55, 55);
-			DrawFrame ("player", 100, 0, 55, 55,1,currentFrame );
-			// TODO: Put everything in Renderer
+			// Render all the stuff
+			TextureManager.Instance.DrawTexture ("player", 0, 0, 55, 55, Renderer);
+			TextureManager.Instance.DrawFrame ("player", 100, 0, 55, 55,1,currentFrame, Renderer);
 
 			SDL.SDL_RenderPresent (Renderer);
 		}
 
-		/// <summary>
-		/// Loads the texture.
-		/// </summary>
-		/// <returns><c>true</c>, if texture was loaded, <c>false</c> otherwise.</returns>
-		/// <param name="path">Path.</param>
-		/// <param name="id">Identifier.</param>
-		public bool LoadTexture (string path, string id)
-		{
-			Console.WriteLine ("LoadTexture: path: "+path+", id: "+id);
-			IntPtr tempSurface = SDL.SDL_LoadBMP (path);
-			if (tempSurface == IntPtr.Zero) {
-				Console.WriteLine (" - SDL_LoadBMP Error: " + SDL.SDL_GetError ());
-				return false;
-			} else {
-				Console.WriteLine ("BMP loaded");
-			}
-
-			IntPtr Texture = SDL.SDL_CreateTextureFromSurface (Renderer, tempSurface);
-			SDL.SDL_FreeSurface (tempSurface);
-			if (Texture != IntPtr.Zero) {
-				textureDict [id] = Texture;
-
-				if (textureDict [id] != IntPtr.Zero) {
-					Console.WriteLine ("Texture putted in Dict");
-				} else {
-					Console.WriteLine ("Error putting texture int dict");
-				}
-				return true;
-			}
-			Console.WriteLine ("Something Wrong in loadTexture");
-			return false;
-		}
-
-		/// <summary>
-		/// Draws the texture.
-		/// </summary>
-		/// <param name="id">Identifier.</param>
-		/// <param name="x">The x coordinate.</param>
-		/// <param name="y">The y coordinate.</param>
-		/// <param name="w">The width.</param>
-		/// <param name="h">The height.</param>
-		/// <param name="flip">Flip.</param>
-		public void DrawTexture (string id, int x, int y, int w, int h, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
-		{
-			Console.WriteLine ("DrawTexture");
-			SDL.SDL_Rect srcRect;
-			SDL.SDL_Rect destRect;
-
-			srcRect.x = 0;
-			srcRect.y = 0;
-			srcRect.w = destRect.w = w;
-			srcRect.h = destRect.h = h;
-			destRect.x = x;
-			destRect.y = y;
-
-			SDL.SDL_RenderCopyEx (Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
-		}
-
-		/// <summary>
-		/// Draws the frame.
-		/// </summary>
-		/// <param name="id">Identifier.</param>
-		/// <param name="x">The x coordinate.</param>
-		/// <param name="y">The y coordinate.</param>
-		/// <param name="w">The width.</param>
-		/// <param name="h">The height.</param>
-		/// <param name="currentRow">Current row.</param>
-		/// <param name="currentFrame">Current frame.</param>
-		/// <param name="flip">Flip.</param>
-		public void DrawFrame (string id, int x, int y, int w, int h, int currentRow, int currentFrame, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
-		{
-			Console.WriteLine ("DrawFrame");
-			SDL.SDL_Rect srcRect;
-			SDL.SDL_Rect destRect;
-
-			srcRect.x = w * currentFrame;
-			srcRect.y = h * (currentRow - 1);
-			srcRect.w = destRect.w = w;
-			srcRect.h = destRect.h = h;
-			destRect.x = x;
-			destRect.y = y; 
-
-			SDL.SDL_RenderCopyEx (Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
-		}
-
+	
 		/// <summary>
 		/// Free everything from memory and closes SDL.
 		/// </summary
@@ -233,5 +144,8 @@ namespace src
 			SDL.SDL_Quit ();  // Quit everything SDL
 		}
 	}
+
+
+		
 }
 

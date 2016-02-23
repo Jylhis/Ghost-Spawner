@@ -6,11 +6,12 @@ namespace src
 {
 	class Program
 	{
+		public static Game game;
 		static int Main (string[] args)
 		{
-			Game game = new Game ("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 800, 600, false);
-            
-			Player player = new Player (10, 10, 55, 55, "player", ref game);
+			game = new Game ("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 800, 600, false);
+			Player player = new Player (0, 0, 55, 55, "player");
+
 
 			while (game.IsRunning) {
 				game.HandleEvents ();
