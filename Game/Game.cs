@@ -23,10 +23,6 @@ namespace src
 		/// </summary>
 		public IntPtr Renderer;
 		/// <summary>
-		/// The texture.
-		/// </summary>
-		public IntPtr Texture;
-		/// <summary>
 		/// Events.
 		/// </summary>
 		public SDL.SDL_Event Events;
@@ -95,7 +91,8 @@ namespace src
 		public void Update ()
 		{
 			//Console.WriteLine ("Update");
-			currentFrame = (int)((SDL.SDL_GetTicks () / 100) % 6);
+			currentFrame = (int)((SDL.SDL_GetTicks () / 100) % 2);
+			//currentFrame = 1;
 		}
 
 		/// <summary>
@@ -133,6 +130,8 @@ namespace src
 			// Render to window
 			SDL.SDL_RenderClear (Renderer);
 
+			DrawTexture ("player", 0, 0, 55, 55);
+			DrawFrame ("player", 100, 0, 55, 55,1,currentFrame );
 			// TODO: Put everything in Renderer
 
 			SDL.SDL_RenderPresent (Renderer);
@@ -147,15 +146,16 @@ namespace src
 		public bool LoadTexture (string path, string id)
 		{
 			Console.WriteLine ("LoadTexture: path: "+path+", id: "+id);
-			IntPtr bmp = SDL.SDL_LoadBMP (path);
-			if (bmp == IntPtr.Zero) {
+			IntPtr tempSurface = SDL.SDL_LoadBMP (path);
+			if (tempSurface == IntPtr.Zero) {
 				Console.WriteLine (" - SDL_LoadBMP Error: " + SDL.SDL_GetError ());
+				return false;
 			} else {
 				Console.WriteLine ("BMP loaded");
 			}
 
-			Texture = SDL.SDL_CreateTextureFromSurface (Renderer, bmp);
-			SDL.SDL_FreeSurface (bmp);
+			IntPtr Texture = SDL.SDL_CreateTextureFromSurface (Renderer, tempSurface);
+			SDL.SDL_FreeSurface (tempSurface);
 			if (Texture != IntPtr.Zero) {
 				textureDict [id] = Texture;
 
@@ -166,6 +166,7 @@ namespace src
 				}
 				return true;
 			}
+			Console.WriteLine ("Something Wrong in loadTexture");
 			return false;
 		}
 
@@ -191,7 +192,7 @@ namespace src
 			destRect.x = x;
 			destRect.y = y;
 
-			SDL.SDL_RenderCopyEx (Renderer, textureDict [id], ref srcRect, ref destRect, 0, IntPtr.Zero, flip);
+			SDL.SDL_RenderCopyEx (Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
 		}
 
 		/// <summary>
@@ -218,7 +219,7 @@ namespace src
 			destRect.x = x;
 			destRect.y = y; 
 
-			SDL.SDL_RenderCopyEx (Renderer, textureDict [id], ref srcRect, ref destRect, 0, IntPtr.Zero, flip);
+			SDL.SDL_RenderCopyEx (Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
 		}
 
 		/// <summary>
