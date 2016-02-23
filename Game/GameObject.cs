@@ -37,14 +37,14 @@ namespace src
 		protected void Load (int x, int y, int h, int w, string tid)
 		{
 			Console.WriteLine ("Loaded: "+this);
-			sizePos.x = x;
-			sizePos.y = y;
-			sizePos.w = w;
-			sizePos.h = h;
-			id = tid;
+			this.sizePos.x = x;
+			this.sizePos.y = y;
+			this.sizePos.w = w;
+			this.sizePos.h = h;
+			this.id = tid;
 
 			currentRow = 1;
-			currentFrame = 1;
+			currentFrame = 0;
 		}
 
 		/// <summary>
@@ -63,7 +63,6 @@ namespace src
 		public void Update ()
 		{
 			Console.WriteLine ("Updated: "+this);
-			// sizePos.x += 1;
 
 		}
 

@@ -16,7 +16,7 @@ namespace src
 		public Player (int x, int y, int h, int w, string tid) : base (x, y, h, w, tid)
 		{
 			Console.WriteLine ("Init: "+this);
-			if (TextureManager.Instance.LoadTexture ("Resources/Player.bmp", "player",Program.game.Renderer)) {
+			if (TextureManager.Instance.Load ("Resources/Player.bmp", "player", Program.game.Renderer)) {
 				Console.WriteLine ("LoadTexture success from: " + this);
 			}
            
@@ -24,15 +24,17 @@ namespace src
 
 		new public void Draw ()
 		{
-			base.Draw ();
 			Console.WriteLine ("Calls gameObject Draw from: "+this);
-
+			base.Draw ();
 		}
 
 		public new void Update ()
 		{
 			Console.WriteLine ("Updated: " + this);
-			sizePos.x+=100;
+			sizePos.x+=1;
+			sizePos.y += 1;
+			currentFrame = (int)((SDL.SDL_GetTicks () / 100) % 2);
+
 			/*If a key was pressed
             if (e.type == SDL.SDL_EventType.SDL_KEYDOWN && e.key.repeat == 0)
             {

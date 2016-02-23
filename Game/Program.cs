@@ -7,10 +7,11 @@ namespace src
 	class Program
 	{
 		public static Game game;
+		public static Player player;
 		static int Main (string[] args)
 		{
 			game = new Game ("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 800, 600, false);
-			Player player = new Player (0, 0, 55, 55, "player");
+			player = new Player (0, 0, 55, 55, "player");
 
 
 			while (game.IsRunning) {

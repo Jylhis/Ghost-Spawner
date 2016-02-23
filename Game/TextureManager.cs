@@ -7,24 +7,31 @@ namespace src
 {
 	public class TextureManager
 	{
+		// Texture Manager singleton
 		private static TextureManager instance;
-
-		private TextureManager(){}
+		private TextureManager (){}
 
 		public static TextureManager Instance {
 			get {
 				if (instance == null) {
-					instance = new TextureManager ();
+					instance = new TextureManager();
 				}
 				return instance;
 			}
 		}
 
-		public Dictionary<string, IntPtr> textureDict = new Dictionary<string, IntPtr> ();
+		private Dictionary<string, IntPtr> textureDict = new Dictionary<string, IntPtr> ();
 
-		public bool LoadTexture (string path, string id, IntPtr Renderer)
+		/// <summary>
+		/// Loads the texture.
+		/// </summary>
+		/// <returns><c>true</c>, if texture was loaded, <c>false</c> otherwise.</returns>
+		/// <param name="path">Path.</param>
+		/// <param name="id">Identifier.</param>
+		/// <param name="Renderer">Renderer.</param>
+		public bool Load (string path, string id, IntPtr Renderer)
 		{
-			Console.WriteLine ("LoadTexture: path: "+path+", id: "+id);
+			Console.WriteLine ("LoadTexture: path: " + path + ", id: " + id);
 			IntPtr tempSurface = SDL.SDL_LoadBMP (path);
 			if (tempSurface == IntPtr.Zero) {
 				Console.WriteLine (" - SDL_LoadBMP Error: " + SDL.SDL_GetError ());
@@ -57,8 +64,9 @@ namespace src
 		/// <param name="y">The y coordinate.</param>
 		/// <param name="w">The width.</param>
 		/// <param name="h">The height.</param>
+		/// <param name="Renderer">Renderer.</param>
 		/// <param name="flip">Flip.</param>
-		public void DrawTexture (string id, int x, int y, int w, int h, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
+		public void Draw (string id, int x, int y, int w, int h, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
 		{
 			Console.WriteLine ("DrawTexture");
 			SDL.SDL_Rect srcRect;
@@ -71,7 +79,7 @@ namespace src
 			destRect.x = x;
 			destRect.y = y;
 
-			SDL.SDL_RenderCopyEx (Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
+			SDL.SDL_RenderCopyEx (Renderer, textureDict [id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
 		}
 
 		/// <summary>
@@ -84,10 +92,11 @@ namespace src
 		/// <param name="h">The height.</param>
 		/// <param name="currentRow">Current row.</param>
 		/// <param name="currentFrame">Current frame.</param>
+		/// <param name="Renderer">Renderer.</param>
 		/// <param name="flip">Flip.</param>
 		public void DrawFrame (string id, int x, int y, int w, int h, int currentRow, int currentFrame, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
 		{
-			Console.WriteLine ("DrawFrame");
+			Console.WriteLine ("DrawFrame string:{0} x:{1}, y:{2}",id,x,y);
 			SDL.SDL_Rect srcRect;
 			SDL.SDL_Rect destRect;
 
@@ -98,7 +107,7 @@ namespace src
 			destRect.x = x;
 			destRect.y = y; 
 
-			SDL.SDL_RenderCopyEx (Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
+			SDL.SDL_RenderCopyEx (Renderer, textureDict [id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
 		}
 	}
 }

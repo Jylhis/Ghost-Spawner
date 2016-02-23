@@ -26,9 +26,7 @@ namespace src
 		/// Events.
 		/// </summary>
 		public SDL.SDL_Event Events;
-		/// <summary>
-		/// The current frame.
-		/// </summary>
+
 		public int currentFrame;
 
 		/// <summary>
@@ -61,7 +59,7 @@ namespace src
 			} else {
 				Console.WriteLine ("SDL started");
 				// Create window
-				Window = SDL.SDL_CreateWindow (title, x, y, w, h,flags);
+				Window = SDL.SDL_CreateWindow (title, x, y, w, h, flags);
 				if (Window == IntPtr.Zero) {
 					Console.WriteLine ("Could not create window: " + SDL.SDL_GetError ());
 				} else {
@@ -87,7 +85,7 @@ namespace src
 		{
 			//Console.WriteLine ("Update");
 			currentFrame = (int)((SDL.SDL_GetTicks () / 100) % 2);
-			//currentFrame = 1;
+			Program.player.Update ();
 		}
 
 		/// <summary>
@@ -126,9 +124,9 @@ namespace src
 			SDL.SDL_RenderClear (Renderer);
 
 			// Render all the stuff
-			TextureManager.Instance.DrawTexture ("player", 0, 0, 55, 55, Renderer);
-			TextureManager.Instance.DrawFrame ("player", 100, 0, 55, 55,1,currentFrame, Renderer);
-
+			//TextureManager.Instance.Draw ("player", 0, 0, 55, 55, Renderer);
+			//TextureManager.Instance.DrawFrame ("player", 100, 0, 55, 55, 1, currentFrame, Renderer);
+			Program.player.Draw();
 			SDL.SDL_RenderPresent (Renderer);
 		}
 
@@ -136,7 +134,8 @@ namespace src
 		/// <summary>
 		/// Free everything from memory and closes SDL.
 		/// </summary
-		~Game() {
+		~Game ()
+		{
 			Console.WriteLine ("Destructor");
 			// Free stuff from memory
 			SDL.SDL_DestroyWindow (Window);
