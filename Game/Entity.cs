@@ -6,19 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using SDL2;
 
-namespace Engine
+namespace src
 {
     class Entity
     {
-		public struct size {
-			public static int w;
-			public static int h;
-		}
-		public struct pos {
-			public int x;
-			public int y;
-		}
-
+        public SDL.SDL_Rect SizAndPos;
 		public struct vel {
 			public static int x;
 			public static int y;
