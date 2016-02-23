@@ -8,15 +8,19 @@ namespace src
 		{
 			// Init
 			Game game = new Game();
-
-			Area level = new Area(); // Create Level
-			Player player = new Player(ref game.Renderer, ref game);  // Create player
+            
+			Player player = new Player(10, 10, 55, 55, "player", ref game);  // Create player
 
 			//  Main game loop
 			while (game.IsRunning) {
                 game.HandleEvents();
                 game.Update();
-                game.Render();
+
+                player.Update();
+
+                game.Render(ref player);
+
+                
 			}
 			game.Clean();
 			return 0;

@@ -18,6 +18,7 @@ namespace src
 		/// The renderer.
 		/// </summary>
 		public IntPtr Renderer;
+        public IntPtr Texture;
 		/// <summary>
 		/// The window.
 		/// </summary>
@@ -69,7 +70,6 @@ namespace src
 				}
 			}
             textureDict = new Dictionary<string, IntPtr>();
-
         }
 
         public void Update()
@@ -92,17 +92,17 @@ namespace src
             }
         }
 
-        public void Render()
+        public void Render(ref Player player)
         {
             // Render to window
             SDL.SDL_RenderClear(Renderer);
 
-            DrawTexture("player", 100, 0, 55, 55, Renderer);
+            player.Draw();
 
             SDL.SDL_RenderPresent(Renderer);
         }
 
-        public bool LoadTexture(string path, string id, IntPtr Renderer)
+        public bool LoadTexture(string path, string id)
         {
             IntPtr bmp = SDL.SDL_LoadBMP(path);
             if (bmp == IntPtr.Zero)
@@ -110,7 +110,7 @@ namespace src
                 Console.WriteLine(" - SDL_LoadBMP Error: " + SDL.SDL_GetError());
             }
 
-            IntPtr Texture = SDL.SDL_CreateTextureFromSurface(Renderer, bmp);
+            Texture = SDL.SDL_CreateTextureFromSurface(Renderer, bmp);
             SDL.SDL_FreeSurface(bmp);
             if (Texture != IntPtr.Zero)
             {
@@ -120,7 +120,7 @@ namespace src
             return false;
         }
 
-        public void DrawTexture(string id, int x, int y, int w, int h, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
+        public void DrawTexture(string id, int x, int y, int w, int h, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
         {
             SDL.SDL_Rect srcRect;
             SDL.SDL_Rect destRect;
@@ -135,7 +135,7 @@ namespace src
             SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0, IntPtr.Zero, flip);
         }
 
-        public void DrawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
+        public void DrawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
         {
             SDL.SDL_Rect srcRect;
             SDL.SDL_Rect destRect;
