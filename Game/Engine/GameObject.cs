@@ -4,33 +4,22 @@ using SDL2;
 
 namespace src
 {
-    public class GameObject
-    {
+	public class GameObject
+	{
+		protected GameObject(ref LoaderParams pParams)
+		{
+		}
 
-        //protected SDL.SDL_Rect sizePos;
-        //protected int currentFrame;
-       // protected int currentRow;
-      //  protected string id;
+		public virtual void Draw()
+		{
+		}
 
+		public virtual void Update()
+		{
+		}
 
-        protected GameObject(ref LoaderParams pParams) { }
-
-    
-    public virtual void Draw()
-    {
-        //Console.WriteLine ("Draw: "+this);
-        //FIXME: TextureManager.Instance.DrawFrame(this.id, this.sizePos.x, this.sizePos.y, this.sizePos.w, this.sizePos.h, this.currentRow, this.currentFrame, Game.Instance.getRenderer);
-    }
-    
-    public virtual void Update()
-    {
-        //Console.WriteLine ("Updated: "+this);
-
-    }
-    
-        public virtual void Clean()
-        {
-            Console.WriteLine("Cleaned: " + this);
-        }
-    }
+		public virtual void Clean()
+		{
+		}
+	}
 }
