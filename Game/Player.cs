@@ -1,71 +1,36 @@
 ﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SDL2;
 
 namespace src
 {
-	public class Player : GameObject
+   
+    public class Player : SDLGameObject
 	{
-		//int maxVel = 10;
-		//Game game;
+        int maxVel = 1;
 
-		public Player (int x, int y, int h, int w, string tid) : base (x, y, h, w, tid)
+		public Player (LoaderParams pParams) : base(ref pParams)
 		{
-			Console.WriteLine ("Init: "+this);
-			if (TextureManager.Instance.Load ("Resources/Player.bmp", "player", Program.game.Renderer)) {
-				Console.WriteLine ("LoadTexture success from: " + this);
-			}
-           
+            //Console.WriteLine ("Init: "+this);
+            TextureManager.Instance.Load("Resources/Player.bmp", "player", Game.Instance.getRenderer);
 		}
 
-		new public void Draw ()
+		public override void Draw ()
 		{
-			Console.WriteLine ("Calls gameObject Draw from: "+this);
+			//Console.WriteLine ("Calls gameObject Draw from: "+this);
 			base.Draw ();
 		}
 
-		public new void Update ()
+		public override void Update ()
 		{
-			Console.WriteLine ("Updated: " + this);
-			sizePos.x+=1;
-			sizePos.y += 1;
-			currentFrame = (int)((SDL.SDL_GetTicks () / 100) % 2);
-
-			/*If a key was pressed
-            if (e.type == SDL.SDL_EventType.SDL_KEYDOWN && e.key.repeat == 0)
-            {
-                //Adjust the velocity
-                switch (e.key.keysym.sym)
-                {
-                    case SDL.SDL_Keycode.SDLK_UP: vel.y -= maxVel; break;
-                    case SDL.SDL_Keycode.SDLK_DOWN: vel.y += maxVel; break;
-                    case SDL.SDL_Keycode.SDLK_LEFT: vel.x -= maxVel; break;
-                    case SDL.SDL_Keycode.SDLK_RIGHT: vel.x += maxVel; break;
-                }
-            }
-            //If a key was released
-            else if (e.type == SDL.SDL_EventType.SDL_KEYUP && e.key.repeat == 0)
-            {
-
-                //Adjust the velocity
-                switch (e.key.keysym.sym)
-                {
-                    case SDL.SDL_Keycode.SDLK_UP: vel.y += maxVel; break;
-                    case SDL.SDL_Keycode.SDLK_DOWN: vel.y -= maxVel; break;
-                    case SDL.SDL_Keycode.SDLK_LEFT: vel.x += maxVel; break;
-                    case SDL.SDL_Keycode.SDLK_RIGHT: vel.x -= maxVel; break;
-                }
-            }*/
-
+            //Console.WriteLine ("Updated: " + this);
+            currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 2);
+            acceleration.X = 1;
+            base.Update();
 		}
 
-		public new void Clean ()
+		public override void Clean ()
 		{
-			base.Clean ();
 			Console.WriteLine ("Calls gameObject Clean from: "+this);
 		}
         
