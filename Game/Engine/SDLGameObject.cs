@@ -1,4 +1,5 @@
 ﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+using SDL2;
 
 namespace src
 {
@@ -10,7 +11,8 @@ namespace src
         public Vector2D acceleration;
         public string id;
 
-        public SDLGameObject(ref LoaderParams pParams) : base(ref pParams)
+        public SDLGameObject(ref LoaderParams pParams)
+            : base(ref pParams)
         {
             position = new Vector2D(pParams.X, pParams.Y);
             velocity = new Vector2D(0, 0);
@@ -25,7 +27,22 @@ namespace src
 
         public override void Draw()
         {
-            TextureManager.Instance.DrawFrame(id, (int)position.X, (int)position.Y, w, h, currentRow, currentFrame, Game.Instance.getRenderer);
+            if (velocity.X < 0)
+            {
+                TextureManager.Instance.DrawFrame(id,
+                    (int)position.X, (int)position.Y,
+                    w, h, currentRow, currentFrame,
+                    Game.Instance.getRenderer, SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL);
+            }
+            else
+            {
+                TextureManager.Instance.DrawFrame(id,
+                    (int)position.X, (int)position.Y,
+                    w, h, currentRow, currentFrame,
+                    Game.Instance.getRenderer);
+            }
+
+            //TextureManager.Instance.DrawFrame(id, (int)position.X, (int)position.Y, w, h, currentRow, currentFrame, Game.Instance.getRenderer);
         }
 
         public override void Update()

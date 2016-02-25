@@ -50,7 +50,7 @@ namespace src
         {
             get
             {
-                Console.WriteLine("x:" + mousePosition.X);
+                //Console.WriteLine("x:" + mousePosition.X);
                 return mousePosition;
             }
         }
@@ -251,6 +251,13 @@ namespace src
         public bool getMouseButtonState(mouse_buttons buttonNumber)
         {
             return mouseButtonStates[(int)buttonNumber];
+        }
+
+        public void reset()
+        {
+            mouseButtonStates[(int)mouse_buttons.LEFT] = false;
+            mouseButtonStates[(int)mouse_buttons.MIDDLE] = false;
+            mouseButtonStates[(int)mouse_buttons.RIGHT] = false;
         }
 
         /// <summary>

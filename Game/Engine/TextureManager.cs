@@ -9,7 +9,11 @@ namespace src
     {
         // Singleton instance
         private static TextureManager instance;
-        private TextureManager() { }
+
+        private TextureManager()
+        {
+        }
+
         /// <summary>
         /// Gets the instance.
         /// </summary>
@@ -36,7 +40,7 @@ namespace src
         /// <param name="Renderer">Renderer.</param>
         public bool Load(string path, string id, IntPtr Renderer)
         {
-            IntPtr tempSurface = SDL.SDL_LoadBMP(path);
+            IntPtr tempSurface = SDL_image.IMG_Load(path);
             if (tempSurface == IntPtr.Zero)
             {
                 Console.WriteLine(" - SDL_LoadBMP Error: " + SDL.SDL_GetError());
@@ -118,6 +122,11 @@ namespace src
             destRect.y = y;
 
             SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
+        }
+
+        public void clearFromTextureMap(string id)
+        {
+            textureDict.Remove(id);
         }
     }
 }

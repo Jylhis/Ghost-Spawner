@@ -4,14 +4,16 @@ using SDL2;
 
 namespace src
 {
-    public class GameObject
+    public abstract class GameObject
     {
-        protected GameObject(ref LoaderParams pParams) { }
+        protected GameObject(ref LoaderParams pParams)
+        {
+        }
 
-        public virtual void Draw() { }
+        public abstract void Draw();
 
-        public virtual void Update() { }
+        public abstract void Update();
 
-        public virtual void Clean() { }
+        public abstract void Clean();
     }
 }

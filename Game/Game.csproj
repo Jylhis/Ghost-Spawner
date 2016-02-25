@@ -79,9 +79,21 @@
     <Compile Include="Engine\SDLGameObject.cs" />
     <Compile Include="Engine\TextureManager.cs" />
     <Compile Include="Engine\Vector2D.cs" />
+    <Compile Include="Engine\GameState.cs" />
+    <Compile Include="Engine\GameStateMachine.cs" />
+    <Compile Include="PlayState.cs" />
+    <Compile Include="MenuState.cs" />
+    <Compile Include="MenuButton.cs" />
+    <Compile Include="PauseState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="SDL2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SDL2_image.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sdl2\sdl2.csproj">
@@ -123,6 +135,18 @@
     <Content Include="Resources\VILINT.bmp" />
     <Content Include="Resources\VILSHD.bmp" />
     <Content Include="Resources\Player.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Exit.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Play.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Main.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Resume.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

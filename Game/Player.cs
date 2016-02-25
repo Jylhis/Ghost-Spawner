@@ -7,9 +7,10 @@ namespace src
 
     public class Player : SDLGameObject
     {
-        public Player(LoaderParams pParams) : base(ref pParams)
+        public Player(LoaderParams pParams)
+            : base(ref pParams)
         {
-            TextureManager.Instance.Load("Resources/Player.bmp", "player", Game.Instance.getRenderer);
+            
         }
 
         public override void Draw()
@@ -53,26 +54,28 @@ namespace src
                 if (InputHandler.Instance.xvalue(0, 1) > 0 ||
                     InputHandler.Instance.xvalue(0, 1) < 0)
                 {
-                    velocity.X = 1 * InputHandler.Instance.xvalue(0, 1);
+                    velocity.X = 2 * InputHandler.Instance.xvalue(0, 1);
                 }
                 if (InputHandler.Instance.yvalue(0, 1) > 0 ||
                     InputHandler.Instance.yvalue(0, 1) < 0)
                 {
-                    velocity.Y = 1 * InputHandler.Instance.yvalue(0, 1);
+                    velocity.Y = 2 * InputHandler.Instance.yvalue(0, 1);
                 }
                 if (InputHandler.Instance.xvalue(0, 2) > 0 ||
                     InputHandler.Instance.xvalue(0, 2) < 0)
                 {
-                    velocity.X = 1 * InputHandler.Instance.xvalue(0, 1);
+                    velocity.X = 2 * InputHandler.Instance.xvalue(0, 1);
                 }
                 if (InputHandler.Instance.yvalue(0, 2) > 0 ||
                     InputHandler.Instance.yvalue(0, 2) < 0)
                 {
-                    velocity.Y = 1 * InputHandler.Instance.yvalue(0, 1);
+                    velocity.Y = 2 * InputHandler.Instance.yvalue(0, 1);
                 }
             }
         }
 
-        public override void Clean() { }
+        public override void Clean()
+        {
+        }
     }
 }

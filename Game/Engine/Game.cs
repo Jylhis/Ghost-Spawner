@@ -14,6 +14,7 @@ namespace src
         private static Game instance;
         private IntPtr Window;
         private IntPtr renderer;
+        private GameStateMachine gameStateMachine;
 
         private Game()
         {
@@ -25,14 +26,17 @@ namespace src
         public bool IsRunning = false;
 
         /// <summary>
-        /// Events.
-        /// </summary>
-        public SDL.SDL_Event Events;
-
-        /// <summary>
         /// The game objects.
         /// </summary>
         public List<GameObject> gameObjects;
+
+        public GameStateMachine getStateMachine
+        {
+            get
+            {
+                return gameStateMachine;
+            }
+        }
 
         /// <summary>
         /// Gets the instance.
@@ -107,9 +111,13 @@ namespace src
                     }
                 }
             }
+
+            gameStateMachine = new GameStateMachine();
+
+            gameStateMachine.changeState(new MenuState());
+
             InputHandler.Instance.InitJoysticks();
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Player(new LoaderParams(100, 100, 55, 55, "player")));  // FIXME
         }
 
         /// <summary>
@@ -118,6 +126,11 @@ namespace src
         public void HandleEvents()
         {
             InputHandler.Instance.Update();
+
+            if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RETURN))
+            {
+                gameStateMachine.changeState(new PlayState());
+            }
         }
 
         /// <summary>
@@ -125,10 +138,11 @@ namespace src
         /// </summary>
         public void Update()
         {
-            foreach (GameObject gObject in gameObjects)
+            /*foreach (GameObject gObject in gameObjects)
             {
                 gObject.Update();
-            }
+            }*/
+            gameStateMachine.update();
         }
 
         /// <summary>
@@ -139,11 +153,12 @@ namespace src
             // Render to window
             SDL.SDL_RenderClear(renderer);
 
+            gameStateMachine.render();
             // Loads all objets into renderer
-            foreach (GameObject gObject in gameObjects)
+            /* foreach (GameObject gObject in gameObjects)
             {
                 gObject.Draw();
-            }
+            }*/
 
             // Render everything
             SDL.SDL_RenderPresent(renderer);
