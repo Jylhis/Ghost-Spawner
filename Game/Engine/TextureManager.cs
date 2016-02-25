@@ -7,7 +7,7 @@ namespace src
 {
     public class TextureManager
     {
-		
+
         private static TextureManager instance;
 
         private TextureManager()
@@ -121,7 +121,7 @@ namespace src
             srcRect.w = destRect.w = w;
             srcRect.h = destRect.h = h;
             destRect.x = x;
-            destRect.y = y; 
+            destRect.y = y;
 
             SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
         }

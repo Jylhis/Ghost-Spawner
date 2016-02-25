@@ -19,7 +19,7 @@ namespace src
 
         /// <param name="v1">V1.</param>
         /// <param name="v2">V2.</param>
-        public static Vector2D operator+(Vector2D v1, Vector2D v2)
+        public static Vector2D operator +(Vector2D v1, Vector2D v2)
         {
             //return Vector2D( x+v2.X , y+v2.Y);
 
@@ -30,7 +30,7 @@ namespace src
 
         /// <param name="v1">V1.</param>
         /// <param name="scalar">Scalar.</param>
-        public static Vector2D operator*(Vector2D v1, float scalar)
+        public static Vector2D operator *(Vector2D v1, float scalar)
         {
             v1.X *= scalar;
             v1.Y *= scalar;
@@ -39,7 +39,7 @@ namespace src
 
         /// <param name="v1">V1.</param>
         /// <param name="v2">V2.</param>
-        public static Vector2D operator-(Vector2D v1, Vector2D v2)
+        public static Vector2D operator -(Vector2D v1, Vector2D v2)
         {
             //return Vector2D( x+v2.X , y+v2.Y);
 
@@ -50,7 +50,7 @@ namespace src
 
         /// <param name="v1">V1.</param>
         /// <param name="scalar">Scalar.</param>
-        public static Vector2D operator/(Vector2D v1, float scalar)
+        public static Vector2D operator /(Vector2D v1, float scalar)
         {
             v1.X /= scalar;
             v1.Y /= scalar;

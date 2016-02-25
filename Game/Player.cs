@@ -4,7 +4,7 @@ using SDL2;
 
 namespace src
 {
-   
+
     public class Player : SDLGameObject
     {
         //int maxVel = 1;
@@ -87,6 +87,6 @@ namespace src
         {
             Console.WriteLine("Calls gameObject Clean from: " + this);
         }
-        
+
     }
 }

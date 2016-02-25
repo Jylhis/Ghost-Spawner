@@ -49,7 +49,7 @@ namespace src
             get
             {
                 Console.WriteLine("x:" + mousePosition.X);
-                return mousePosition; 
+                return mousePosition;
             }
         }
 
@@ -77,6 +77,139 @@ namespace src
             {
                 mouseButtonStates.Add(false);
             }
+        }
+
+        private void onKeyDown()
+        {
+            IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
+            Marshal.Copy(tmpKeystates, keystates, 0, numkeys);
+        }
+        private void onKeyUp()
+        {
+            IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
+            Marshal.Copy(tmpKeystates, keystates, 0, numkeys);
+        }
+        private void onMouseMove(ref SDL.SDL_Event events)
+        {
+            mousePosition.X = events.motion.x;
+            mousePosition.Y = events.motion.y;
+        }
+
+        private void onMouseButtonDown(ref SDL.SDL_Event events)
+        {
+            if (events.button.button == SDL.SDL_BUTTON_LEFT)
+            {
+                mouseButtonStates[(int)mouse_buttons.LEFT] = true;
+            }
+            if (events.button.button == SDL.SDL_BUTTON_MIDDLE)
+            {
+                mouseButtonStates[(int)mouse_buttons.MIDDLE] = true;
+            }
+            if (events.button.button == SDL.SDL_BUTTON_RIGHT)
+            {
+                mouseButtonStates[(int)mouse_buttons.RIGHT] = true;
+            }
+        }
+
+        private void onMouseButtonUp(ref SDL.SDL_Event events)
+        {
+            if (events.button.button == SDL.SDL_BUTTON_LEFT)
+            {
+                mouseButtonStates[(int)mouse_buttons.LEFT] = false;
+            }
+            if (events.button.button == SDL.SDL_BUTTON_MIDDLE)
+            {
+                mouseButtonStates[(int)mouse_buttons.MIDDLE] = false;
+            }
+            if (events.button.button == SDL.SDL_BUTTON_RIGHT)
+            {
+                mouseButtonStates[(int)mouse_buttons.RIGHT] = false;
+            }
+
+        }
+
+        private void onJoystickAxisMove(ref SDL.SDL_Event events)
+        {
+            int whichOne = events.jaxis.which;
+
+            // left stick move left or right
+            if (events.jaxis.axis == 0)
+            {
+                if (events.jaxis.axisValue > joystickDeadZone)
+                {
+                    joystickValues[whichOne].Item1.X = 1;
+                }
+                else if (events.jaxis.axisValue < -joystickDeadZone)
+                {
+                    joystickValues[whichOne].Item1.X = -1;
+                }
+                else
+                {
+                    joystickValues[whichOne].Item1.X = 0;
+                }
+            }
+
+            // left stick move up or down
+            if (events.jaxis.axis == 1)
+            {
+                if (events.jaxis.axisValue > joystickDeadZone)
+                {
+                    joystickValues[whichOne].Item1.Y = 1;
+                }
+                else if (events.jaxis.axisValue < -joystickDeadZone)
+                {
+                    joystickValues[whichOne].Item1.Y = -1;
+                }
+                else
+                {
+                    joystickValues[whichOne].Item1.Y = 0;
+                }
+            }
+
+            // right stick move left or right
+            if (events.jaxis.axis == 3)
+            {
+                if (events.jaxis.axisValue > joystickDeadZone)
+                {
+                    joystickValues[whichOne].Item2.X = 1;
+                }
+                else if (events.jaxis.axisValue < -joystickDeadZone)
+                {
+                    joystickValues[whichOne].Item2.X = -1;
+                }
+                else
+                {
+                    joystickValues[whichOne].Item2.X = 0;
+                }
+            }
+
+            // right stick move up or down
+            if (events.jaxis.axis == 4)
+            {
+                if (events.jaxis.axisValue > joystickDeadZone)
+                {
+                    joystickValues[whichOne].Item2.Y = 1;
+                }
+                else if (events.jaxis.axisValue < -joystickDeadZone)
+                {
+                    joystickValues[whichOne].Item2.Y = -1;
+                }
+                else
+                {
+                    joystickValues[whichOne].Item1.Y = 0;
+                }
+            }
+        }
+
+        private void onJoystickButtonDown(ref SDL.SDL_Event events)
+        {
+            int whichOne = events.jaxis.which;
+            buttonStates[whichOne][events.jbutton.button] = true;
+        }
+        private void onJoystickButtonUp(ref SDL.SDL_Event events)
+        {
+            int whichOne = events.jaxis.which;
+            buttonStates[whichOne][events.jbutton.button] = false;
         }
 
         public void InitJoysticks()
@@ -120,7 +253,7 @@ namespace src
             {
                 joysticksInit = false;
             }
-				
+
         }
 
         // Onko parempi tapa tehhä näitä?
@@ -162,7 +295,7 @@ namespace src
         }
 
         public bool getMouseButtonState(mouse_buttons buttonNumber)
-        { 
+        {
             return mouseButtonStates[(int)buttonNumber];
         }
 
@@ -170,8 +303,8 @@ namespace src
         {
             if (keystates != null)
             {
-              if (keystates[(int)key] == 1)
-                { 
+                if (keystates[(int)key] == 1)
+                {
                     return true;
                 }
                 else
@@ -185,144 +318,40 @@ namespace src
         public void Update()
         {
             SDL.SDL_Event events;
-            
             while (SDL.SDL_PollEvent(out events) != 0)
-            {
-                IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
-                Marshal.Copy(tmpKeystates, keystates, 0, numkeys);
-                // FIXME switch case?
-
-                if (events.type == SDL.SDL_EventType.SDL_QUIT)
+                switch (events.type)
                 {
-                    Game.Instance.IsRunning = false;
+                    case SDL.SDL_EventType.SDL_QUIT:
+                        Game.Instance.IsRunning = false;
+                        break;
+                    case SDL.SDL_EventType.SDL_JOYAXISMOTION:
+                        onJoystickAxisMove(ref events);
+                        break;
+                    case SDL.SDL_EventType.SDL_JOYBUTTONDOWN:
+                        onJoystickButtonDown(ref events);
+                        break;
+                    case SDL.SDL_EventType.SDL_JOYBUTTONUP:
+                        onJoystickButtonUp(ref events);
+                        break;
+                    case SDL.SDL_EventType.SDL_MOUSEMOTION:
+                        onMouseMove(ref events);
+                        break;
+                    case SDL.SDL_EventType.SDL_MOUSEBUTTONDOWN:
+                        onMouseButtonDown(ref events);
+                        break;
+                    case SDL.SDL_EventType.SDL_MOUSEBUTTONUP:
+                        onMouseButtonUp(ref events);
+                        break;
+                    case SDL.SDL_EventType.SDL_KEYDOWN:
+                        onKeyDown();
+                        break;
+                    case SDL.SDL_EventType.SDL_KEYUP:
+                        onKeyUp();
+                        break;
+                    default:
+                        break;
+
                 }
-
-                // Mouse buttons
-                if (events.type == SDL.SDL_EventType.SDL_MOUSEBUTTONDOWN)
-                {
-					
-                    if (events.button.button == SDL.SDL_BUTTON_LEFT)
-                    {
-                        mouseButtonStates[(int)mouse_buttons.LEFT] = true;
-                    }
-                    if (events.button.button == SDL.SDL_BUTTON_MIDDLE)
-                    {
-                        mouseButtonStates[(int)mouse_buttons.MIDDLE] = true;
-                    }
-                    if (events.button.button == SDL.SDL_BUTTON_RIGHT)
-                    {
-                        mouseButtonStates[(int)mouse_buttons.RIGHT] = true;
-                    }
-                }
-                // Mouse movement
-                if (events.type == SDL.SDL_EventType.SDL_MOUSEMOTION)
-                {
-                    mousePosition.X = events.motion.x;
-                    mousePosition.Y = events.motion.y;
-                }
-
-                if (events.type == SDL.SDL_EventType.SDL_MOUSEBUTTONDOWN)
-                {
-                    if (events.button.button == SDL.SDL_BUTTON_LEFT)
-                    {
-                        mouseButtonStates[(int)mouse_buttons.LEFT] = false;
-                    }
-                    if (events.button.button == SDL.SDL_BUTTON_MIDDLE)
-                    {
-                        mouseButtonStates[(int)mouse_buttons.MIDDLE] = false;
-                    }
-                    if (events.button.button == SDL.SDL_BUTTON_RIGHT)
-                    {
-                        mouseButtonStates[(int)mouse_buttons.RIGHT] = false;
-                    }
-                }
-
-                // Joystick buttons
-                if (events.type == SDL.SDL_EventType.SDL_JOYBUTTONUP)
-                {
-                    int whichOne = events.jaxis.which;
-                    buttonStates[whichOne][events.jbutton.button] = true;
-                }
-                if (events.type == SDL.SDL_EventType.SDL_JOYBUTTONUP)
-                {
-                    int whichOne = events.jaxis.which;
-                    buttonStates[whichOne][events.jbutton.button] = false;
-                }
-
-                // Joystick Axis
-                if (events.type == SDL.SDL_EventType.SDL_JOYAXISMOTION)
-                {
-                    int whichOne = events.jaxis.which;
-
-                    // left stick move left or right
-                    if (events.jaxis.axis == 0)
-                    {
-                        if (events.jaxis.axisValue > joystickDeadZone)
-                        {
-                            joystickValues[whichOne].Item1.X = 1;
-                        }
-                        else if (events.jaxis.axisValue < -joystickDeadZone)
-                        {
-                            joystickValues[whichOne].Item1.X = -1;
-                        }
-                        else
-                        {
-                            joystickValues[whichOne].Item1.X = 0;
-                        }
-                    }
-
-                    // left stick move up or down
-                    if (events.jaxis.axis == 1)
-                    {
-                        if (events.jaxis.axisValue > joystickDeadZone)
-                        {
-                            joystickValues[whichOne].Item1.Y = 1;
-                        }
-                        else if (events.jaxis.axisValue < -joystickDeadZone)
-                        {
-                            joystickValues[whichOne].Item1.Y = -1;
-                        }
-                        else
-                        {
-                            joystickValues[whichOne].Item1.Y = 0;
-                        }
-                    }
-
-                    // right stick move left or right
-                    if (events.jaxis.axis == 3)
-                    {
-                        if (events.jaxis.axisValue > joystickDeadZone)
-                        {
-                            joystickValues[whichOne].Item2.X = 1;
-                        }
-                        else if (events.jaxis.axisValue < -joystickDeadZone)
-                        {
-                            joystickValues[whichOne].Item2.X = -1;
-                        }
-                        else
-                        {
-                            joystickValues[whichOne].Item2.X = 0;
-                        }
-                    }
-
-                    // right stick move up or down
-                    if (events.jaxis.axis == 4)
-                    {
-                        if (events.jaxis.axisValue > joystickDeadZone)
-                        {
-                            joystickValues[whichOne].Item2.Y = 1;
-                        }
-                        else if (events.jaxis.axisValue < -joystickDeadZone)
-                        {
-                            joystickValues[whichOne].Item2.Y = -1;
-                        }
-                        else
-                        {
-                            joystickValues[whichOne].Item1.Y = 0;
-                        }
-                    }
-                }
-            }
         }
 
         public void Clean()
