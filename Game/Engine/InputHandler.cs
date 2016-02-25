@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using SDL2;
+using System.Runtime.InteropServices;
 
 namespace src
 {
@@ -14,10 +15,10 @@ namespace src
 
     public enum xbox_controller_buttons
     {
+        A = 0,
+        B = 1,
         X = 2,
         Y = 3,
-        B = 1,
-        A = 0,
         LB = 4,
         RB = 5,
         SELECT = 6,
@@ -40,7 +41,7 @@ namespace src
         private List<List<bool>> buttonStates;
         private List<bool> mouseButtonStates;
         private Vector2D mousePosition;
-        private IntPtr keystates;
+        private byte[] keystates;
         private int numkeys;
 
         public Vector2D getMousePosition
@@ -69,6 +70,8 @@ namespace src
             // Init mouse
             mouseButtonStates = new List<bool>();
             mousePosition = new Vector2D(0, 0);
+            IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
+            keystates = new byte[numkeys];
 
             for (int i = 0; i < 3; i++)
             {
@@ -165,16 +168,16 @@ namespace src
 
         public bool isKeyDown(SDL.SDL_Scancode key)
         {
-            if (keystates != IntPtr.Zero)
+            if (keystates != null)
             {
-              /*FIXME:  if (keystates[key] == 1)
+              if (keystates[(int)key] == 1)
                 { 
                     return true;
                 }
                 else
                 {
                     return false;
-                }*/
+                }
             }
             return false;
         }
@@ -182,9 +185,11 @@ namespace src
         public void Update()
         {
             SDL.SDL_Event events;
+            
             while (SDL.SDL_PollEvent(out events) != 0)
             {
-                keystates = SDL.SDL_GetKeyboardState(out numkeys);
+                IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
+                Marshal.Copy(tmpKeystates, keystates, 0, numkeys);
                 // FIXME switch case?
 
                 if (events.type == SDL.SDL_EventType.SDL_QUIT)

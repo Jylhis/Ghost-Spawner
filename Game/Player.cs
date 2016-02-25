@@ -41,7 +41,7 @@ namespace src
             // Keyboard
             if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_W))
             {
-                velocity.Y = 2;
+                velocity.Y = -2;
             }
             if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_A))
             {
@@ -49,7 +49,7 @@ namespace src
             }
             if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_S))
             {
-                velocity.Y = -2;
+                velocity.Y = 2;
             }
             if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_D))
             {
