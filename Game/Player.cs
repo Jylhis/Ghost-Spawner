@@ -7,37 +7,28 @@ namespace src
 
     public class Player : SDLGameObject
     {
-        //int maxVel = 1;
-
-        public Player(LoaderParams pParams)
-            : base(ref pParams)
+        public Player(LoaderParams pParams) : base(ref pParams)
         {
-            //Console.WriteLine ("Init: "+this);
             TextureManager.Instance.Load("Resources/Player.bmp", "player", Game.Instance.getRenderer);
         }
 
         public override void Draw()
         {
-            //Console.WriteLine ("Calls gameObject Draw from: "+this);
             base.Draw();
         }
 
         public override void Update()
         {
-            //Console.WriteLine ("Updated: " + this);
             velocity.X = 0;
             velocity.Y = 0;
             handleInput();
 
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 2);
-            //acceleration.X = 1;
             base.Update();
         }
 
         private void handleInput()
         {
-            // switch case?
-
             // Keyboard
             if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_W))
             {
@@ -56,8 +47,7 @@ namespace src
                 velocity.X = 2;
             }
 
-
-            // Joystick/Controller
+            // Joystick / Controller
             if (InputHandler.Instance.JoysticksInitialised)
             {
                 if (InputHandler.Instance.xvalue(0, 1) > 0 ||
@@ -83,10 +73,6 @@ namespace src
             }
         }
 
-        public override void Clean()
-        {
-            Console.WriteLine("Calls gameObject Clean from: " + this);
-        }
-
+        public override void Clean() { }
     }
 }

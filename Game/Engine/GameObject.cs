@@ -6,20 +6,12 @@ namespace src
 {
     public class GameObject
     {
-        protected GameObject(ref LoaderParams pParams)
-        {
-        }
+        protected GameObject(ref LoaderParams pParams) { }
 
-        public virtual void Draw()
-        {
-        }
+        public virtual void Draw() { }
 
-        public virtual void Update()
-        {
-        }
+        public virtual void Update() { }
 
-        public virtual void Clean()
-        {
-        }
+        public virtual void Clean() { }
     }
 }

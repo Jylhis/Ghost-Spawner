@@ -33,7 +33,6 @@ namespace src
         // FIXME: Hiiri position ei toimi kunnolla
 
         const int joystickDeadZone = 10000;
-
         private bool joysticksInit;
         private static InputHandler instance;
         private List<IntPtr> joysticks;
@@ -67,12 +66,13 @@ namespace src
 
         private InputHandler()
         {
-            // Init mouse
-            mouseButtonStates = new List<bool>();
-            mousePosition = new Vector2D(0, 0);
+            // Init keyboard
             IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
             keystates = new byte[numkeys];
 
+            // Init mouse
+            mouseButtonStates = new List<bool>();
+            mousePosition = new Vector2D(0, 0);
             for (int i = 0; i < 3; i++)
             {
                 mouseButtonStates.Add(false);
@@ -84,11 +84,13 @@ namespace src
             IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
             Marshal.Copy(tmpKeystates, keystates, 0, numkeys);
         }
+
         private void onKeyUp()
         {
             IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
             Marshal.Copy(tmpKeystates, keystates, 0, numkeys);
         }
+
         private void onMouseMove(ref SDL.SDL_Event events)
         {
             mousePosition.X = events.motion.x;
@@ -131,73 +133,70 @@ namespace src
         private void onJoystickAxisMove(ref SDL.SDL_Event events)
         {
             int whichOne = events.jaxis.which;
-
-            // left stick move left or right
-            if (events.jaxis.axis == 0)
+            switch (events.jaxis.axis)
             {
-                if (events.jaxis.axisValue > joystickDeadZone)
-                {
-                    joystickValues[whichOne].Item1.X = 1;
-                }
-                else if (events.jaxis.axisValue < -joystickDeadZone)
-                {
-                    joystickValues[whichOne].Item1.X = -1;
-                }
-                else
-                {
-                    joystickValues[whichOne].Item1.X = 0;
-                }
-            }
+                case 0:  // left stick move left or right
+                    if (events.jaxis.axisValue > joystickDeadZone)
+                    {
+                        joystickValues[whichOne].Item1.X = 1;
+                    }
+                    else if (events.jaxis.axisValue < -joystickDeadZone)
+                    {
+                        joystickValues[whichOne].Item1.X = -1;
+                    }
+                    else
+                    {
+                        joystickValues[whichOne].Item1.X = 0;
+                    }
+                    break;
 
-            // left stick move up or down
-            if (events.jaxis.axis == 1)
-            {
-                if (events.jaxis.axisValue > joystickDeadZone)
-                {
-                    joystickValues[whichOne].Item1.Y = 1;
-                }
-                else if (events.jaxis.axisValue < -joystickDeadZone)
-                {
-                    joystickValues[whichOne].Item1.Y = -1;
-                }
-                else
-                {
-                    joystickValues[whichOne].Item1.Y = 0;
-                }
-            }
+                case 1:  // left stick move up or down
+                    if (events.jaxis.axisValue > joystickDeadZone)
+                    {
+                        joystickValues[whichOne].Item1.Y = 1;
+                    }
+                    else if (events.jaxis.axisValue < -joystickDeadZone)
+                    {
+                        joystickValues[whichOne].Item1.Y = -1;
+                    }
+                    else
+                    {
+                        joystickValues[whichOne].Item1.Y = 0;
+                    }
+                    break;
 
-            // right stick move left or right
-            if (events.jaxis.axis == 3)
-            {
-                if (events.jaxis.axisValue > joystickDeadZone)
-                {
-                    joystickValues[whichOne].Item2.X = 1;
-                }
-                else if (events.jaxis.axisValue < -joystickDeadZone)
-                {
-                    joystickValues[whichOne].Item2.X = -1;
-                }
-                else
-                {
-                    joystickValues[whichOne].Item2.X = 0;
-                }
-            }
+                case 3:  // right stick move left or right
+                    if (events.jaxis.axisValue > joystickDeadZone)
+                    {
+                        joystickValues[whichOne].Item2.X = 1;
+                    }
+                    else if (events.jaxis.axisValue < -joystickDeadZone)
+                    {
+                        joystickValues[whichOne].Item2.X = -1;
+                    }
+                    else
+                    {
+                        joystickValues[whichOne].Item2.X = 0;
+                    }
+                    break;
 
-            // right stick move up or down
-            if (events.jaxis.axis == 4)
-            {
-                if (events.jaxis.axisValue > joystickDeadZone)
-                {
-                    joystickValues[whichOne].Item2.Y = 1;
-                }
-                else if (events.jaxis.axisValue < -joystickDeadZone)
-                {
-                    joystickValues[whichOne].Item2.Y = -1;
-                }
-                else
-                {
-                    joystickValues[whichOne].Item1.Y = 0;
-                }
+                case 4:  // right stick move up or down
+                    if (events.jaxis.axisValue > joystickDeadZone)
+                    {
+                        joystickValues[whichOne].Item2.Y = 1;
+                    }
+                    else if (events.jaxis.axisValue < -joystickDeadZone)
+                    {
+                        joystickValues[whichOne].Item2.Y = -1;
+                    }
+                    else
+                    {
+                        joystickValues[whichOne].Item1.Y = 0;
+                    }
+                    break;
+
+                default:
+                    break;
             }
         }
 
@@ -206,6 +205,7 @@ namespace src
             int whichOne = events.jaxis.which;
             buttonStates[whichOne][events.jbutton.button] = true;
         }
+
         private void onJoystickButtonUp(ref SDL.SDL_Event events)
         {
             int whichOne = events.jaxis.which;
@@ -214,7 +214,6 @@ namespace src
 
         public void InitJoysticks()
         {
-            // Init Joystick
             if (SDL.SDL_WasInit(SDL.SDL_INIT_JOYSTICK) == 0)
             {
                 SDL.SDL_InitSubSystem(SDL.SDL_INIT_JOYSTICK);
@@ -222,6 +221,7 @@ namespace src
                 joystickValues = new List<Tuple<Vector2D, Vector2D>>();
                 buttonStates = new List<List<bool>>();
             }
+
             if (SDL.SDL_NumJoysticks() > 0)
             {
                 for (int i = 0; i < SDL.SDL_NumJoysticks(); i++)
@@ -246,7 +246,6 @@ namespace src
                 }
                 SDL.SDL_JoystickEventState(SDL.SDL_ENABLE);
                 joysticksInit = true;
-
                 Console.WriteLine("Initialised " + joysticks.Count + " joystick(s)");
             }
             else
@@ -256,7 +255,6 @@ namespace src
 
         }
 
-        // Onko parempi tapa tehhä näitä?
         public int xvalue(int joy, int stick)
         {
             if (joystickValues.Count > 0)
@@ -297,6 +295,14 @@ namespace src
         public bool getMouseButtonState(mouse_buttons buttonNumber)
         {
             return mouseButtonStates[(int)buttonNumber];
+        }
+
+        public bool JoysticksInitialised
+        {
+            get
+            {
+                return joysticksInit;
+            }
         }
 
         public bool isKeyDown(SDL.SDL_Scancode key)
@@ -350,7 +356,6 @@ namespace src
                         break;
                     default:
                         break;
-
                 }
         }
 
@@ -362,14 +367,6 @@ namespace src
                 {
                     SDL.SDL_JoystickClose(joysticks[i]);
                 }
-            }
-        }
-
-        public bool JoysticksInitialised
-        {
-            get
-            {
-                return joysticksInit;
             }
         }
     }

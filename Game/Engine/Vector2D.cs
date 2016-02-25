@@ -21,8 +21,6 @@ namespace src
         /// <param name="v2">V2.</param>
         public static Vector2D operator +(Vector2D v1, Vector2D v2)
         {
-            //return Vector2D( x+v2.X , y+v2.Y);
-
             v1.X += v2.X;
             v1.Y += v2.Y;
             return v1;
@@ -41,8 +39,6 @@ namespace src
         /// <param name="v2">V2.</param>
         public static Vector2D operator -(Vector2D v1, Vector2D v2)
         {
-            //return Vector2D( x+v2.X , y+v2.Y);
-
             v1.X -= v2.X;
             v1.Y -= v2.Y;
             return v1;
@@ -64,7 +60,7 @@ namespace src
         {
             double l = 1 / Length;
             if (l > 0)
-            {//no dividing zero
+            {
                 this.X *= l;
                 this.Y *= l;
             }
@@ -88,6 +84,5 @@ namespace src
         /// </summary>
         /// <value>The length.</value>
         public double Length { get { return Math.Sqrt(x * x + y * y); } }
-
     }
 }

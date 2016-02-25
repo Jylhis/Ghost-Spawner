@@ -33,10 +33,12 @@ namespace src
         /// True if program is running.
         /// </summary>
         public bool IsRunning = false;
+
         /// <summary>
         /// The window.
         /// </summary>
         private IntPtr Window;
+
         /// <summary>
         /// The renderer.
         /// </summary>
@@ -95,9 +97,7 @@ namespace src
         /// <summary>
         /// Initializes a new instance of the <see cref="src.Game"/> class.
         /// </summary>
-        private Game()
-        {
-        }
+        private Game() { }
 
         /// <summary>
         /// Start SDL, Window, Renderer and other stuff
@@ -157,7 +157,6 @@ namespace src
         /// </summary>
         public void Update()
         {
-            // currentFrame = (int)((SDL.SDL_GetTicks () / 100) % 2);
             foreach (GameObject gObject in gameObjects)
             {
                 gObject.Update();
@@ -177,8 +176,6 @@ namespace src
         /// </summary>
         public void Render()
         {
-            //Console.WriteLine ("Render");
-
             // Render to window
             SDL.SDL_RenderClear(renderer);
 
@@ -198,7 +195,7 @@ namespace src
         /// </summary
         public void Close()
         {
-            Console.WriteLine("Started closing game");
+            Console.WriteLine("Closing game");
             // Free stuff from memory
             InputHandler.Instance.Clean();
             SDL.SDL_DestroyWindow(Window);

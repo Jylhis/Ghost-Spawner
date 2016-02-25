@@ -10,8 +10,7 @@ namespace src
         public Vector2D acceleration;
         public string id;
 
-        public SDLGameObject(ref LoaderParams pParams)
-            : base(ref pParams)
+        public SDLGameObject(ref LoaderParams pParams) : base(ref pParams)
         {
             position = new Vector2D(pParams.X, pParams.Y);
             velocity = new Vector2D(0, 0);

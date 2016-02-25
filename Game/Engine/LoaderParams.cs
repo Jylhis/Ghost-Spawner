@@ -30,30 +30,60 @@ namespace src
         /// Gets the x.
         /// </summary>
         /// <value>The x.</value>
-        public int X { get { return x; } }
+        public int X
+        {
+            get
+            {
+                return x;
+            }
+        }
 
         /// <summary>
         /// Gets the y.
         /// </summary>
         /// <value>The y.</value>
-        public int Y { get { return y; } }
+        public int Y
+        {
+            get
+            {
+                return y;
+            }
+        }
 
         /// <summary>
         /// Gets the w.
         /// </summary>
         /// <value>The w.</value>
-        public int W { get { return w; } }
+        public int W
+        {
+            get
+            {
+                return w;
+            }
+        }
 
         /// <summary>
         /// Gets the h.
         /// </summary>
         /// <value>The h.</value>
-        public int H { get { return h; } }
+        public int H
+        {
+            get
+            {
+                return h;
+            }
+        }
 
         /// <summary>
         /// Gets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        public string Id { get { return id; } }
+        public string Id
+        {
+            get
+            {
+                return id;
+            }
+        }
     }
 }

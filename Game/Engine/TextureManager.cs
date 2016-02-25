@@ -7,13 +7,9 @@ namespace src
 {
     public class TextureManager
     {
-
+        // Singleton instance
         private static TextureManager instance;
-
-        private TextureManager()
-        {
-        }
-
+        private TextureManager() { }
         /// <summary>
         /// Gets the instance.
         /// </summary>
@@ -40,7 +36,6 @@ namespace src
         /// <param name="Renderer">Renderer.</param>
         public bool Load(string path, string id, IntPtr Renderer)
         {
-            //Console.WriteLine ("LoadTexture: path: " + path + ", id: " + id);
             IntPtr tempSurface = SDL.SDL_LoadBMP(path);
             if (tempSurface == IntPtr.Zero)
             {
@@ -112,7 +107,6 @@ namespace src
         /// <param name="flip">Flip.</param>
         public void DrawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
         {
-            //Console.WriteLine ("DrawFrame string:{0} x:{1}, y:{2}",id,x,y);
             SDL.SDL_Rect srcRect;
             SDL.SDL_Rect destRect;
 
