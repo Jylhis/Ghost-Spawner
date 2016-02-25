@@ -12,6 +12,27 @@ namespace src
     {
 
         private static Game instance;
+        private IntPtr Window;
+        private IntPtr renderer;
+
+        private Game()
+        {
+        }
+
+        /// <summary>
+        /// True if game is running.
+        /// </summary>
+        public bool IsRunning = false;
+
+        /// <summary>
+        /// Events.
+        /// </summary>
+        public SDL.SDL_Event Events;
+
+        /// <summary>
+        /// The game objects.
+        /// </summary>
+        public List<GameObject> gameObjects;
 
         /// <summary>
         /// Gets the instance.
@@ -30,22 +51,7 @@ namespace src
         }
 
         /// <summary>
-        /// True if program is running.
-        /// </summary>
-        public bool IsRunning = false;
-
-        /// <summary>
-        /// The window.
-        /// </summary>
-        private IntPtr Window;
-
-        /// <summary>
-        /// The renderer.
-        /// </summary>
-        private IntPtr renderer;
-
-        /// <summary>
-        /// Gets the get renderer.
+        /// Gets the renderer.
         /// </summary>
         /// <value>The get renderer.</value>
         public IntPtr getRenderer
@@ -54,53 +60,7 @@ namespace src
         }
 
         /// <summary>
-        /// Events.
-        /// </summary>
-        public SDL.SDL_Event Events;
-
-        /// <summary>
-        /// The game objects.
-        /// </summary>
-        public List<GameObject> gameObjects;
-
-
-        /// <summary>
-        /// Draw this instance.
-        /// </summary>
-        public void Draw()
-        {
-            foreach (GameObject gObject in gameObjects)
-            {
-                gObject.Draw();
-            }
-        }
-
-        /// <summary>
-        /// Polls the events.
-        /// </summary>
-        /// <returns><c>true</c>, if there is events left, <c>false</c> otherwise.</returns>
-        public bool PollEvents
-        {
-            get
-            {
-                if (SDL.SDL_PollEvent(out Events) != 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="src.Game"/> class.
-        /// </summary>
-        private Game() { }
-
-        /// <summary>
-        /// Start SDL, Window, Renderer and other stuff
+        /// Initialize SDL, window, renderer, controller and everything.
         /// </summary>
         /// <param name="title">Title.</param>
         /// <param name="x">The x coordinate.</param>
@@ -149,11 +109,19 @@ namespace src
             }
             InputHandler.Instance.InitJoysticks();
             gameObjects = new List<GameObject>();
-            gameObjects.Add(new Player(new LoaderParams(100, 100, 55, 55, "player")));
+            gameObjects.Add(new Player(new LoaderParams(100, 100, 55, 55, "player")));  // FIXME
         }
 
         /// <summary>
-        /// Update instances.
+        /// Handles the events.
+        /// </summary>
+        public void HandleEvents()
+        {
+            InputHandler.Instance.Update();
+        }
+
+        /// <summary>
+        /// Update.
         /// </summary>
         public void Update()
         {
@@ -164,15 +132,7 @@ namespace src
         }
 
         /// <summary>
-        /// Handles events.
-        /// </summary>
-        public void HandleEvents()
-        {
-            InputHandler.Instance.Update();
-        }
-
-        /// <summary>
-        /// Render instances.
+        /// Render.
         /// </summary>
         public void Render()
         {
@@ -189,10 +149,9 @@ namespace src
             SDL.SDL_RenderPresent(renderer);
         }
 
-
         /// <summary>
-        /// Free everything from memory and closes SDL.
-        /// </summary
+        /// Close everything.
+        /// </summary>
         public void Close()
         {
             Console.WriteLine("Closing game");
@@ -203,8 +162,5 @@ namespace src
             SDL.SDL_Quit();
         }
     }
-
-
-
 }
 

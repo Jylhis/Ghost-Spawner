@@ -8,31 +8,30 @@ namespace src
 {
     public enum mouse_buttons
     {
-        LEFT = 0,
-        MIDDLE = 1,
-        RIGHT = 2
+        LEFT,
+        MIDDLE,
+        RIGHT
     }
 
     public enum xbox_controller_buttons
     {
-        A = 0,
-        B = 1,
-        X = 2,
-        Y = 3,
-        LB = 4,
-        RB = 5,
-        SELECT = 6,
-        START = 7,
-        XBOX = 8,
-        LEFT_THUMB = 9,
-        RIGHT_THUMB = 10
+        A,
+        B,
+        X,
+        Y,
+        LB,
+        RB,
+        SELECT,
+        START,
+        XBOX,
+        LEFT_THUMB,
+        RIGHT_THUMB
     }
 
     public class InputHandler
     {
         // FIXME: Hiiri position ei toimi kunnolla
-
-        const int joystickDeadZone = 10000;
+        private const int joystickDeadZone = 10000;
         private bool joysticksInit;
         private static InputHandler instance;
         private List<IntPtr> joysticks;
@@ -43,6 +42,10 @@ namespace src
         private byte[] keystates;
         private int numkeys;
 
+        /// <summary>
+        /// Gets the mouse position.
+        /// </summary>
+        /// <value>The mouse position.</value>
         public Vector2D getMousePosition
         {
             get
@@ -52,6 +55,10 @@ namespace src
             }
         }
 
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        /// <value>The instance.</value>
         public static InputHandler Instance
         {
             get
@@ -63,6 +70,19 @@ namespace src
                 return instance;
             }
         }
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="src.InputHandler"/> joysticks initialised.
+        /// </summary>
+        /// <value><c>true</c> if joysticks initialised; otherwise, <c>false</c>.</value>
+        public bool JoysticksInitialised
+        {
+            get
+            {
+                return joysticksInit;
+            }
+        }
+
 
         private InputHandler()
         {
@@ -212,6 +232,93 @@ namespace src
             buttonStates[whichOne][events.jbutton.button] = false;
         }
 
+        /// <summary>
+        /// Gets the button states.
+        /// </summary>
+        /// <returns><c>true</c>, if button is down, <c>false</c> if button is up.</returns>
+        /// <param name="joy">Joystick.</param>
+        /// <param name="buttonNumber">Button number.</param>
+        public bool getButtonStates(int joy, int buttonNumber)
+        {
+            return buttonStates[joy][buttonNumber];
+        }
+
+        /// <summary>
+        /// Gets the state of the mouse button.
+        /// </summary>
+        /// <returns><c>true</c>, if mouse button is down, <c>false</c> if button is up.</returns>
+        /// <param name="buttonNumber">Button number.</param>
+        public bool getMouseButtonState(mouse_buttons buttonNumber)
+        {
+            return mouseButtonStates[(int)buttonNumber];
+        }
+
+        /// <summary>
+        /// Is the key down.
+        /// </summary>
+        /// <returns><c>true</c>, if key is down, <c>false</c> if key is up.</returns>
+        /// <param name="key">Key.</param>
+        public bool isKeyDown(SDL.SDL_Scancode key)
+        {
+            if (keystates != null)
+            {
+                if (keystates[(int)key] == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Gets x value of specified joystick and a stick.
+        /// </summary>
+        /// <param name="joy">Joystick.</param>
+        /// <param name="stick">Stick.</param>
+        public int xvalue(int joy, int stick)
+        {
+            if (joystickValues.Count > 0)
+            {
+                if (stick == 1)
+                {
+                    return (int)joystickValues[joy].Item1.X;
+                }
+                else
+                {
+                    return (int)joystickValues[joy].Item2.X;
+                }
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Gets y value of specified joystick and a stick.
+        /// </summary>
+        /// <param name="joy">Joystick.</param>
+        /// <param name="stick">Stick.</param>
+        public int yvalue(int joy, int stick)
+        {
+            if (joystickValues.Count > 0)
+            {
+                if (stick == 1)
+                {
+                    return (int)joystickValues[joy].Item1.Y;
+                }
+                else
+                {
+                    return (int)joystickValues[joy].Item2.Y;
+                }
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Inits the joysticks.
+        /// </summary>
         public void InitJoysticks()
         {
             if (SDL.SDL_WasInit(SDL.SDL_INIT_JOYSTICK) == 0)
@@ -255,72 +362,9 @@ namespace src
 
         }
 
-        public int xvalue(int joy, int stick)
-        {
-            if (joystickValues.Count > 0)
-            {
-                if (stick == 1)
-                {
-                    return (int)joystickValues[joy].Item1.X;
-                }
-                else
-                {
-                    return (int)joystickValues[joy].Item2.X;
-                }
-            }
-            return 0;
-        }
-
-        public int yvalue(int joy, int stick)
-        {
-            if (joystickValues.Count > 0)
-            {
-                if (stick == 1)
-                {
-                    return (int)joystickValues[joy].Item1.Y;
-                }
-                else
-                {
-                    return (int)joystickValues[joy].Item2.Y;
-                }
-            }
-            return 0;
-        }
-
-        public bool getButtonStates(int joy, int buttonNumber)
-        {
-            return buttonStates[joy][buttonNumber];
-        }
-
-        public bool getMouseButtonState(mouse_buttons buttonNumber)
-        {
-            return mouseButtonStates[(int)buttonNumber];
-        }
-
-        public bool JoysticksInitialised
-        {
-            get
-            {
-                return joysticksInit;
-            }
-        }
-
-        public bool isKeyDown(SDL.SDL_Scancode key)
-        {
-            if (keystates != null)
-            {
-                if (keystates[(int)key] == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            return false;
-        }
-
+        /// <summary>
+        /// Catches events.
+        /// </summary>
         public void Update()
         {
             SDL.SDL_Event events;
@@ -359,6 +403,9 @@ namespace src
                 }
         }
 
+        /// <summary>
+        /// Clean this instance.
+        /// </summary>
         public void Clean()
         {
             if (joysticksInit)
