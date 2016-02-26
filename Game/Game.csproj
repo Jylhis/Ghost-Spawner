@@ -85,9 +85,15 @@
     <Compile Include="MenuState.cs" />
     <Compile Include="MenuButton.cs" />
     <Compile Include="PauseState.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="AnimatedGraphics.cs" />
+    <Compile Include="GameOverState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Resources\Enemy.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sdl2\sdl2.csproj">

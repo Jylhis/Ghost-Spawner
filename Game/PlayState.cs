@@ -1,6 +1,7 @@
 ﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
 using System;
 using System.Collections.Generic;
+using SDL2;
 
 namespace src
 {
@@ -21,6 +22,13 @@ namespace src
             {
                 gameobjects[i].Update();
             }
+
+            /* FIXME
+            if(checkCollision(ref gameobjects[0], ref gameobjects[1]))
+            {
+                Game.Instance.getStateMachine.pushState(new GameOverState());
+            }
+            */
         }
 
         public override void render()
@@ -34,13 +42,24 @@ namespace src
         public override bool onEnter()
         {
             gameobjects = new List<GameObject>();
+
+            // Add Player
             if (!TextureManager.Instance.Load("Resources/Player.bmp", "player", Game.Instance.getRenderer))
             {
                 return false;
             }
             GameObject player = new Player(new LoaderParams(100, 100, 55, 55, "player"));
 
+            // Add Enemy
+            if (!TextureManager.Instance.Load("Resources/Enemy.bmp", "enemy", Game.Instance.getRenderer))
+            {
+                return false;
+            }
+            GameObject enemy = new Enemy(new LoaderParams(300, 300, 55, 55, "enemy"));
+
+
             gameobjects.Add(player);
+            gameobjects.Add(enemy);
 
             Console.WriteLine("Entering Playstate");
             return true;
@@ -56,6 +75,44 @@ namespace src
             TextureManager.Instance.clearFromTextureMap("Room");
 
             Console.WriteLine("Exiting Playstate");
+            return true;
+        }
+
+        // FIXME:
+        bool checkCollision(ref SDLGameObject p1, ref SDLGameObject p2)
+        { // TODO: Check this.
+            int leftA, leftB;
+            int rightA, rightB;
+            int topA, topB;
+            int bottomA, bottomB;
+
+            leftA = (int)p1.position.X;
+            rightA = (int)(p1.position.X + p1.w);
+            topA = (int)p1.position.Y;
+            bottomA = (int)(p1.position.Y + p1.h);
+
+            leftB = (int)p2.position.X;
+            rightB = (int)(p2.position.X + p2.w);
+            topB = (int)p2.position.Y;
+            bottomB = (int)(p2.position.Y + p2.h);
+
+            if (bottomA <= topB)
+            {
+                return false;
+            }
+            if (topA >= bottomB)
+            {
+                return false;
+            }
+            if (rightA <= leftB)
+            {
+                return false;
+            }
+            if (leftA >= rightB)
+            {
+                return false;
+            }
+                            
             return true;
         }
 
