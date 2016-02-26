@@ -24,7 +24,7 @@ namespace src
             }
 
             // FIXME
-            if(checkCollision(gameobjects[0], gameobjects[1]))
+            if (checkCollision(gameobjects[0], gameobjects[1]))
             {
                 Game.Instance.getStateMachine.pushState(new GameOverState());
             }

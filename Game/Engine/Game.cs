@@ -12,8 +12,7 @@ namespace src
     {
 
         private static Game instance;
-        private IntPtr Window;
-        private IntPtr renderer;
+        private IntPtr Window, renderer;
         private GameStateMachine gameStateMachine;
 
         private Game()
@@ -30,6 +29,10 @@ namespace src
         /// </summary>
         public List<GameObject> gameObjects;
 
+        /// <summary>
+        /// Gets the get state machine.
+        /// </summary>
+        /// <value>The get state machine.</value>
         public GameStateMachine getStateMachine
         {
             get

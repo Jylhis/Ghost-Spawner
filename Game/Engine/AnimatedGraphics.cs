@@ -9,12 +9,20 @@ namespace src
         private int animSpeed;
         private int numFrames = 3;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="src.AnimatedGraphics"/> class.
+        /// </summary>
+        /// <param name="pParams">P parameters.</param>
+        /// <param name="inAnimSpeed">In animation speed.</param>
         public AnimatedGraphics(LoaderParams pParams, int inAnimSpeed)
             : base(ref pParams)
         {
             animSpeed = inAnimSpeed;
         }
 
+        /// <summary>
+        /// Update this instance.
+        /// </summary>
         public override void Update()
         {
             currentFrame = (int)((SDL.SDL_GetTicks() / (1000 / animSpeed)) % numFrames);

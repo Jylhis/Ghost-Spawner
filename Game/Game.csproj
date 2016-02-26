@@ -75,7 +75,6 @@
     <Compile Include="Engine\InputHandler.cs" />
     <Compile Include="Engine\LoaderParams.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Engine\SDLGameObject.cs" />
     <Compile Include="Engine\TextureManager.cs" />
     <Compile Include="Engine\Vector2D.cs" />
@@ -86,8 +85,13 @@
     <Compile Include="MenuButton.cs" />
     <Compile Include="PauseState.cs" />
     <Compile Include="Enemy.cs" />
-    <Compile Include="AnimatedGraphics.cs" />
     <Compile Include="GameOverState.cs" />
+    <Compile Include="Engine\Level.cs" />
+    <Compile Include="Engine\TileLayer.cs" />
+    <Compile Include="Engine\Program.cs" />
+    <Compile Include="Engine\Layer.cs" />
+    <Compile Include="Engine\AnimatedGraphics.cs" />
+    <Compile Include="Engine\LevelParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -98,6 +102,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Restart.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\level.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\testTile.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -41,12 +41,12 @@ namespace src
         {
             gameobjects = new List<GameObject>();
             if (!TextureManager.Instance.Load("Resources/Play.bmp",
-                   "playbutton", Game.Instance.getRenderer))
+                    "playbutton", Game.Instance.getRenderer))
             {
                 return false;
             }
             if (!TextureManager.Instance.Load("Resources/Exit.bmp",
-                   "exitbutton", Game.Instance.getRenderer))
+                    "exitbutton", Game.Instance.getRenderer))
             {
                 return false;
             }

@@ -10,10 +10,19 @@ namespace src
         {
         }
 
+        /// <summary>
+        /// Draw this instance.
+        /// </summary>
         public abstract void Draw();
 
+        /// <summary>
+        /// Update this instance.
+        /// </summary>
         public abstract void Update();
 
+        /// <summary>
+        /// Clean this instance.
+        /// </summary>
         public abstract void Clean();
     }
 }

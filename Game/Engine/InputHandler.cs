@@ -8,29 +8,70 @@ namespace src
 {
     public enum mouse_buttons
     {
+        /// <summary>
+        /// The LEF.
+        /// </summary>
         LEFT,
+        /// <summary>
+        /// The MIDDL.
+        /// </summary>
         MIDDLE,
+        /// <summary>
+        /// The RIGH.
+        /// </summary>
         RIGHT
     }
 
     public enum xbox_controller_buttons
     {
+        /// <summary>
+        /// A.
+        /// </summary>
         A,
+        /// <summary>
+        /// The b.
+        /// </summary>
         B,
+        /// <summary>
+        /// The x.
+        /// </summary>
         X,
+        /// <summary>
+        /// The y.
+        /// </summary>
         Y,
+        /// <summary>
+        /// The L.
+        /// </summary>
         LB,
+        /// <summary>
+        /// The R.
+        /// </summary>
         RB,
+        /// <summary>
+        /// The SELEC.
+        /// </summary>
         SELECT,
+        /// <summary>
+        /// The STAR.
+        /// </summary>
         START,
+        /// <summary>
+        /// The XBO.
+        /// </summary>
         XBOX,
+        /// <summary>
+        /// The LEF t THUM.
+        /// </summary>
         LEFT_THUMB,
+        /// <summary>
+        /// The RIGH t THUM.
+        /// </summary>
         RIGHT_THUMB
     }
 
     public class InputHandler
     {
-        // FIXME: Hiiri position ei toimi kunnolla
         private const int joystickDeadZone = 10000;
         private bool joysticksInit;
         private static InputHandler instance;
@@ -253,6 +294,9 @@ namespace src
             return mouseButtonStates[(int)buttonNumber];
         }
 
+        /// <summary>
+        /// Reset this instance.
+        /// </summary>
         public void reset()
         {
             mouseButtonStates[(int)mouse_buttons.LEFT] = false;

@@ -36,7 +36,8 @@ namespace src
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Draw();
-            };
+            }
+            ;
         }
 
         public override bool onEnter()

@@ -124,6 +124,10 @@ namespace src
             SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
         }
 
+        /// <summary>
+        /// Clears from texture map.
+        /// </summary>
+        /// <param name="id">Identifier.</param>
         public void clearFromTextureMap(string id)
         {
             textureDict.Remove(id);

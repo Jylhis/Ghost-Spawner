@@ -35,9 +35,9 @@ namespace src
         {
             Vector2D mousePos = InputHandler.Instance.getMousePosition;
             if (mousePos.X < (position.X + w)
-               && mousePos.X > position.X
-               && mousePos.Y < (position.Y + h)
-               && mousePos.Y > position.Y)
+                && mousePos.X > position.X
+                && mousePos.Y < (position.Y + h)
+                && mousePos.Y > position.Y)
             {
                 //currentFrame = (int)button_state.MOUSE_OVER;
                 if (InputHandler.Instance.getMouseButtonState(mouse_buttons.LEFT)

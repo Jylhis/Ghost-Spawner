@@ -3,10 +3,7 @@ namespace src
 {
     public class LoaderParams
     {
-        private int x;
-        private int y;
-        private int w;
-        private int h;
+        private int x, y, w, h;
         private string id;
 
         /// <summary>
