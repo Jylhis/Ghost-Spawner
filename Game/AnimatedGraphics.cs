@@ -7,7 +7,7 @@ namespace src
     public class AnimatedGraphics : SDLGameObject
     {
         private int animSpeed;
-        private int numFrames;
+        private int numFrames = 3;
 
         public AnimatedGraphics(LoaderParams pParams, int inAnimSpeed)
             : base(ref pParams)

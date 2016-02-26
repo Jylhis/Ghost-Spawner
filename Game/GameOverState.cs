@@ -36,23 +36,23 @@ namespace src
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Draw();
-            }
-            ;
+            };
         }
 
         public override bool onEnter()
         {
-            if (!TextureManager.Instance.Load("assets/gameover.png",
+            gameObjects = new List<GameObject>();
+            if (!TextureManager.Instance.Load("Resources/gameover.png",
                     "gameovertext", Game.Instance.getRenderer))
             {
                 return false;
             }
-            if (!TextureManager.Instance.Load("assets/main.png",
+            if (!TextureManager.Instance.Load("Resources/Main.bmp",
                     "mainbutton", Game.Instance.getRenderer))
             {
                 return false;
             }
-            if (!TextureManager.Instance.Load("assets/restart.png",
+            if (!TextureManager.Instance.Load("Resources/Restart.bmp",
                     "restartbutton", Game.Instance.getRenderer))
             {
                 return false;

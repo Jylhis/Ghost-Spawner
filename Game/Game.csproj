@@ -94,6 +94,12 @@
     <None Include="Resources\Enemy.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\gameover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Restart.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sdl2\sdl2.csproj">
@@ -103,7 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\BENCH.bmp" />
-    <Content Include="Resources\test.bmp" />
+    <Content Include="Resources\test.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\BENCH.GIF" />
     <Content Include="Resources\CLIFFVEG.bmp" />
     <Content Include="Resources\CLIFSHD.bmp" />
