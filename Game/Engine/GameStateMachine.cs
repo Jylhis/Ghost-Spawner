@@ -7,6 +7,7 @@ namespace src
 {
     public class GameStateMachine
     {
+        // Stack?
         private List<GameState> gameStates;
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace src
         }
 
         /// <summary>
-        /// Pushs the state.
+        /// Push the state.
         /// </summary>
         /// <param name="state">State.</param>
         public void pushState(GameState state)

@@ -25,12 +25,7 @@ namespace src
         public bool IsRunning = false;
 
         /// <summary>
-        /// The game objects.
-        /// </summary>
-        public List<GameObject> gameObjects;
-
-        /// <summary>
-        /// Gets the get state machine.
+        /// Gets state machine.
         /// </summary>
         /// <value>The get state machine.</value>
         public GameStateMachine getStateMachine
@@ -60,7 +55,7 @@ namespace src
         /// <summary>
         /// Gets the renderer.
         /// </summary>
-        /// <value>The get renderer.</value>
+        /// <value>The renderer.</value>
         public IntPtr getRenderer
         {
             get { return renderer; }
@@ -116,11 +111,8 @@ namespace src
             }
 
             gameStateMachine = new GameStateMachine();
-
             gameStateMachine.changeState(new MenuState());
-
             InputHandler.Instance.InitJoysticks();
-            gameObjects = new List<GameObject>();
         }
 
         /// <summary>
@@ -141,10 +133,6 @@ namespace src
         /// </summary>
         public void Update()
         {
-            /*foreach (GameObject gObject in gameObjects)
-            {
-                gObject.Update();
-            }*/
             gameStateMachine.update();
         }
 
@@ -156,12 +144,8 @@ namespace src
             // Render to window
             SDL.SDL_RenderClear(renderer);
 
-            gameStateMachine.render();
             // Loads all objets into renderer
-            /* foreach (GameObject gObject in gameObjects)
-            {
-                gObject.Draw();
-            }*/
+            gameStateMachine.render();
 
             // Render everything
             SDL.SDL_RenderPresent(renderer);
@@ -173,7 +157,7 @@ namespace src
         public void Close()
         {
             Console.WriteLine("Closing game");
-            // Free stuff from memory
+
             InputHandler.Instance.Clean();
             SDL.SDL_DestroyWindow(Window);
             SDL.SDL_DestroyRenderer(renderer);

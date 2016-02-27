@@ -17,21 +17,21 @@ namespace src
         public abstract void render();
 
         /// <summary>
-        /// Ons the enter.
+        /// On enter.
         /// </summary>
-        /// <returns><c>true</c>, if enter was oned, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c>, if enter was success, <c>false</c> otherwise.</returns>
         public abstract bool onEnter();
 
         /// <summary>
-        /// Ons the exit.
+        /// On exit.
         /// </summary>
-        /// <returns><c>true</c>, if exit was oned, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c>, if exit was success, <c>false</c> otherwise.</returns>
         public abstract bool onExit();
 
         /// <summary>
-        /// Gets the state I.
+        /// Gets the state ID.
         /// </summary>
-        /// <returns>The state I.</returns>
+        /// <returns>The state ID.</returns>
         public abstract string getStateID();
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace src
 {
+    // TODO
     public struct Tileset
     {
         int firstGridID, tileWidth, tileHeight, spacing, margin,

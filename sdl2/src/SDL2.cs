@@ -5014,7 +5014,7 @@ namespace SDL2
 			SDL_CONTROLLER_BUTTON_MAX,
 		}
 
-		// FIXME: I'd rather this somehow be private...
+		// I'd rather this somehow be private...
 		[StructLayout(LayoutKind.Sequential)]
 		public struct INTERNAL_GameControllerButtonBind_hat
 		{
@@ -5844,7 +5844,7 @@ namespace SDL2
 			SDL_SYSWM_ANDROID
 		}
 
-		// FIXME: I wish these weren't public...
+		// I wish these weren't public...
 		[StructLayout(LayoutKind.Sequential)]
 		public struct INTERNAL_windows_wminfo
 		{

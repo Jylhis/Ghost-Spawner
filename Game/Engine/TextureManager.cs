@@ -7,12 +7,8 @@ namespace src
 {
     public class TextureManager
     {
-        // Singleton instance
         private static TextureManager instance;
-
-        private TextureManager()
-        {
-        }
+        private Dictionary<string, IntPtr> textureDict = new Dictionary<string, IntPtr>();
 
         /// <summary>
         /// Gets the instance.
@@ -30,7 +26,9 @@ namespace src
             }
         }
 
-        private Dictionary<string, IntPtr> textureDict = new Dictionary<string, IntPtr>();
+        private TextureManager()
+        {
+        }
 
         /// <summary>
         /// Load the texture and puts it into dictionary.
@@ -46,28 +44,15 @@ namespace src
                 Console.WriteLine(" - SDL_LoadBMP Error: " + SDL.SDL_GetError());
                 return false;
             }
-            else
-            {
-                Console.WriteLine("BMP loaded");
-            }
 
             IntPtr Texture = SDL.SDL_CreateTextureFromSurface(Renderer, tempSurface);
             SDL.SDL_FreeSurface(tempSurface);
             if (Texture != IntPtr.Zero)
             {
                 textureDict[id] = Texture;
-
-                if (textureDict[id] != IntPtr.Zero)
-                {
-                    Console.WriteLine("Texture put in Dict");
-                }
-                else
-                {
-                    Console.WriteLine("Error putting texture int dict");
-                }
                 return true;
             }
-            Console.WriteLine("Something Wrong in loadTexture");
+            Console.WriteLine(" - Something Wrong in loadTexture");
             return false;
         }
 
@@ -83,7 +68,6 @@ namespace src
         /// <param name="flip">Flip.</param>
         public void Draw(string id, int x, int y, int w, int h, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
         {
-            Console.WriteLine("DrawTexture");
             SDL.SDL_Rect srcRect;
             SDL.SDL_Rect destRect;
 
