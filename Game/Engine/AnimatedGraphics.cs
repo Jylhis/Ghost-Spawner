@@ -4,7 +4,7 @@ using SDL2;
 
 namespace src
 {
-    public class AnimatedGraphics : SDLGameObject
+    class AnimatedGraphics : SDLGameObject
     {
         private int animSpeed;
         private int numFrames = 3;
@@ -12,8 +12,8 @@ namespace src
         /// <summary>
         /// Initializes a new instance of the <see cref="src.AnimatedGraphics"/> class.
         /// </summary>
-        /// <param name="pParams">P parameters.</param>
-        /// <param name="inAnimSpeed">In animation speed.</param>
+        /// <param name="pParams">Parameters.</param>
+        /// <param name="inAnimSpeed">Animation speed.</param>
         public AnimatedGraphics(LoaderParams pParams, int inAnimSpeed)
             : base(ref pParams)
         {

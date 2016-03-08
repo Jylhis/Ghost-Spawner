@@ -6,67 +6,31 @@ using System.Runtime.InteropServices;
 
 namespace src
 {
+    /// <summary>
+    /// Mouse buttons.
+    /// </summary>
     public enum mouse_buttons
     {
-        /// <summary>
-        /// The LEF.
-        /// </summary>
         LEFT,
-        /// <summary>
-        /// The MIDDL.
-        /// </summary>
         MIDDLE,
-        /// <summary>
-        /// The RIGH.
-        /// </summary>
         RIGHT
     }
 
+    /// <summary>
+    /// Xbox controller buttons.
+    /// </summary>
     public enum xbox_controller_buttons
     {
-        /// <summary>
-        /// A.
-        /// </summary>
         A,
-        /// <summary>
-        /// The b.
-        /// </summary>
         B,
-        /// <summary>
-        /// The x.
-        /// </summary>
         X,
-        /// <summary>
-        /// The y.
-        /// </summary>
         Y,
-        /// <summary>
-        /// The L.
-        /// </summary>
         LB,
-        /// <summary>
-        /// The R.
-        /// </summary>
         RB,
-        /// <summary>
-        /// The SELEC.
-        /// </summary>
         SELECT,
-        /// <summary>
-        /// The STAR.
-        /// </summary>
         START,
-        /// <summary>
-        /// The XBO.
-        /// </summary>
         XBOX,
-        /// <summary>
-        /// The LEF t THUM.
-        /// </summary>
         LEFT_THUMB,
-        /// <summary>
-        /// The RIGH t THUM.
-        /// </summary>
         RIGHT_THUMB
     }
 
@@ -130,6 +94,7 @@ namespace src
             // Init keyboard
             IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
             keystates = new byte[numkeys];
+            tmpKeystates = IntPtr.Zero;
 
             // Init mouse
             mouseButtonStates = new List<bool>();
@@ -160,35 +125,39 @@ namespace src
 
         private void onMouseButtonDown(ref SDL.SDL_Event events)
         {
-            if (events.button.button == SDL.SDL_BUTTON_LEFT)
+            switch (events.button.button)
             {
-                mouseButtonStates[(int)mouse_buttons.LEFT] = true;
-            }
-            if (events.button.button == SDL.SDL_BUTTON_MIDDLE)
-            {
-                mouseButtonStates[(int)mouse_buttons.MIDDLE] = true;
-            }
-            if (events.button.button == SDL.SDL_BUTTON_RIGHT)
-            {
-                mouseButtonStates[(int)mouse_buttons.RIGHT] = true;
+                case (byte)SDL.SDL_BUTTON_LEFT:
+                    mouseButtonStates[(int)mouse_buttons.LEFT] = true;
+                    break;
+                case (byte)SDL.SDL_BUTTON_MIDDLE:
+                    mouseButtonStates[(int)mouse_buttons.MIDDLE] = true;
+                    break;
+                case (byte)SDL.SDL_BUTTON_RIGHT:
+                    mouseButtonStates[(int)mouse_buttons.RIGHT] = true;
+                    break;
+                default:
+                    break;
             }
         }
 
         private void onMouseButtonUp(ref SDL.SDL_Event events)
         {
-            if (events.button.button == SDL.SDL_BUTTON_LEFT)
+            switch (events.button.button)
             {
-                mouseButtonStates[(int)mouse_buttons.LEFT] = false;
+                case (byte)SDL.SDL_BUTTON_LEFT:
+                    mouseButtonStates[(int)mouse_buttons.LEFT] = false;
+                    break;
+                case (byte)SDL.SDL_BUTTON_MIDDLE:
+                    mouseButtonStates[(int)mouse_buttons.MIDDLE] = false;
+                    break;
+                case (byte)SDL.SDL_BUTTON_RIGHT:
+                    mouseButtonStates[(int)mouse_buttons.RIGHT] = false;
+                    break;
+                default:
+                    break;
+            
             }
-            if (events.button.button == SDL.SDL_BUTTON_MIDDLE)
-            {
-                mouseButtonStates[(int)mouse_buttons.MIDDLE] = false;
-            }
-            if (events.button.button == SDL.SDL_BUTTON_RIGHT)
-            {
-                mouseButtonStates[(int)mouse_buttons.RIGHT] = false;
-            }
-
         }
 
         private void onJoystickAxisMove(ref SDL.SDL_Event events)

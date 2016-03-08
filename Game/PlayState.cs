@@ -23,7 +23,6 @@ namespace src
                 gameobjects[i].Update();
             }
 
-            // FIXME
             if (checkCollision(gameobjects[0], gameobjects[1]))
             {
                 Game.Instance.getStateMachine.pushState(new GameOverState());
@@ -78,18 +77,15 @@ namespace src
             return true;
         }
 
-        // FIXME:
-        //  ref SDLGameObject p1, ref SDLGameObject p2
         bool checkCollision(params GameObject[] list)
-        { // TODO: Check this.
-
+        {
             SDLGameObject p1 = (SDLGameObject)list[0];
             SDLGameObject p2 = (SDLGameObject)list[1];
             int leftA, leftB;
             int rightA, rightB;
             int topA, topB;
             int bottomA, bottomB;
-            //p1.
+
             leftA = (int)p1.position.X;
             rightA = (int)(p1.position.X + p1.w);
             topA = (int)p1.position.Y;

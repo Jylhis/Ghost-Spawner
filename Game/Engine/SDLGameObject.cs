@@ -5,29 +5,22 @@ namespace src
 {
     public class SDLGameObject : GameObject
     {
+        protected int currentRow, currentFrame;
+        protected Vector2D velocity, acceleration;
+
         /// <summary>
-        /// The w.
+        /// The width.
         /// </summary>
         /// <summary>
-        /// The h.
+        /// The height.
         /// </summary>
-        /// <summary>
-        /// The current row.
-        /// </summary>
-        /// <summary>
-        /// The current frame.
-        /// </summary>
-        public int w, h, currentRow, currentFrame;
+        public int w, h;
+
         /// <summary>
         /// The position.
         /// </summary>
-        /// <summary>
-        /// The velocity.
-        /// </summary>
-        /// <summary>
-        /// The acceleration.
-        /// </summary>
-        public Vector2D position, velocity, acceleration;
+        public Vector2D position;
+
         /// <summary>
         /// The identifier.
         /// </summary>
@@ -43,9 +36,9 @@ namespace src
             position = new Vector2D(pParams.X, pParams.Y);
             velocity = new Vector2D(0, 0);
             acceleration = new Vector2D(0, 0);
-            this.w = pParams.W;
-            this.h = pParams.H;
-            this.id = pParams.Id;
+            w = pParams.W;
+            h = pParams.H;
+            id = pParams.Id;
 
             currentFrame = 1;
             currentRow = 1;
@@ -70,8 +63,6 @@ namespace src
                     w, h, currentRow, currentFrame,
                     Game.Instance.getRenderer);
             }
-
-            //TextureManager.Instance.DrawFrame(id, (int)position.X, (int)position.Y, w, h, currentRow, currentFrame, Game.Instance.getRenderer);
         }
 
         /// <summary>
@@ -89,7 +80,5 @@ namespace src
         public override void Clean()
         {
         }
-
-
     }
 }

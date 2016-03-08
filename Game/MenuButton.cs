@@ -44,7 +44,7 @@ namespace src
                     && released)
                 {
                     currentFrame = (int)button_state.CLICKED;
-                    call(); // FIXME
+                    call();
                     released = false;
                 }
                 else if (InputHandler.Instance.getMouseButtonState(mouse_buttons.LEFT))
