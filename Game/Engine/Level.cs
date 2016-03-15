@@ -38,6 +38,8 @@ namespace src
             return tilesets;
         }
 
+        // TODO s168 firend class LevelParser
+
         /// <summary>
         /// Initializes a new instance of the <see cref="src.Level"/> class.
         /// </summary>
