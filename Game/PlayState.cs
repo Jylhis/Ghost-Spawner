@@ -10,6 +10,7 @@ namespace src
         private const string menuID = "PLAY";
 
         private List<GameObject> gameobjects;
+        private Level pLevel;
 
         public override void update()
         {
@@ -32,6 +33,8 @@ namespace src
 
         public override void render()
         {
+            // TODO: Fix level render .s 179
+            //pLevel.render();
             for (int i = 0; i < gameobjects.Count; i++)
             {
                 gameobjects[i].Draw();
@@ -41,6 +44,9 @@ namespace src
         public override bool onEnter()
         {
             gameobjects = new List<GameObject>();
+
+            LevelParser levelParser = new LevelParser();
+            pLevel = levelParser.ParseLevel("Resources/map.tmx");
 
             // Add Player
             if (!TextureManager.Instance.Load("Resources/Player.bmp", "player", Game.Instance.getRenderer))

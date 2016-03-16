@@ -19,7 +19,6 @@ namespace src
         public override void Update()
         {
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 2);
-
             base.Update();
         }
 

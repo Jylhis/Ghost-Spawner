@@ -10,7 +10,7 @@ namespace src
     /// </summary>
     public class Game
     {
-
+        private int width, height;
         private static Game instance;
         private IntPtr Window, renderer;
         private GameStateMachine gameStateMachine;
@@ -33,6 +33,22 @@ namespace src
             get
             {
                 return gameStateMachine;
+            }
+        }
+
+        public int Width
+        {
+            get
+            {
+                return width;
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                return height;
             }
         }
 
@@ -113,6 +129,8 @@ namespace src
             gameStateMachine = new GameStateMachine();
             gameStateMachine.changeState(new MenuState());
             InputHandler.Instance.InitJoysticks();
+            width = w;
+            height = h;
         }
 
         /// <summary>

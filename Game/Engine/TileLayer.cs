@@ -7,7 +7,7 @@ namespace src
     // TODO
     public class TileLayer : Layer
     {
-        private int numColumnsm, numRows, tileSize;
+        private int numColumns, numRows, tileSize;
         private Vector2D position, velocity;
         private List<Tileset> tilesets;
         private List<List<int>> tileIDs;
@@ -18,8 +18,16 @@ namespace src
         /// </summary>
         /// <param name="tileSize">Tile size.</param>
         /// <param name="tilesets">Tilesets.</param>
-        public TileLayer(int tileSize, ref List<Tileset> tilesets)
+        public TileLayer(int itileSize, ref List<Tileset> itilesets)
         {
+            tileSize = itileSize;
+            tilesets = itilesets;
+            Vector2D tmp = new Vector2D(0, 0);
+            position = tmp;
+            velocity = tmp;
+
+            numColumns = (Game.Instance.Width / tileSize);
+            numRows = (Game.Instance.Height / tileSize);
         }
 
         /// <summary>
@@ -27,7 +35,7 @@ namespace src
         /// </summary>
         public override void update()
         {
-            throw new NotImplementedException();
+            position += velocity;
         }
 
         /// <summary>
@@ -35,14 +43,40 @@ namespace src
         /// </summary>
         public override void render()
         {
-            throw new NotImplementedException();
+            int x, y, x2, y2 = 0;
+
+            x = (int)position.X / tileSize;
+            y = (int)position.Y / tileSize;
+
+            x2 = (int)(position.Y) % tileSize;
+            y2 = (int)(position.Y) % tileSize;
+
+            for (int i = 0; i < numRows; i++)
+            {
+                for (int j = 0; j < numColumns; j++)
+                {
+                    int id = tileIDs[i][j + x];
+
+                    if (id == 0)
+                    {
+                        continue;
+                    }
+                    Tileset tileset = getTilesetByID(id);
+
+                    id--;
+
+                    TextureManager.Instance.DrawTile(tileset.name, 2, 2, (j * tileSize) - x2,
+                        (i * tileSize) - y2, tileSize, tileSize, (id - (tileset.firstGridID - 1)) / tileset.numColumns,
+                        (id - (tileset.firstGridID - 1)) % tileset.numColumns, Game.Instance.getRenderer);
+                }
+            }
         }
 
         /// <summary>
         /// Sets the tile I ds.
         /// </summary>
         /// <param name="data">Data.</param>
-        public void setTileIDs(ref List<List<int>> data)
+        public void setTileIDs(List<List<int>> data)
         {
             tileIDs = data;
         }
@@ -65,8 +99,8 @@ namespace src
         {
             return tilesets[tileID];
         }
-    
-        
+
+
     }
 
 }

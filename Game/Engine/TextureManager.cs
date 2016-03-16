@@ -81,6 +81,19 @@ namespace src
             SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
         }
 
+        public void DrawTile(string id, int margin, int spacing, int x, int y, int width, int height, int currentRow, int currentFrame, IntPtr renderer)
+        {
+            SDL.SDL_Rect srcRect, destRect;
+            srcRect.x = margin + (spacing + width) * currentFrame;
+            srcRect.y = margin + (spacing + height) * currentRow;
+            srcRect.w = destRect.w = width;
+            srcRect.h = destRect.h = height;
+            destRect.x = x;
+            destRect.y = y;
+
+            SDL.SDL_RenderCopyEx(renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, SDL.SDL_RendererFlip.SDL_FLIP_NONE);
+        }
+
         /// <summary>
         /// Draws the frame.
         /// </summary>
