@@ -51,13 +51,13 @@ namespace src
             x2 = (int)(position.Y) % tileSize;
             y2 = (int)(position.Y) % tileSize;
 
-            for(int i = 0; i < numRows; i++)
+            for (int i = 0; i < numRows; i++)
             {
-                for(int j = 0; j < numColumns; j++)
+                for (int j = 0; j < numColumns; j++)
                 {
                     int id = tileIDs[i][j + x];
 
-                    if(id == 0)
+                    if (id == 0)
                     {
                         continue;
                     }
@@ -66,7 +66,7 @@ namespace src
                     id--;
 
                     TextureManager.Instance.DrawTile(tileset.name, 2, 2, (j * tileSize) - x2,
-                        (i * tileSize) - y2, tileSize, tileSize, (id - (tileset.firstGridId - 1)) / tileset.numColumns,
+                        (i * tileSize) - y2, tileSize, tileSize, (id - (tileset.firstGridID - 1)) / tileset.numColumns,
                         (id - (tileset.firstGridID - 1)) % tileset.numColumns, Game.Instance.getRenderer);
                 }
             }
@@ -76,7 +76,7 @@ namespace src
         /// Sets the tile I ds.
         /// </summary>
         /// <param name="data">Data.</param>
-        public void setTileIDs(ref List<List<int>> data)
+        public void setTileIDs(List<List<int>> data)
         {
             tileIDs = data;
         }
@@ -99,8 +99,8 @@ namespace src
         {
             return tilesets[tileID];
         }
-    
-        
+
+
     }
 
 }

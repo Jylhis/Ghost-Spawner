@@ -7,16 +7,16 @@ namespace src
     // TODO
     public struct Tileset
     {
-        int firstGridID, tileWidth, tileHeight, spacing, margin,
+        public int firstGridID, tileWidth, tileHeight, spacing, margin,
             width, height, numColumns;
-        string name;
+        public string name;
     }
 
     public class Level
     {
-       
 
-        private List<Layer> layers;
+
+        private List<Layer> layers = new List<Layer>();
 
         /// <summary>
         /// Gets the layers.
@@ -27,7 +27,7 @@ namespace src
             return layers;
         }
 
-        private List<Tileset> tilesets;
+        private List<Tileset> tilesets = new List<Tileset>();
 
         /// <summary>
         /// Gets the tilesets.

@@ -11,105 +11,132 @@ namespace src
         // TODO
         private int tileSize, width, height;
 
-        private void parseTilesets(ref XmlElement tilesetRoot, ref List<Tileset> tilesets)
+        private void parseTilesets(XmlElement tilesetRoot, List<Tileset> tilesets)
         {
             TextureManager.Instance.Load(tilesetRoot.FirstChild.Attributes["source"].Value, tilesetRoot.GetAttribute("name"), Game.Instance.getRenderer);
 
-            Tileset tileset;
-            tileset.width = tilesetRoot.FirstChild.Attributes["width"].Value;
-            tileset.height = tilesetRoot.FirstChild.Attributes["height"].Value;
-            tileset.FirstGridID = tilesetRoot.FirstChild.Attributes["firstgrid"].Value;
-            tileset.tileWidth = tilesetRoot.FirstChild.Attributes["tilewidth"].Value;
-            tileset.tileHeight = tilesetRoot.FirstChild.Attributes["tileheight"].Value;
-            tileset.spacing = tilesetRoot.FirstChild.Attributes["spacing"].Value;
-            tileset.margin = tilesetRoot.FirstChild.Attributes["margin"].Value;
-            tileset.name = tilesetRoot.FirstChild.Attributes["name"].Value;
+            Tileset tileset = new Tileset();
+            tileset.width = int.Parse(tilesetRoot.FirstChild.Attributes["width"].Value);
+            tileset.height = int.Parse(tilesetRoot.FirstChild.Attributes["height"].Value);
+            tileset.firstGridID = int.Parse(tilesetRoot.Attributes["firstgid"].Value);
+            tileset.tileWidth = int.Parse(tilesetRoot.Attributes["tilewidth"].Value);
+            tileset.tileHeight = int.Parse(tilesetRoot.Attributes["tileheight"].Value);
+            try
+            {
+                tileset.spacing = int.Parse(tilesetRoot.FirstChild.Attributes["spacing"].Value);
+            }
+            catch (System.NullReferenceException)
+            {
+
+                tileset.spacing = 0;
+            }
+            
+            tileset.margin = int.Parse(tilesetRoot.Attributes["margin"].Value);
+            tileset.name = tilesetRoot.Attributes["name"].Value;
 
             tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
 
             tilesets.Add(tileset);
         }
 
-        private void parseTileLayer(ref XmlElement pTileElement, List<Layer> pLayers, List<Tileset> pTilesets)
+        private void parseTileLayer(XmlElement pTileElement, List<Layer> pLayers, List<Tileset> pTilesets)
         {
             TileLayer pTileLayer = new TileLayer(tileSize, ref pTilesets);
 
-        // tile data
-        List<List<int>> data;
+            // tile data
+            List<List<int>> data = new List<List<int>>();
 
-        string decodedIDs;
-        XmlElement pDataNode;
+            string decodedIDs;
+            XmlElement pDataNode = (XmlElement)pTileElement.FirstChild;
 
             for (XmlElement e = (XmlElement)pTileElement.FirstChild; e != null; e = (XmlElement)e.NextSibling)
             {
-                if (e.Value == "data")
+                if (e.Name == "data")
                 {
                     pDataNode = e;
                 }
             }
-            for(XmlElement e = (XmlElement)pDataNode.FirstChild; e != null; e = (XmlElement)e.NextSibling)
-                {
-                // FIXME:
-                XmlText text = (XmlText)e.ToText;
+
+            for (XmlNode e = pDataNode.FirstChild; e != null; e = e.NextSibling)
+            {
                 string t = e.InnerText;
                 byte[] tmpData = Convert.FromBase64String(t);
                 decodedIDs = Encoding.UTF8.GetString(tmpData);
+            }
+               
 
-                // TODO: s172 loppu?? zlib? tarviiko?
-                List<int> layerRow = new List<int>(width);
+                int numGids = width * height * sizeof(int);
+                List<int> gids = new List<int>(numGids);
+            // TODO: COMPRESS???
+            //uncompress((Bytef*)&gids[0], &numGids, (const Bytef*)decodedIDs.c_str(), decodedIDs.size());
 
-                for(int j = 0; j < height; j++)
+            /* List<int> layerRow = new List<int>(width);
+
+             for (int j = 0; j < height; j++)
+             {
+                 data.Add(layerRow);
+             }*/
+
+            for (int rows = 0; rows < height; rows++)
                 {
-                    data.Add(layerRow);
+                for (int cols = 0; cols < width; cols++)
+                {
+                    List<int> tmp = new List<int>(rows * width + cols);
+                    //data = rows * width + cols;
+                    data.Add(tmp);
+                    //data[rows][cols] = tmp;
+
+                    //data[rows][cols] = gids.Capacity;
+                    //data[rows][cols] = gids[rows * width + cols];
+
+                    //data[rows].Add(rows * width + cols);
                 }
 
-                for(int rows = 0; rows < height; rows++)
-                {
-                    for(int cols = 0; cols < width; cols++)
-                    {
-                        data[rows][cols] = grids[rows * width + cols];
+            }
 
-                    }
-                }
-
-                pTileLayer.setTileIDs(ref data);
+                pTileLayer.setTileIDs(data);
 
                 pLayers.Add(pTileLayer);
+            }
+
+        
+
+
+        public Level ParseLevel(string levelFile)
+        {
+
+            XmlDocument LevelDocument = new XmlDocument();
+
+            Console.WriteLine("XML: " + levelFile);
+            
+            LevelDocument.Load(levelFile);
+
+
+            Level pLevel = new Level();
+
+            XmlElement pRoot = LevelDocument.DocumentElement;
+
+            tileSize = int.Parse(pRoot.GetAttribute("tilewidth"));
+            width = int.Parse(pRoot.GetAttribute("width"));
+            height = int.Parse(pRoot.GetAttribute("height"));
+
+            // Parse tilesets
+            for (XmlElement e = (XmlElement)pRoot.FirstChild; e != null; e = (XmlElement)e.NextSibling)
+            {
+                if (e.Name == "tileset")
+                {
+                    parseTilesets(e, pLevel.getTilesets());
                 }
-        
-        }
-    
-        
-        public Level ParseLevel(ref string levelFile)
-        {
-        XmlDocument LevelDocument = new XmlDocument();
-        LevelDocument.LoadXml(levelFile);
-
-        Level pLevel = new Level();
-
-        XmlElement pRoot = LevelDocument.DocumentElement;
-
-        tileSize = pRoot.GetAttribute("tilewidth");
-        width = pRoot.GetAttribute("width");
-        height = pRoot.GetAttribute("height");
-
-        // Parse tilesets
-        for(XmlElement e = (XmlElement)pRoot.FirstChild; e != null; e = (XmlElement)e.NextSibling)
-        {
-            if (e.Value == "tileset")
-            {
-                parseTilesets(ref e, ref pLevel.getTilesets());
             }
-        }
-        // parse any object layers
-        for(XmlElement e = (XmlElement)pRoot.FirstChild; e != null; e = (XmlElement)e.NextSibling)
-        {
-            if(e.Value == "layer")
+            // parse any object layers
+            for (XmlElement e = (XmlElement)pRoot.FirstChild; e != null; e = (XmlElement)e.NextSibling)
             {
-                parseTileLayer(ref e, ref pLevel.getLayers(), ref pLevel.getTilesets());
+                if (e.Name == "layer")
+                {
+                    parseTileLayer(e, pLevel.getLayers(), pLevel.getTilesets());
+                }
             }
-        }
-        return pLevel;
+            return pLevel;
         }
 
     }

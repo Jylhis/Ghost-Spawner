@@ -81,7 +81,7 @@ namespace src
             SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
         }
 
-        public void drawTile(string id, int margin, int spacing, int x, int y, int width, int height, int currentRow, int currentFrame, IntPtr renderer)
+        public void DrawTile(string id, int margin, int spacing, int x, int y, int width, int height, int currentRow, int currentFrame, IntPtr renderer)
         {
             SDL.SDL_Rect srcRect, destRect;
             srcRect.x = margin + (spacing + width) * currentFrame;
@@ -91,7 +91,7 @@ namespace src
             destRect.x = x;
             destRect.y = y;
 
-            SDL.SDL_RenderCopyEx(renderer, TextureMap[id], srcRect, destRect, 0, 0, SDL.SDL_RendererFlip.SDL_FLIP_NONE);
+            SDL.SDL_RenderCopyEx(renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, SDL.SDL_RendererFlip.SDL_FLIP_NONE);
         }
 
         /// <summary>
