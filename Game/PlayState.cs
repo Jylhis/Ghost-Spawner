@@ -33,7 +33,8 @@ namespace src
 
         public override void render()
         {
-            pLevel.render();
+            // TODO: Fix level render
+            //pLevel.render();
             for (int i = 0; i < gameobjects.Count; i++)
             {
                 gameobjects[i].Draw();
