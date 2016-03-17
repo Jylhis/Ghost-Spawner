@@ -97,16 +97,9 @@
     <None Include="Resources\gameover.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\map.tmx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Restart.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\testTile.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\level.tmx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sdl2\sdl2.csproj">
@@ -116,9 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\BENCH.bmp" />
-    <Content Include="Resources\test.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\BENCH.GIF" />
     <Content Include="Resources\CLIFFVEG.bmp" />
     <Content Include="Resources\CLIFSHD.bmp" />
@@ -134,8 +124,6 @@
     <Content Include="Resources\PAVE.bmp" />
     <Content Include="Resources\RUIN.bmp" />
     <Content Include="Resources\TABLE1.GIF" />
-    <Content Include="Resources\TEST5B.bmp" />
-    <Content Include="Resources\TEST7B.bmp" />
     <Content Include="Resources\TOWNBOT.bmp" />
     <Content Include="Resources\TOWNBOT2.bmp" />
     <Content Include="Resources\TOWNDOOR.bmp" />

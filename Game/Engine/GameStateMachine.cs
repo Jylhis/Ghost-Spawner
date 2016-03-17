@@ -8,14 +8,13 @@ namespace src
     public class GameStateMachine
     {
         // Stack?
-        private List<GameState> gameStates;
+        private List<GameState> gameStates = new List<GameState>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="src.GameStateMachine"/> class.
         /// </summary>
         public GameStateMachine()
         {
-            gameStates = new List<GameState>();
         }
 
         /// <summary>

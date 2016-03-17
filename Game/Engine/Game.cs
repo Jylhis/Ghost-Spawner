@@ -5,24 +5,31 @@ using System.Collections.Generic;
 
 namespace src
 {
-    /// <summary>
-    /// Handles start and shutdown of SDL. Renders and events.
-    /// </summary>
     public class Game
     {
-        private int width, height;
         private static Game instance;
         private IntPtr Window, renderer;
         private GameStateMachine gameStateMachine;
+        private bool running = false;
 
         private Game()
         {
         }
 
         /// <summary>
-        /// True if game is running.
+        /// Returns true if game is running.
         /// </summary>
-        public bool IsRunning = false;
+        public bool IsRunning
+        {
+            get
+            {
+                return running;
+            }
+            set
+            {
+                running = value;
+            }
+        }
 
         /// <summary>
         /// Gets state machine.
@@ -33,22 +40,6 @@ namespace src
             get
             {
                 return gameStateMachine;
-            }
-        }
-
-        public int Width
-        {
-            get
-            {
-                return width;
-            }
-        }
-
-        public int Height
-        {
-            get
-            {
-                return height;
             }
         }
 
@@ -120,7 +111,7 @@ namespace src
                     else
                     {
                         Console.WriteLine("Renderer started");
-                        IsRunning = true;
+                        Game.Instance.IsRunning = true;
                         SDL.SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
                     }
                 }
@@ -129,11 +120,9 @@ namespace src
             gameStateMachine = new GameStateMachine();
             gameStateMachine.changeState(new MenuState());
             InputHandler.Instance.InitJoysticks();
-            width = w;
-            height = h;
 
             //HACK
-            TextureManager.Instance.Load("Resources/level.png","background",renderer);
+            TextureManager.Instance.Load("Resources/level.png", "background", renderer);
         }
 
         /// <summary>
@@ -166,7 +155,7 @@ namespace src
             SDL.SDL_RenderClear(renderer);
 
             // background hack
-            TextureManager.Instance.Draw("background",0,0,1024,720,renderer);
+            TextureManager.Instance.Draw("background", 0, 0, 1024, 720, renderer);
 
             // Loads all objets into renderer
             gameStateMachine.render();

@@ -50,8 +50,8 @@ namespace src
             {
                 return false;
             }
-            GameObject button1 = new MenuButton(new LoaderParams(100, 100, 400, 100, "playbutton"), menuToPlay);
-            GameObject button2 = new MenuButton(new LoaderParams(100, 300, 400, 100, "exitbutton"), exitFromMenu);
+            GameObject button1 = new MenuButton(new LoaderParams(300, 200, 400, 100, "playbutton"), menuToPlay);
+            GameObject button2 = new MenuButton(new LoaderParams(300, 400, 400, 100, "exitbutton"), exitFromMenu);
             gameobjects.Add(button1);
             gameobjects.Add(button2);
             Console.WriteLine("entering MenuState");

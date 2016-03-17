@@ -29,7 +29,7 @@ namespace src
         /// <summary>
         /// Initializes a new instance of the <see cref="src.SDLGameObject"/> class.
         /// </summary>
-        /// <param name="pParams">P parameters.</param>
+        /// <param name="pParams">Parameters.</param>
         public SDLGameObject(ref LoaderParams pParams)
             : base(ref pParams)
         {

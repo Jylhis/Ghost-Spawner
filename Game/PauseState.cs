@@ -1,13 +1,14 @@
 ﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
 using System;
 using System.Collections.Generic;
+using SDL2;
 
 namespace src
 {
     public class PauseState : GameState
     {
         private const string menuID = "PAUSE";
-        private List<GameObject> gameobjects;
+        private List<GameObject> gameobjects = new List<GameObject>();
 
         private static void pauseToMain()
         {
@@ -23,6 +24,8 @@ namespace src
 
         public override void update()
         {
+           
+                    
             for (int i = 0; i < gameobjects.Count; i++)
             {
                 gameobjects[i].Update();
@@ -39,7 +42,6 @@ namespace src
 
         public override bool onEnter()
         {
-            gameobjects = new List<GameObject>();
             if (!TextureManager.Instance.Load("Resources/Resume.bmp",
                     "resumebutton", Game.Instance.getRenderer))
             {
@@ -50,8 +52,8 @@ namespace src
             {
                 return false;
             }
-            GameObject button1 = new MenuButton(new LoaderParams(100, 100, 400, 100, "resumebutton"), resumePlay);
-            GameObject button2 = new MenuButton(new LoaderParams(100, 300, 400, 100, "mainmenubutton"), pauseToMain);
+            GameObject button1 = new MenuButton(new LoaderParams(300, 200, 400, 100, "resumebutton"), resumePlay);
+            GameObject button2 = new MenuButton(new LoaderParams(300, 400, 400, 100, "mainmenubutton"), pauseToMain);
             gameobjects.Add(button1);
             gameobjects.Add(button2);
             Console.WriteLine("entering PauseState");

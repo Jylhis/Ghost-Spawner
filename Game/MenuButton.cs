@@ -5,7 +5,7 @@ namespace src
 {
     public class MenuButton : SDLGameObject
     {
-        bool released;
+        private bool released;
 
         public delegate void callback();
 
@@ -22,7 +22,6 @@ namespace src
             : base(ref pParams)
         {
             call = new callback(incall);
-            //call();
             currentFrame = (int)button_state.MOUSE_OUT;
         }
 
@@ -39,7 +38,6 @@ namespace src
                 && mousePos.Y < (position.Y + h)
                 && mousePos.Y > position.Y)
             {
-                //currentFrame = (int)button_state.MOUSE_OVER;
                 if (InputHandler.Instance.getMouseButtonState(mouse_buttons.LEFT)
                     && released)
                 {

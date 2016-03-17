@@ -4,13 +4,11 @@ using SDL2;
 
 namespace src
 {
-
     public class Player : SDLGameObject
     {
         public Player(LoaderParams pParams)
             : base(ref pParams)
         {
-            
         }
 
         public override void Draw()

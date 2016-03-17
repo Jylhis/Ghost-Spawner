@@ -11,27 +11,18 @@ namespace src
     /// </summary>
     public enum mouse_buttons
     {
+        /// <summary>
+        /// Mouse left button.
+        /// </summary>
         LEFT,
+        /// <summary>
+        /// Mouse middle button.
+        /// </summary>
         MIDDLE,
+        /// <summary>
+        /// Mouse right mouse.
+        /// </summary>
         RIGHT
-    }
-
-    /// <summary>
-    /// Xbox controller buttons.
-    /// </summary>
-    public enum xbox_controller_buttons
-    {
-        A,
-        B,
-        X,
-        Y,
-        LB,
-        RB,
-        SELECT,
-        START,
-        XBOX,
-        LEFT_THUMB,
-        RIGHT_THUMB
     }
 
     public class InputHandler
@@ -39,11 +30,11 @@ namespace src
         private const int joystickDeadZone = 10000;
         private bool joysticksInit;
         private static InputHandler instance;
-        private List<IntPtr> joysticks;
-        private List<Tuple<Vector2D, Vector2D>> joystickValues;
-        private List<List<bool>> buttonStates;
-        private List<bool> mouseButtonStates;
-        private Vector2D mousePosition;
+        private List<IntPtr> joysticks = new List<IntPtr>();
+        private List<Tuple<Vector2D, Vector2D>> joystickValues = new List<Tuple<Vector2D, Vector2D>>();
+        private List<List<bool>> buttonStates = new List<List<bool>>();
+        private List<bool> mouseButtonStates = new List<bool>();
+        private Vector2D mousePosition = new Vector2D(0,0);
         private byte[] keystates;
         private int numkeys;
 
@@ -91,14 +82,12 @@ namespace src
 
         private InputHandler()
         {
-            // Init keyboard
+            // FIXME: Init keyboard
             IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
             keystates = new byte[numkeys];
             tmpKeystates = IntPtr.Zero;
 
             // Init mouse
-            mouseButtonStates = new List<bool>();
-            mousePosition = new Vector2D(0, 0);
             for (int i = 0; i < 3; i++)
             {
                 mouseButtonStates.Add(false);
@@ -344,9 +333,6 @@ namespace src
             if (SDL.SDL_WasInit(SDL.SDL_INIT_JOYSTICK) == 0)
             {
                 SDL.SDL_InitSubSystem(SDL.SDL_INIT_JOYSTICK);
-                joysticks = new List<IntPtr>();
-                joystickValues = new List<Tuple<Vector2D, Vector2D>>();
-                buttonStates = new List<List<bool>>();
             }
 
             if (SDL.SDL_NumJoysticks() > 0)

@@ -9,11 +9,11 @@ namespace src
         /// <summary>
         /// Initializes a new instance of the <see cref="src.LoaderParams"/> class.
         /// </summary>
-        /// <param name="inx">Inx.</param>
-        /// <param name="iny">Iny.</param>
-        /// <param name="inw">Inw.</param>
-        /// <param name="inh">Inh.</param>
-        /// <param name="inid">Inid.</param>
+        /// <param name="inx">X.</param>
+        /// <param name="iny">Y.</param>
+        /// <param name="inw">Width.</param>
+        /// <param name="inh">Height.</param>
+        /// <param name="inid">ID.</param>
         public LoaderParams(int inx, int iny, int inw, int inh, string inid)
         {
             x = inx;

@@ -6,7 +6,7 @@ namespace src
 {
     public class GameOverState : GameState
     {
-        private List<GameObject> gameObjects;
+        private List<GameObject> gameObjects = new List<GameObject>();
         private const string menuID = "GAMEOVER";
 
         private static void gameOverToMain()
@@ -42,7 +42,6 @@ namespace src
 
         public override bool onEnter()
         {
-            gameObjects = new List<GameObject>();
             if (!TextureManager.Instance.Load("Resources/gameover.png",
                     "gameovertext", Game.Instance.getRenderer))
             {
@@ -60,10 +59,8 @@ namespace src
             }
             GameObject gameOverText = new AnimatedGraphics(new LoaderParams(200, 100, 190, 30, "gameovertext"), 2);
 
-            GameObject button1 = new MenuButton(new LoaderParams(200, 200,
-                                         200, 80, "mainbutton"), gameOverToMain);
-            GameObject button2 = new MenuButton(new LoaderParams(200, 300,
-                                         200, 80, "restartbutton"), restartPlay);
+            GameObject button1 = new MenuButton(new LoaderParams(300, 200, 400, 100, "mainbutton"), gameOverToMain);
+            GameObject button2 = new MenuButton(new LoaderParams(300, 400, 400, 100, "restartbutton"), restartPlay);
 
             gameObjects.Add(gameOverText);
 
