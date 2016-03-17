@@ -12,7 +12,7 @@ namespace src
         static int Main(string[] args)
         {
             UInt32 frameStart, frameTime;
-            Game.Instance.Init("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 800, 600, false);
+            Game.Instance.Init("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 1024, 720, false);
 
             while (Game.Instance.IsRunning)
             {

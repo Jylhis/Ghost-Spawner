@@ -131,6 +131,9 @@ namespace src
             InputHandler.Instance.InitJoysticks();
             width = w;
             height = h;
+
+            //HACK
+            TextureManager.Instance.Load("Resources/level.png","background",renderer);
         }
 
         /// <summary>
@@ -162,9 +165,12 @@ namespace src
             // Render to window
             SDL.SDL_RenderClear(renderer);
 
+            // background hack
+            TextureManager.Instance.Draw("background",0,0,1024,720,renderer);
+
             // Loads all objets into renderer
             gameStateMachine.render();
-
+                
             // Render everything
             SDL.SDL_RenderPresent(renderer);
         }
