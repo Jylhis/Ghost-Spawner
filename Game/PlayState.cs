@@ -48,7 +48,7 @@ namespace src
             GameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
 
             // Add Enemy
-            if (!TextureManager.Instance.Load("Resources/ghost_chase.bmp", "enemy", Game.Instance.getRenderer))
+            if (!TextureManager.Instance.Load("Resources/spr_suicidebomber_strip4.png", "enemy", Game.Instance.getRenderer))
             {
                 return false;
             }

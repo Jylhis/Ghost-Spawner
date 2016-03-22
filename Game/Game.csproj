@@ -118,15 +118,11 @@
     <Content Include="Resources\distortionoverlaystretchtofullscreen.bmp" />
     <Content Include="Resources\dot.bmp" />
     <Content Include="Resources\dot2.bmp" />
-    <Content Include="Resources\ENCINT.GIF" />
     <Content Include="Resources\FENCDAM.bmp" />
     <Content Include="Resources\FENCE.bmp" />
     <Content Include="Resources\gem.bmp" />
     <Content Include="Resources\gemcollecteffect.bmp" />
     <Content Include="Resources\ghost_bombswallow.bmp" />
-    <Content Include="Resources\ghost_chase.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\glowoverlay.bmp" />
     <Content Include="Resources\GRS2ROC.bmp" />
     <Content Include="Resources\KITCHEN.GIF" />
@@ -168,7 +164,9 @@
     <Content Include="Resources\spr_robot_strip4.png" />
     <Content Include="Resources\spr_spawnspawn_strip42.png" />
     <Content Include="Resources\spr_suicidebomber2_strip10.png" />
-    <Content Include="Resources\spr_suicidebomber_strip4.png" />
+    <Content Include="Resources\spr_suicidebomber_strip4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\spr_tank_strip3.png" />
     <Content Include="Resources\SYNSObullet.bmp" />
     <Content Include="Resources\TABLE1.GIF" />

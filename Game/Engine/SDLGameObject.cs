@@ -81,7 +81,7 @@ namespace src
                         velocity.X = 0;
                     }
                     break;
-                case 900:
+                case 970:
                     if (velocity.X > 0)
                     {
                         velocity.X = 0;
@@ -98,7 +98,7 @@ namespace src
                         velocity.Y = 0;
                     }
                     break;
-                case 600:
+                case 670:
                     if (velocity.Y > 0)
                     {
                         velocity.Y = 0;
