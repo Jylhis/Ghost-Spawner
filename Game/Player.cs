@@ -22,7 +22,7 @@ namespace src
             velocity.Y = 0;
             handleInput();
 
-            currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 2);
+            currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 8);
             base.Update();
         }
 

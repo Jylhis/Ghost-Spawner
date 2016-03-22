@@ -41,18 +41,18 @@ namespace src
         public override bool onEnter()
         {
             // Add Player
-            if (!TextureManager.Instance.Load("Resources/Player.bmp", "player", Game.Instance.getRenderer))
+            if (!TextureManager.Instance.Load("Resources/spr_player_strip8.png", "player", Game.Instance.getRenderer))
             {
                 return false;
             }
-            GameObject player = new Player(new LoaderParams(100, 100, 55, 55, "player"));
+            GameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
 
             // Add Enemy
-            if (!TextureManager.Instance.Load("Resources/Enemy.bmp", "enemy", Game.Instance.getRenderer))
+            if (!TextureManager.Instance.Load("Resources/ghost_chase.bmp", "enemy", Game.Instance.getRenderer))
             {
                 return false;
             }
-            GameObject enemy = new Enemy(new LoaderParams(300, 300, 55, 55, "enemy"));
+            GameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
 
 
             gameobjects.Add(player);

@@ -57,13 +57,10 @@ namespace src
             {
                 return false;
             }
-            GameObject gameOverText = new AnimatedGraphics(new LoaderParams(200, 100, 190, 30, "gameovertext"), 2);
 
-            GameObject button1 = new MenuButton(new LoaderParams(300, 200, 400, 100, "mainbutton"), gameOverToMain);
-            GameObject button2 = new MenuButton(new LoaderParams(300, 400, 400, 100, "restartbutton"), restartPlay);
-
-            gameObjects.Add(gameOverText);
-
+            GameObject button1 = new MenuButton(new LoaderParams(320, 400, 380, 203, "mainbutton"), gameOverToMain);
+            GameObject button2 = new MenuButton(new LoaderParams(320, 100, 380, 203, "restartbutton"), restartPlay);
+            
             gameObjects.Add(button1);
             gameObjects.Add(button2);
             Console.WriteLine("Entering GameOverState");

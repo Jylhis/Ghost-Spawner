@@ -122,7 +122,7 @@ namespace src
             InputHandler.Instance.InitJoysticks();
 
             //HACK
-            TextureManager.Instance.Load("Resources/level.png", "background", renderer);
+            TextureManager.Instance.Load("Resources/background_robotron.bmp", "background", renderer);
         }
 
         /// <summary>

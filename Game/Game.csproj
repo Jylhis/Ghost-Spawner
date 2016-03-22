@@ -91,12 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Resources\Enemy.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\gameover.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\Restart.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -108,44 +102,86 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\BENCH.bmp" />
+    <Content Include="Resources\ant.bmp" />
+    <Content Include="Resources\antspawner.bmp" />
+    <Content Include="Resources\army.bmp" />
+    <Content Include="Resources\background_robotron.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\background_robotron_original.bmp" />
+    <Content Include="Resources\bar.bmp" />
     <Content Include="Resources\BENCH.GIF" />
+    <Content Include="Resources\brush.bmp" />
+    <Content Include="Resources\bunnyrabbit.bmp" />
     <Content Include="Resources\CLIFFVEG.bmp" />
-    <Content Include="Resources\CLIFSHD.bmp" />
     <Content Include="Resources\CLIFVEG2.bmp" />
+    <Content Include="Resources\distortionoverlaystretchtofullscreen.bmp" />
+    <Content Include="Resources\dot.bmp" />
+    <Content Include="Resources\dot2.bmp" />
     <Content Include="Resources\ENCINT.GIF" />
     <Content Include="Resources\FENCDAM.bmp" />
     <Content Include="Resources\FENCE.bmp" />
-    <Content Include="Resources\FENCSHD1.bmp" />
-    <Content Include="Resources\FENCSHD2.bmp" />
+    <Content Include="Resources\gem.bmp" />
+    <Content Include="Resources\gemcollecteffect.bmp" />
+    <Content Include="Resources\ghost_bombswallow.bmp" />
+    <Content Include="Resources\ghost_chase.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\glowoverlay.bmp" />
     <Content Include="Resources\GRS2ROC.bmp" />
-    <Content Include="Resources\INVEN3.TIF" />
     <Content Include="Resources\KITCHEN.GIF" />
+    <Content Include="Resources\license.txt" />
+    <Content Include="Resources\menubackground.bmp" />
+    <Content Include="Resources\menubackgroundscroller.bmp" />
+    <Content Include="Resources\mine.bmp" />
+    <Content Include="Resources\mushroom.bmp" />
     <Content Include="Resources\PAVE.bmp" />
-    <Content Include="Resources\RUIN.bmp" />
+    <Content Include="Resources\pinkrobot.bmp" />
+    <Content Include="Resources\pixelfloor.bmp" />
+    <Content Include="Resources\prespawn.bmp" />
+    <Content Include="Resources\scanlines.bmp" />
+    <Content Include="Resources\spawneffect.bmp" />
+    <Content Include="Resources\spawnwarning2.bmp" />
+    <Content Include="Resources\spr_antspawner_strip44.png" />
+    <Content Include="Resources\spr_ant_strip8.png" />
+    <Content Include="Resources\spr_asplooo_strip6.png" />
+    <Content Include="Resources\spr_bar_strip29.png" />
+    <Content Include="Resources\spr_crown_strip4.png" />
+    <Content Include="Resources\spr_dot2_strip8.png" />
+    <Content Include="Resources\spr_dot_strip8.png" />
+    <Content Include="Resources\spr_dronespawn_strip35.png" />
+    <Content Include="Resources\spr_enemy1_strip8.png" />
+    <Content Include="Resources\spr_enemy2a_strip6.png" />
+    <Content Include="Resources\spr_enemy2l_strip6.png" />
+    <Content Include="Resources\spr_enemy2r_strip6.png" />
+    <Content Include="Resources\spr_enemy2_strip6.png" />
+    <Content Include="Resources\spr_enemy3_strip6.png" />
+    <Content Include="Resources\spr_enemyb_strip16.png" />
+    <Content Include="Resources\spr_flyingsaucer_strip4.png" />
+    <Content Include="Resources\spr_gemcollect_strip11.png" />
+    <Content Include="Resources\spr_gem_strip15.png" />
+    <Content Include="Resources\spr_idler_strip4.png" />
+    <Content Include="Resources\spr_playerbullet.png" />
+    <Content Include="Resources\spr_player_strip8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\spr_robot_strip4.png" />
+    <Content Include="Resources\spr_spawnspawn_strip42.png" />
+    <Content Include="Resources\spr_suicidebomber2_strip10.png" />
+    <Content Include="Resources\spr_suicidebomber_strip4.png" />
+    <Content Include="Resources\spr_tank_strip3.png" />
+    <Content Include="Resources\SYNSObullet.bmp" />
     <Content Include="Resources\TABLE1.GIF" />
     <Content Include="Resources\TOWNBOT.bmp" />
     <Content Include="Resources\TOWNBOT2.bmp" />
     <Content Include="Resources\TOWNDOOR.bmp" />
     <Content Include="Resources\TOWNJNT.bmp" />
-    <Content Include="Resources\TOWNJNT2.bmp" />
-    <Content Include="Resources\TOWNSHD1.bmp" />
     <Content Include="Resources\TOWNTOP.bmp" />
     <Content Include="Resources\TOWNWIN.bmp" />
     <Content Include="Resources\TREE.GIF" />
-    <Content Include="Resources\VILDAM.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\VILFLR.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\VILINT.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\VILSHD.bmp" />
-    <Content Include="Resources\Player.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\VILDAM.bmp" />
+    <Content Include="Resources\VILFLR.bmp" />
+    <Content Include="Resources\VILINT.bmp" />
     <Content Include="Resources\Exit.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -156,9 +192,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Resume.bmp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\level.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
