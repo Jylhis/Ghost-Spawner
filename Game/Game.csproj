@@ -74,6 +74,7 @@
     <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\InputHandler.cs" />
     <Compile Include="Engine\LoaderParams.cs" />
+    <Compile Include="Engine\SoundManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Engine\SDLGameObject.cs" />
     <Compile Include="Engine\TextureManager.cs" />
