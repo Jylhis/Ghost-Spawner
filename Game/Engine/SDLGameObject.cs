@@ -1,5 +1,6 @@
 ﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
 using SDL2;
+using System;
 
 namespace src
 {
@@ -71,7 +72,44 @@ namespace src
         public override void Update()
         {
             velocity += acceleration;
+            
+            switch ((int)position.X)
+            {
+                case 10:
+                    if (velocity.X < 0)
+                    {
+                        velocity.X = 0;
+                    }
+                    break;
+                case 900:
+                    if (velocity.X > 0)
+                    {
+                        velocity.X = 0;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            switch ((int)position.Y)
+            {
+                case 10:
+                    if (velocity.Y < 0)
+                    {
+                        velocity.Y = 0;
+                    }
+                    break;
+                case 600:
+                    if (velocity.Y > 0)
+                    {
+                        velocity.Y = 0;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
             position += velocity;
+
         }
 
         /// <summary>
