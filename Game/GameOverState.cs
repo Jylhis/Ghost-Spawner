@@ -42,11 +42,6 @@ namespace src
 
         public override bool onEnter()
         {
-            if (!TextureManager.Instance.Load("Resources/gameover.png",
-                    "gameovertext", Game.Instance.getRenderer))
-            {
-                return false;
-            }
             if (!TextureManager.Instance.Load("Resources/Main.bmp",
                     "mainbutton", Game.Instance.getRenderer))
             {
