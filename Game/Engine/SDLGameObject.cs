@@ -1,6 +1,12 @@
-﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 24.02.2016
+ */
+
 using SDL2;
-using System;
 
 namespace src
 {
@@ -8,14 +14,30 @@ namespace src
     {
         protected int currentRow, currentFrame;
         protected Vector2D velocity, acceleration;
+        protected int w, h;
 
-        /// <summary>
-        /// The width.
-        /// </summary>
-        /// <summary>
-        /// The height.
-        /// </summary>
-        public int w, h;
+        public int W
+        {
+            get
+            {
+                return w;
+            }
+            set
+            {
+                w = value;
+            }
+        }
+        public int H
+        {
+            get
+            {
+                return h;
+            }
+            set
+            {
+                h = value;
+            }
+        }
 
         /// <summary>
         /// The position.
@@ -37,8 +59,8 @@ namespace src
             position = new Vector2D(pParams.X, pParams.Y);
             velocity = new Vector2D(0, 0);
             acceleration = new Vector2D(0, 0);
-            w = pParams.W;
-            h = pParams.H;
+            W = pParams.W;
+            H = pParams.H;
             id = pParams.Id;
 
             currentFrame = 1;
@@ -54,15 +76,15 @@ namespace src
             {
                 TextureManager.Instance.DrawFrame(id,
                     (int)position.X, (int)position.Y,
-                    w, h, currentRow, currentFrame,
-                    Game.Instance.getRenderer, SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL);
+                    W, H, currentRow, currentFrame,
+                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL);
             }
             else
             {
                 TextureManager.Instance.DrawFrame(id,
                     (int)position.X, (int)position.Y,
-                    w, h, currentRow, currentFrame,
-                    Game.Instance.getRenderer);
+                    W, H, currentRow, currentFrame,
+                    Game.Instance.GetRenderer);
             }
         }
 
@@ -72,7 +94,7 @@ namespace src
         public override void Update()
         {
             velocity += acceleration;
-            
+
             switch ((int)position.X)
             {
                 case 10:

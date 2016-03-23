@@ -1,5 +1,10 @@
-﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
-using System;
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 22.02.2016
+ */
 using SDL2;
 
 namespace src
@@ -29,19 +34,19 @@ namespace src
         private void handleInput()
         {
             // Keyboard
-            if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_W))
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_W))
             {
                 velocity.Y = -2;
             }
-            if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_A))
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_A))
             {
                 velocity.X = -2;
             }
-            if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_S))
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_S))
             {
                 velocity.Y = 2;
             }
-            if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_D))
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_D))
             {
                 velocity.X = 2;
             }
@@ -49,25 +54,25 @@ namespace src
             // Joystick / Controller
             if (InputHandler.Instance.JoysticksInitialised)
             {
-                if (InputHandler.Instance.xvalue(0, 1) > 0 ||
-                    InputHandler.Instance.xvalue(0, 1) < 0)
+                if (InputHandler.Instance.Xvalue(0, 1) > 0 ||
+                    InputHandler.Instance.Xvalue(0, 1) < 0)
                 {
-                    velocity.X = 2 * InputHandler.Instance.xvalue(0, 1);
+                    velocity.X = 2 * InputHandler.Instance.Xvalue(0, 1);
                 }
-                if (InputHandler.Instance.yvalue(0, 1) > 0 ||
-                    InputHandler.Instance.yvalue(0, 1) < 0)
+                if (InputHandler.Instance.Yvalue(0, 1) > 0 ||
+                    InputHandler.Instance.Yvalue(0, 1) < 0)
                 {
-                    velocity.Y = 2 * InputHandler.Instance.yvalue(0, 1);
+                    velocity.Y = 2 * InputHandler.Instance.Yvalue(0, 1);
                 }
-                if (InputHandler.Instance.xvalue(0, 2) > 0 ||
-                    InputHandler.Instance.xvalue(0, 2) < 0)
+                if (InputHandler.Instance.Xvalue(0, 2) > 0 ||
+                    InputHandler.Instance.Xvalue(0, 2) < 0)
                 {
-                    velocity.X = 2 * InputHandler.Instance.xvalue(0, 1);
+                    velocity.X = 2 * InputHandler.Instance.Xvalue(0, 1);
                 }
-                if (InputHandler.Instance.yvalue(0, 2) > 0 ||
-                    InputHandler.Instance.yvalue(0, 2) < 0)
+                if (InputHandler.Instance.Yvalue(0, 2) > 0 ||
+                    InputHandler.Instance.Yvalue(0, 2) < 0)
                 {
-                    velocity.Y = 2 * InputHandler.Instance.yvalue(0, 1);
+                    velocity.Y = 2 * InputHandler.Instance.Yvalue(0, 1);
                 }
             }
         }

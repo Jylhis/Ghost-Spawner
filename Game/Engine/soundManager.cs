@@ -1,4 +1,11 @@
-﻿using SDL2;
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 22.03.2016
+ */
+using SDL2;
 using System;
 using System.Collections.Generic;
 
@@ -11,58 +18,61 @@ namespace src
     }
     class SoundManager
     {
-        private static SoundManager pInstance;
-        private Dictionary<string, IntPtr> sfxs = new Dictionary<string, IntPtr>();
+        private static SoundManager instance;
+        private Dictionary<string, IntPtr> sounds = new Dictionary<string, IntPtr>();
         private Dictionary<string, IntPtr> musics = new Dictionary<string, IntPtr>();
 
-        public static SoundManager Instance()
+        public static SoundManager Instance
         {
-            if (pInstance == null)
+            get
             {
-                pInstance = new SoundManager();
-                return pInstance;
+                if (instance == null)
+                {
+                    instance = new SoundManager();
+                    return instance;
+                }
+                return instance;
             }
-            return pInstance;
         }
 
-        public bool load(string fileName, string id, sound_type type)
+        public bool Load(string fileName, string id, sound_type type)
         {
-            //IntPtr pMusic = IntPtr.Zero;
-            if(type == sound_type.SOUND_MUSIC)
+            if (type == sound_type.SOUND_MUSIC)
             {
-                IntPtr pMusic = SDL_mixer.Mix_LoadMUS(fileName);
-            
-                if(pMusic == IntPtr.Zero)
+                IntPtr music = SDL_mixer.Mix_LoadMUS(fileName);
+
+                if (music == IntPtr.Zero)
                 {
                     Console.WriteLine("Could not load music");
                     return false;
                 }
-                musics[id] = pMusic;
+                musics[id] = music;
                 return true;
             }
             else if (type == sound_type.SOUND_SFX)
             {
                 IntPtr pChunk = SDL_mixer.Mix_LoadWAV(fileName);
-                if(pChunk == IntPtr.Zero)
+                if (pChunk == IntPtr.Zero)
                 {
                     Console.WriteLine("Could not load SFX");
                     return false;
                 }
-                sfxs[id] = pChunk;
+                sounds[id] = pChunk;
                 return true;
             }
             return false;
         }
 
-        public void playSound(string id, int loop)
+        public void PlaySound(string id, int loop = 0)
+        {
+            SDL_mixer.Mix_PlayChannel(-1, sounds[id], loop);
+        }
+        public void PlayMusic(string id, int loop = 0)
         {
             SDL_mixer.Mix_PlayMusic(musics[id], loop);
+
         }
-        public void playMusic(string id, int loop)
-        {
-            SDL_mixer.Mix_PlayChannel(-1, sfxs[id], loop);
-        }
-        
+
         private SoundManager()
         {
             // AUDIO_S16
@@ -73,15 +83,5 @@ namespace src
         {
             SDL_mixer.Mix_CloseAudio();
         }
-
-       /* private SoundManager(ref SoundManager)
-        {
-
-        }
-
-        private SoundManager operator =(SoundManager)
-        {
-
-        }*/
     }
 }

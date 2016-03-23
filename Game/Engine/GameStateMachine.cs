@@ -1,4 +1,10 @@
-﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 25.02.2016
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +13,6 @@ namespace src
 {
     public class GameStateMachine
     {
-        // Stack?
         private List<GameState> gameStates = new List<GameState>();
 
         /// <summary>
@@ -20,22 +25,22 @@ namespace src
         /// <summary>
         /// Update this instance.
         /// </summary>
-        public void update()
+        public void Update()
         {
             if (gameStates.Count != 0)
             {
-                gameStates.Last().update();
+                gameStates.Last().Update();
             }
         }
 
         /// <summary>
         /// Render this instance.
         /// </summary>
-        public void render()
+        public void Render()
         {
             if (gameStates.Count != 0)
             {
-                gameStates.Last().render();
+                gameStates.Last().Render();
             }
         }
 
@@ -43,42 +48,42 @@ namespace src
         /// Push the state.
         /// </summary>
         /// <param name="state">State.</param>
-        public void pushState(GameState state)
+        public void PushState(GameState state)
         {
             gameStates.Add(state);
-            gameStates.Last().onEnter();
+            gameStates.Last().OnEnter();
         }
 
         /// <summary>
         /// Changes the state.
         /// </summary>
         /// <param name="state">State.</param>
-        public void changeState(GameState state)
+        public void ChangeState(GameState state)
         {
             if (gameStates.Count != 0)
             {
-                if (gameStates.Last().getStateID() == state.getStateID())
+                if (gameStates.Last().GetStateID() == state.GetStateID())
                 {
                     return;
                 }
 
-                if (gameStates.Last().onExit())
+                if (gameStates.Last().OnExit())
                 {
                     gameStates.Remove(gameStates.Last());
                 }
             }
             gameStates.Add(state);
-            gameStates.Last().onEnter();
+            gameStates.Last().OnEnter();
         }
 
         /// <summary>
         /// Pops the state.
         /// </summary>
-        public void popState()
+        public void PopState()
         {
             if (gameStates.Count != 0)
             {
-                if (gameStates.Last().onExit())
+                if (gameStates.Last().OnExit())
                 {
                     gameStates.Remove(gameStates.Last());
                 }

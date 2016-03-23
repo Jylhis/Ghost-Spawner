@@ -1,4 +1,10 @@
-﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 24.02.2016
+ */
 using System;
 using SDL2;
 using System.Collections.Generic;
@@ -8,7 +14,7 @@ namespace src
     public class Game
     {
         private static Game instance;
-        private IntPtr Window, renderer;
+        private IntPtr window, renderer;
         private GameStateMachine gameStateMachine;
         private bool running = false;
 
@@ -35,7 +41,7 @@ namespace src
         /// Gets state machine.
         /// </summary>
         /// <value>The get state machine.</value>
-        public GameStateMachine getStateMachine
+        public GameStateMachine GetStateMachine
         {
             get
             {
@@ -63,7 +69,7 @@ namespace src
         /// Gets the renderer.
         /// </summary>
         /// <value>The renderer.</value>
-        public IntPtr getRenderer
+        public IntPtr GetRenderer
         {
             get { return renderer; }
         }
@@ -94,8 +100,8 @@ namespace src
             {
                 Console.WriteLine("SDL started");
                 // Create window
-                Window = SDL.SDL_CreateWindow(title, x, y, w, h, flags);
-                if (Window == IntPtr.Zero)
+                window = SDL.SDL_CreateWindow(title, x, y, w, h, flags);
+                if (window == IntPtr.Zero)
                 {
                     Console.WriteLine("Could not create window: " + SDL.SDL_GetError());
                 }
@@ -103,7 +109,7 @@ namespace src
                 {
                     Console.WriteLine("Window started");
                     // Create Renderer
-                    renderer = SDL.SDL_CreateRenderer(Window, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
+                    renderer = SDL.SDL_CreateRenderer(window, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
                     if (renderer == IntPtr.Zero)
                     {
                         Console.WriteLine("Could not create renderer: " + SDL.SDL_GetError());
@@ -118,10 +124,9 @@ namespace src
             }
 
             gameStateMachine = new GameStateMachine();
-            gameStateMachine.changeState(new MenuState());
+            gameStateMachine.ChangeState(new MenuState());
             InputHandler.Instance.InitJoysticks();
-
-            //HACK
+            
             TextureManager.Instance.Load("Resources/background_robotron.bmp", "background", renderer);
         }
 
@@ -132,9 +137,9 @@ namespace src
         {
             InputHandler.Instance.Update();
 
-            if (InputHandler.Instance.isKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RETURN))
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RETURN))
             {
-                gameStateMachine.changeState(new PlayState());
+                gameStateMachine.ChangeState(new PlayState());
             }
         }
 
@@ -143,7 +148,7 @@ namespace src
         /// </summary>
         public void Update()
         {
-            gameStateMachine.update();
+            gameStateMachine.Update();
         }
 
         /// <summary>
@@ -154,12 +159,12 @@ namespace src
             // Render to window
             SDL.SDL_RenderClear(renderer);
 
-            // background hack
+            // Background
             TextureManager.Instance.Draw("background", 0, 0, 1024, 720, renderer);
 
             // Loads all objets into renderer
-            gameStateMachine.render();
-                
+            gameStateMachine.Render();
+
             // Render everything
             SDL.SDL_RenderPresent(renderer);
         }
@@ -172,7 +177,7 @@ namespace src
             Console.WriteLine("Closing game");
 
             InputHandler.Instance.Clean();
-            SDL.SDL_DestroyWindow(Window);
+            SDL.SDL_DestroyWindow(window);
             SDL.SDL_DestroyRenderer(renderer);
             SDL.SDL_Quit();
         }

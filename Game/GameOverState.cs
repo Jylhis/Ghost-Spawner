@@ -1,4 +1,10 @@
-﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 26.02.2016
+ */
 using System;
 using System.Collections.Generic;
 
@@ -11,19 +17,19 @@ namespace src
 
         private static void gameOverToMain()
         {
-            Game.Instance.getStateMachine.changeState(new MenuState());
+            Game.Instance.GetStateMachine.ChangeState(new MenuState());
         }
 
         private static void restartPlay()
         {
-            Game.Instance.getStateMachine.changeState(new PlayState());
+            Game.Instance.GetStateMachine.ChangeState(new PlayState());
         }
 
         public GameOverState()
         {
         }
 
-        public override void update()
+        public override void Update()
         {
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -31,7 +37,7 @@ namespace src
             }
         }
 
-        public override void render()
+        public override void Render()
         {
             for (int i = 0; i < gameObjects.Count; i++)
             {
@@ -40,45 +46,45 @@ namespace src
             ;
         }
 
-        public override bool onEnter()
+        public override bool OnEnter()
         {
             if (!TextureManager.Instance.Load("Resources/Main.bmp",
-                    "mainbutton", Game.Instance.getRenderer))
+                    "mainbutton", Game.Instance.GetRenderer))
             {
                 return false;
             }
             if (!TextureManager.Instance.Load("Resources/Restart.bmp",
-                    "restartbutton", Game.Instance.getRenderer))
+                    "restartbutton", Game.Instance.GetRenderer))
             {
                 return false;
             }
 
             GameObject button1 = new MenuButton(new LoaderParams(320, 400, 380, 203, "mainbutton"), gameOverToMain);
             GameObject button2 = new MenuButton(new LoaderParams(320, 100, 380, 203, "restartbutton"), restartPlay);
-            
+
             gameObjects.Add(button1);
             gameObjects.Add(button2);
             Console.WriteLine("Entering GameOverState");
             return true;
         }
 
-        public override bool onExit()
+        public override bool OnExit()
         {
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Clean();
             }
             gameObjects.Clear();
-            TextureManager.Instance.clearFromTextureMap("mainbutton");
-            TextureManager.Instance.clearFromTextureMap("restartbutton");
+            TextureManager.Instance.ClearFromTextureMap("mainbutton");
+            TextureManager.Instance.ClearFromTextureMap("restartbutton");
 
-            InputHandler.Instance.reset();
+            InputHandler.Instance.Reset();
 
             Console.WriteLine("Exiting GameOverState");
             return true;
         }
 
-        public override string getStateID()
+        public override string GetStateID()
         {
             return menuID;
         }

@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\ant.bmp" />
+    <Content Include="Resources\antspawn2.wav" />
     <Content Include="Resources\antspawner.bmp" />
     <Content Include="Resources\army.bmp" />
     <Content Include="Resources\background_robotron.bmp">
@@ -119,24 +120,50 @@
     <Content Include="Resources\distortionoverlaystretchtofullscreen.bmp" />
     <Content Include="Resources\dot.bmp" />
     <Content Include="Resources\dot2.bmp" />
+    <Content Include="Resources\enemy1.wav" />
+    <Content Include="Resources\enemy3.wav" />
+    <Content Include="Resources\explode1.wav" />
+    <Content Include="Resources\explode2.wav" />
+    <Content Include="Resources\explode3.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\FENCDAM.bmp" />
     <Content Include="Resources\FENCE.bmp" />
+    <Content Include="Resources\gameover1.wav" />
+    <Content Include="Resources\gameover2.wav" />
     <Content Include="Resources\gem.bmp" />
+    <Content Include="Resources\gemcollect1.wav" />
+    <Content Include="Resources\gemcollect2.wav" />
     <Content Include="Resources\gemcollecteffect.bmp" />
+    <Content Include="Resources\gemcollect_voice.wav" />
     <Content Include="Resources\ghost_bombswallow.bmp" />
     <Content Include="Resources\glowoverlay.bmp" />
     <Content Include="Resources\GRS2ROC.bmp" />
+    <Content Include="Resources\idler.wav" />
+    <Content Include="Resources\johnnyball1.wav" />
+    <Content Include="Resources\johnnyball2.wav" />
     <Content Include="Resources\KITCHEN.GIF" />
+    <Content Include="Resources\laser1.wav" />
+    <Content Include="Resources\laser2.wav" />
+    <Content Include="Resources\lasor1.wav" />
+    <Content Include="Resources\lasor2.wav" />
     <Content Include="Resources\license.txt" />
     <Content Include="Resources\menubackground.bmp" />
     <Content Include="Resources\menubackgroundscroller.bmp" />
     <Content Include="Resources\mine.bmp" />
     <Content Include="Resources\mushroom.bmp" />
+    <Content Include="Resources\otherlanding.wav" />
     <Content Include="Resources\PAVE.bmp" />
     <Content Include="Resources\pinkrobot.bmp" />
     <Content Include="Resources\pixelfloor.bmp" />
+    <Content Include="Resources\playerboom.wav" />
+    <Content Include="Resources\playerspawn.wav" />
     <Content Include="Resources\prespawn.bmp" />
+    <Content Include="Resources\robot.wav" />
     <Content Include="Resources\scanlines.bmp" />
+    <Content Include="Resources\select.wav" />
+    <Content Include="Resources\singlespawn1.wav" />
+    <Content Include="Resources\singlespawn2.wav" />
     <Content Include="Resources\spawneffect.bmp" />
     <Content Include="Resources\spawnwarning2.bmp" />
     <Content Include="Resources\spr_antspawner_strip44.png" />
@@ -171,6 +198,8 @@
     <Content Include="Resources\spr_tank_strip3.png" />
     <Content Include="Resources\SYNSObullet.bmp" />
     <Content Include="Resources\TABLE1.GIF" />
+    <Content Include="Resources\teleportin.wav" />
+    <Content Include="Resources\teleportin2.wav" />
     <Content Include="Resources\TOWNBOT.bmp" />
     <Content Include="Resources\TOWNBOT2.bmp" />
     <Content Include="Resources\TOWNDOOR.bmp" />

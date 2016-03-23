@@ -1,4 +1,10 @@
-﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 24.02.2016
+ */
 using System;
 using System.Collections.Generic;
 using SDL2;
@@ -9,7 +15,7 @@ namespace src
     /// <summary>
     /// Mouse buttons.
     /// </summary>
-    public enum mouse_buttons
+    public enum MouseButtons
     {
         /// <summary>
         /// Mouse left button.
@@ -34,7 +40,7 @@ namespace src
         private List<Tuple<Vector2D, Vector2D>> joystickValues = new List<Tuple<Vector2D, Vector2D>>();
         private List<List<bool>> buttonStates = new List<List<bool>>();
         private List<bool> mouseButtonStates = new List<bool>();
-        private Vector2D mousePosition = new Vector2D(0,0);
+        private Vector2D mousePosition = new Vector2D(0, 0);
         private byte[] keystates;
         private int numkeys;
 
@@ -42,7 +48,7 @@ namespace src
         /// Gets the mouse position.
         /// </summary>
         /// <value>The mouse position.</value>
-        public Vector2D getMousePosition
+        public Vector2D GetMousePosition
         {
             get
             {
@@ -117,13 +123,13 @@ namespace src
             switch (events.button.button)
             {
                 case (byte)SDL.SDL_BUTTON_LEFT:
-                    mouseButtonStates[(int)mouse_buttons.LEFT] = true;
+                    mouseButtonStates[(int)MouseButtons.LEFT] = true;
                     break;
                 case (byte)SDL.SDL_BUTTON_MIDDLE:
-                    mouseButtonStates[(int)mouse_buttons.MIDDLE] = true;
+                    mouseButtonStates[(int)MouseButtons.MIDDLE] = true;
                     break;
                 case (byte)SDL.SDL_BUTTON_RIGHT:
-                    mouseButtonStates[(int)mouse_buttons.RIGHT] = true;
+                    mouseButtonStates[(int)MouseButtons.RIGHT] = true;
                     break;
                 default:
                     break;
@@ -135,13 +141,13 @@ namespace src
             switch (events.button.button)
             {
                 case (byte)SDL.SDL_BUTTON_LEFT:
-                    mouseButtonStates[(int)mouse_buttons.LEFT] = false;
+                    mouseButtonStates[(int)MouseButtons.LEFT] = false;
                     break;
                 case (byte)SDL.SDL_BUTTON_MIDDLE:
-                    mouseButtonStates[(int)mouse_buttons.MIDDLE] = false;
+                    mouseButtonStates[(int)MouseButtons.MIDDLE] = false;
                     break;
                 case (byte)SDL.SDL_BUTTON_RIGHT:
-                    mouseButtonStates[(int)mouse_buttons.RIGHT] = false;
+                    mouseButtonStates[(int)MouseButtons.RIGHT] = false;
                     break;
                 default:
                     break;
@@ -237,7 +243,7 @@ namespace src
         /// <returns><c>true</c>, if button is down, <c>false</c> if button is up.</returns>
         /// <param name="joy">Joystick.</param>
         /// <param name="buttonNumber">Button number.</param>
-        public bool getButtonStates(int joy, int buttonNumber)
+        public bool GetButtonStates(int joy, int buttonNumber)
         {
             return buttonStates[joy][buttonNumber];
         }
@@ -247,7 +253,7 @@ namespace src
         /// </summary>
         /// <returns><c>true</c>, if mouse button is down, <c>false</c> if button is up.</returns>
         /// <param name="buttonNumber">Button number.</param>
-        public bool getMouseButtonState(mouse_buttons buttonNumber)
+        public bool GetMouseButtonState(MouseButtons buttonNumber)
         {
             return mouseButtonStates[(int)buttonNumber];
         }
@@ -255,11 +261,11 @@ namespace src
         /// <summary>
         /// Reset this instance.
         /// </summary>
-        public void reset()
+        public void Reset()
         {
-            mouseButtonStates[(int)mouse_buttons.LEFT] = false;
-            mouseButtonStates[(int)mouse_buttons.MIDDLE] = false;
-            mouseButtonStates[(int)mouse_buttons.RIGHT] = false;
+            mouseButtonStates[(int)MouseButtons.LEFT] = false;
+            mouseButtonStates[(int)MouseButtons.MIDDLE] = false;
+            mouseButtonStates[(int)MouseButtons.RIGHT] = false;
         }
 
         /// <summary>
@@ -267,7 +273,7 @@ namespace src
         /// </summary>
         /// <returns><c>true</c>, if key is down, <c>false</c> if key is up.</returns>
         /// <param name="key">Key.</param>
-        public bool isKeyDown(SDL.SDL_Scancode key)
+        public bool IsKeyDown(SDL.SDL_Scancode key)
         {
             if (keystates != null)
             {
@@ -288,7 +294,7 @@ namespace src
         /// </summary>
         /// <param name="joy">Joystick.</param>
         /// <param name="stick">Stick.</param>
-        public int xvalue(int joy, int stick)
+        public int Xvalue(int joy, int stick)
         {
             if (joystickValues.Count > 0)
             {
@@ -309,7 +315,7 @@ namespace src
         /// </summary>
         /// <param name="joy">Joystick.</param>
         /// <param name="stick">Stick.</param>
-        public int yvalue(int joy, int stick)
+        public int Yvalue(int joy, int stick)
         {
             if (joystickValues.Count > 0)
             {

@@ -1,5 +1,10 @@
-﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
-
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 25.02.2016
+ */
 namespace src
 {
     public class MenuButton : SDLGameObject
@@ -31,20 +36,20 @@ namespace src
 
         public override void Update()
         {
-            Vector2D mousePos = InputHandler.Instance.getMousePosition;
-            if (mousePos.X < (position.X + w)
+            Vector2D mousePos = InputHandler.Instance.GetMousePosition;
+            if (mousePos.X < (position.X + W)
                 && mousePos.X > position.X
-                && mousePos.Y < (position.Y + h)
+                && mousePos.Y < (position.Y + H)
                 && mousePos.Y > position.Y)
             {
-                if (InputHandler.Instance.getMouseButtonState(mouse_buttons.LEFT)
+                if (InputHandler.Instance.GetMouseButtonState(MouseButtons.LEFT)
                     && released)
                 {
                     currentFrame = (int)button_state.CLICKED;
                     call();
                     released = false;
                 }
-                else if (InputHandler.Instance.getMouseButtonState(mouse_buttons.LEFT))
+                else if (InputHandler.Instance.GetMouseButtonState(MouseButtons.LEFT))
                 {
                     released = true;
                     currentFrame = (int)button_state.MOUSE_OVER;

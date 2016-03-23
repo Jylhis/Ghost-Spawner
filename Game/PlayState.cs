@@ -1,4 +1,10 @@
-﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 25.02.2016
+ */
 using System;
 using System.Collections.Generic;
 using SDL2;
@@ -9,73 +15,73 @@ namespace src
     {
         private const string menuID = "PLAY";
 
-        private List<GameObject> gameobjects = new List<GameObject>();
+        private List<GameObject> gameObjects = new List<GameObject>();
 
-        public override void update()
+        public override void Update()
         {
-            if (InputHandler.Instance.isKeyDown(SDL2.SDL.SDL_Scancode.SDL_SCANCODE_ESCAPE))
+            if (InputHandler.Instance.IsKeyDown(SDL2.SDL.SDL_Scancode.SDL_SCANCODE_ESCAPE))
             {
-                Game.Instance.getStateMachine.pushState(new PauseState());
+                Game.Instance.GetStateMachine.PushState(new PauseState());
             }
 
-            for (int i = 0; i < gameobjects.Count; i++)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameobjects[i].Update();
+                gameObjects[i].Update();
             }
 
-            if (checkCollision(gameobjects[0], gameobjects[1]))
+            if (checkCollision(gameObjects[0], gameObjects[1]))
             {
-                Game.Instance.getStateMachine.pushState(new GameOverState());
+                Game.Instance.GetStateMachine.PushState(new GameOverState());
             }
 
         }
 
-        public override void render()
+        public override void Render()
         {
-            for (int i = 0; i < gameobjects.Count; i++)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameobjects[i].Draw();
+                gameObjects[i].Draw();
             }
         }
 
-        public override bool onEnter()
+        public override bool OnEnter()
         {
             // Add Player
-            if (!TextureManager.Instance.Load("Resources/spr_player_strip8.png", "player", Game.Instance.getRenderer))
+            if (!TextureManager.Instance.Load("Resources/spr_player_strip8.png", "player", Game.Instance.GetRenderer))
             {
                 return false;
             }
             GameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
 
             // Add Enemy
-            if (!TextureManager.Instance.Load("Resources/spr_suicidebomber_strip4.png", "enemy", Game.Instance.getRenderer))
+            if (!TextureManager.Instance.Load("Resources/spr_suicidebomber_strip4.png", "enemy", Game.Instance.GetRenderer))
             {
                 return false;
             }
             GameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
 
 
-            gameobjects.Add(player);
-            gameobjects.Add(enemy);
+            gameObjects.Add(player);
+            gameObjects.Add(enemy);
 
             Console.WriteLine("Entering Playstate");
             return true;
         }
 
-        public override bool onExit()
+        public override bool OnExit()
         {
-            for (int i = 0; i < gameobjects.Count; i++)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameobjects[i].Clean();
+                gameObjects[i].Clean();
             }
-            gameobjects.Clear();
-            TextureManager.Instance.clearFromTextureMap("Room");
+            gameObjects.Clear();
+            TextureManager.Instance.ClearFromTextureMap("Room");
 
             Console.WriteLine("Exiting Playstate");
             return true;
         }
 
-        bool checkCollision(params GameObject[] list)
+        private bool checkCollision(params GameObject[] list)
         {
             SDLGameObject p1 = (SDLGameObject)list[0];
             SDLGameObject p2 = (SDLGameObject)list[1];
@@ -85,14 +91,14 @@ namespace src
             int bottomA, bottomB;
 
             leftA = (int)p1.position.X;
-            rightA = (int)(p1.position.X + p1.w);
+            rightA = (int)(p1.position.X + p1.W);
             topA = (int)p1.position.Y;
-            bottomA = (int)(p1.position.Y + p1.h);
+            bottomA = (int)(p1.position.Y + p1.H);
 
             leftB = (int)p2.position.X;
-            rightB = (int)(p2.position.X + p2.w);
+            rightB = (int)(p2.position.X + p2.W);
             topB = (int)p2.position.Y;
-            bottomB = (int)(p2.position.Y + p2.h);
+            bottomB = (int)(p2.position.Y + p2.H);
 
             if (bottomA <= topB)
             {
@@ -110,14 +116,13 @@ namespace src
             {
                 return false;
             }
-               
+
             return true;
         }
 
-        public override string getStateID()
+        public override string GetStateID()
         {
             return menuID;
         }
     }
 }
-  

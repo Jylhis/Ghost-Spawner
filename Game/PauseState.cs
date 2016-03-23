@@ -1,82 +1,87 @@
-﻿// Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+﻿/*
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ *
+ * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ *
+ * Created: 25.02.2016
+ */
 using System;
 using System.Collections.Generic;
-using SDL2;
 
 namespace src
 {
     public class PauseState : GameState
     {
         private const string menuID = "PAUSE";
-        private List<GameObject> gameobjects = new List<GameObject>();
+        private List<GameObject> gameObjects = new List<GameObject>();
 
         private static void pauseToMain()
         {
             Console.WriteLine("PLAY!");
-            Game.Instance.getStateMachine.changeState(new MenuState());
+            Game.Instance.GetStateMachine.ChangeState(new MenuState());
         }
 
         private static void resumePlay()
         {
             Console.WriteLine("Exit!");
-            Game.Instance.getStateMachine.popState();
+            Game.Instance.GetStateMachine.PopState();
         }
 
-        public override void update()
+        public override void Update()
         {
-           
-                    
-            for (int i = 0; i < gameobjects.Count; i++)
+
+
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameobjects[i].Update();
+                gameObjects[i].Update();
             }
         }
 
-        public override void render()
+        public override void Render()
         {
-            for (int i = 0; i < gameobjects.Count; i++)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameobjects[i].Draw();
-            } 
+                gameObjects[i].Draw();
+            }
         }
 
-        public override bool onEnter()
+        public override bool OnEnter()
         {
             if (!TextureManager.Instance.Load("Resources/Resume.bmp",
-                    "resumebutton", Game.Instance.getRenderer))
+                    "resumebutton", Game.Instance.GetRenderer))
             {
                 return false;
             }
             if (!TextureManager.Instance.Load("Resources/Main.bmp",
-                    "mainmenubutton", Game.Instance.getRenderer))
+                    "mainmenubutton", Game.Instance.GetRenderer))
             {
                 return false;
             }
             GameObject button1 = new MenuButton(new LoaderParams(320, 100, 380, 203, "resumebutton"), resumePlay);
             GameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "mainmenubutton"), pauseToMain);
-            gameobjects.Add(button1);
-            gameobjects.Add(button2);
+            gameObjects.Add(button1);
+            gameObjects.Add(button2);
             Console.WriteLine("entering PauseState");
             return true;
         }
 
-        public override bool onExit()
+        public override bool OnExit()
         {
-            for (int i = 0; i < gameobjects.Count; i++)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameobjects[i].Clean();
+                gameObjects[i].Clean();
             }
-            gameobjects.Clear();
-            TextureManager.Instance.clearFromTextureMap("resumebutton");
-            TextureManager.Instance.clearFromTextureMap("mainmenubutton");
+            gameObjects.Clear();
+            TextureManager.Instance.ClearFromTextureMap("resumebutton");
+            TextureManager.Instance.ClearFromTextureMap("mainmenubutton");
 
-            InputHandler.Instance.reset();
+            InputHandler.Instance.Reset();
 
             Console.WriteLine("Exiting Menustate");
             return true;
         }
 
-        public override string getStateID()
+        public override string GetStateID()
         {
             return menuID;
         }
