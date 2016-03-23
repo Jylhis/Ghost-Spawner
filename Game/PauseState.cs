@@ -18,7 +18,9 @@ namespace src
         private static void pauseToMain()
         {
             Console.WriteLine("PLAY!");
+            Game.Instance.GetStateMachine.PopState();
             Game.Instance.GetStateMachine.ChangeState(new MenuState());
+
         }
 
         private static void resumePlay()
