@@ -17,13 +17,13 @@ namespace src
 
         private static void menuToPlay()
         {
-            Console.WriteLine("PLAY!");
+            Console.WriteLine("Pressed Play");
             Game.Instance.GetStateMachine.ChangeState(new PlayState());
         }
 
         private static void exitFromMenu()
         {
-            Console.WriteLine("Exit!");
+            Console.WriteLine("Pressed Exit");
             Game.Instance.IsRunning = false;
         }
 

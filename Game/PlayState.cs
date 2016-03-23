@@ -30,7 +30,7 @@ namespace src
 
             if (checkCollision(gameObjects[0], gameObjects[1]))
             {
-                Game.Instance.GetStateMachine.PushState(new GameOverState());
+                Game.Instance.GetStateMachine.ChangeState(new GameOverState());
             }
 
         }

@@ -89,7 +89,6 @@ namespace src
             {
                 flags = SDL.SDL_WindowFlags.SDL_WINDOW_FULLSCREEN;
             }
-            Console.WriteLine("Constructor");
             // Start SDL
             if (SDL.SDL_Init(SDL.SDL_INIT_VIDEO) != 0)
             {

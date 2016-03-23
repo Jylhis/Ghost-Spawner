@@ -61,6 +61,7 @@ namespace src
             GameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "mainmenubutton"), pauseToMain);
             gameObjects.Add(button1);
             gameObjects.Add(button2);
+
             Console.WriteLine("entering PauseState");
             return true;
         }
