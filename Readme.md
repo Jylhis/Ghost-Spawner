@@ -9,6 +9,7 @@ bitbucket: git@bitbucket.org:fooset/proto.git
 - enemy explosion throw back
 - Score & wave counter
 - final sounds & graphics
+- GameStateMachine -> Stack
 - player acceleration smooth
 - collision box size
 - Creadits
