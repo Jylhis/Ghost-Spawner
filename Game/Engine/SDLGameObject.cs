@@ -5,7 +5,6 @@
  *
  * Created: 24.02.2016
  */
-
 using SDL2;
 
 namespace src
@@ -16,6 +15,10 @@ namespace src
         protected Vector2D velocity, acceleration;
         protected int w, h;
 
+        /// <summary>
+        /// Gets or sets the width.
+        /// </summary>
+        /// <value>The width.</value>
         public int W
         {
             get
@@ -27,6 +30,11 @@ namespace src
                 w = value;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
+        /// <value>The height.</value>
         public int H
         {
             get

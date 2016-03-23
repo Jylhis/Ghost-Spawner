@@ -11,8 +11,10 @@ namespace src
 {
     public class Player : SDLGameObject
     {
-        public Player(LoaderParams pParams) : base(ref pParams)
-        { }
+        public Player(LoaderParams pParams)
+            : base(ref pParams)
+        {
+        }
 
         public override void Draw()
         {
@@ -95,7 +97,7 @@ namespace src
 
         public void Shoot()
         {
-            GameObject bullet = new Bullet(new LoaderParams((int)position.X+w/2, (int)position.Y+w/2, 4, 4, "bullet"));
+            GameObject bullet = new Bullet(new LoaderParams((int)position.X + w / 2, (int)position.Y + w / 2, 4, 4, "bullet"));
             PlayState.gameObjects.Add(bullet);
         }
 

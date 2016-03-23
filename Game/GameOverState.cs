@@ -45,7 +45,6 @@ namespace src
             {
                 gameObjects[i].Draw();
             }
-            ;
         }
 
         public override bool OnEnter()

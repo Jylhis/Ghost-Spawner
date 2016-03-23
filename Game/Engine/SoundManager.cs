@@ -13,15 +13,26 @@ namespace src
 {
     enum sound_type
     {
+        /// <summary>
+        /// Music.
+        /// </summary>
         SOUND_MUSIC,
+        /// <summary>
+        /// Sound effect.
+        /// </summary>
         SOUND_SFX
     }
+
     class SoundManager
     {
         private static SoundManager instance;
         private Dictionary<string, IntPtr> sounds = new Dictionary<string, IntPtr>();
         private Dictionary<string, IntPtr> musics = new Dictionary<string, IntPtr>();
 
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        /// <value>The instance.</value>
         public static SoundManager Instance
         {
             get
@@ -35,6 +46,12 @@ namespace src
             }
         }
 
+        /// <summary>
+        /// Load the sound/music
+        /// </summary>
+        /// <param name="fileName">File name.</param>
+        /// <param name="id">Identifier.</param>
+        /// <param name="type">Type.</param>
         public bool Load(string fileName, string id, sound_type type)
         {
             if (type == sound_type.SOUND_MUSIC)
@@ -63,14 +80,24 @@ namespace src
             return false;
         }
 
+        /// <summary>
+        /// Play the sound.
+        /// </summary>
+        /// <param name="id">Identifier.</param>
+        /// <param name="loop">Loop.</param>
         public void PlaySound(string id, int loop = 0)
         {
             SDL_mixer.Mix_PlayChannel(-1, sounds[id], loop);
         }
+
+        /// <summary>
+        /// Play the music.
+        /// </summary>
+        /// <param name="id">Identifier.</param>
+        /// <param name="loop">Loop.</param>
         public void PlayMusic(string id, int loop = 0)
         {
             SDL_mixer.Mix_PlayMusic(musics[id], loop);
-
         }
 
         private SoundManager()

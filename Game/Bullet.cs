@@ -11,7 +11,8 @@ namespace src
 {
     class Bullet : SDLGameObject
     {
-        public Bullet(LoaderParams pParams) : base(ref pParams)
+        public Bullet(LoaderParams pParams)
+            : base(ref pParams)
         {
         }
 
@@ -25,7 +26,7 @@ namespace src
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 5);
             base.Update();
         }
-        
+
         public override void Clean()
         {
         }
