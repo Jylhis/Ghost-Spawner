@@ -5,7 +5,6 @@
  *
  * Created: 26.02.2016
  */
-using System;
 using SDL2;
 
 namespace src
