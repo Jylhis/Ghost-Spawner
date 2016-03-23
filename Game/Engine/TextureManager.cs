@@ -47,7 +47,7 @@ namespace src
             IntPtr tempSurface = SDL_image.IMG_Load(path);
             if (tempSurface == IntPtr.Zero)
             {
-                Console.WriteLine(" - SDL_LoadBMP Error: " + SDL.SDL_GetError());
+                Console.WriteLine(" - SDL_Load Error: " + SDL.SDL_GetError());
                 return false;
             }
 
@@ -99,7 +99,7 @@ namespace src
         /// <param name="currentFrame">Current frame.</param>
         /// <param name="Renderer">Renderer.</param>
         /// <param name="flip">Flip.</param>
-        public void DrawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
+        public void DrawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE, double angle = 0.0)
         {
             SDL.SDL_Rect srcRect;
             SDL.SDL_Rect destRect;
@@ -111,7 +111,7 @@ namespace src
             destRect.x = x;
             destRect.y = y;
 
-            SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
+            SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, angle, IntPtr.Zero, flip);
         }
 
         /// <summary>

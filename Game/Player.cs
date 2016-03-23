@@ -11,10 +11,8 @@ namespace src
 {
     public class Player : SDLGameObject
     {
-        public Player(LoaderParams pParams)
-            : base(ref pParams)
-        {
-        }
+        public Player(LoaderParams pParams) : base(ref pParams)
+        { }
 
         public override void Draw()
         {
@@ -51,6 +49,24 @@ namespace src
                 velocity.X = 2;
             }
 
+            // Shoot
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_UP))
+            {
+                Shoot();
+            }
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_DOWN))
+            {
+                Shoot();
+            }
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_LEFT))
+            {
+                Shoot();
+            }
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RIGHT))
+            {
+                Shoot();
+            }
+
             // Joystick / Controller
             if (InputHandler.Instance.JoysticksInitialised)
             {
@@ -75,6 +91,12 @@ namespace src
                     velocity.Y = 2 * InputHandler.Instance.Yvalue(0, 1);
                 }
             }
+        }
+
+        public void Shoot()
+        {
+            GameObject bullet = new Bullet(new LoaderParams((int)position.X+w/2, (int)position.Y+w/2, 4, 4, "bullet"));
+            PlayState.gameObjects.Add(bullet);
         }
 
         public override void Clean()

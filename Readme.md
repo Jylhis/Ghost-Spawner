@@ -10,6 +10,5 @@ bitbucket: git@bitbucket.org:fooset/proto.git
 - Score & wave counter
 - final sounds & graphics
 - player acceleration smooth
-- player rotation thingy
 - collision box size
 - Creadits

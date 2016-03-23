@@ -14,7 +14,7 @@ namespace src
     {
         private const string menuID = "PLAY";
 
-        private List<GameObject> gameObjects = new List<GameObject>();
+        public static List<GameObject> gameObjects = new List<GameObject>();
 
         public override void Update()
         {
@@ -42,6 +42,7 @@ namespace src
                 gameObjects[i].Draw();
             }
         }
+        
 
         public override bool OnEnter()
         {
@@ -58,6 +59,12 @@ namespace src
                 return false;
             }
             GameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
+
+            // Load bullet
+            if (!TextureManager.Instance.Load("Resources/spr_playerbullet.png", "bullet", Game.Instance.GetRenderer))
+            {
+                return false;
+            }
 
 
             gameObjects.Add(player);
