@@ -9,6 +9,8 @@ bitbucket: git@bitbucket.org:fooset/proto.git
 - enemy explosion throw back
 - Score & wave counter
 - final sounds & graphics
+- Tests
+- Async things example: playSound function
 - GameStateMachine -> Stack
 - player acceleration smooth
 - collision box size
