@@ -72,7 +72,7 @@ namespace src
         {
             for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameObjects[i].Clean();
+                gameObjects[i] = null;
             }
             gameObjects.Clear();
             TextureManager.Instance.ClearFromTextureMap("resumebutton");

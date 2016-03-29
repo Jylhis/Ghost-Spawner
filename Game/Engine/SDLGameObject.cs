@@ -173,11 +173,6 @@ namespace src
             Console.WriteLine(this + "OnCollision");
         }
 
-        /// <summary>
-        /// Clean this instance.
-        /// </summary>
-        public virtual void Clean()
-        {
-        }
+       
     }
 }

@@ -2,7 +2,6 @@
 - UML relaatiot
 - loppuraportti
 - AI movement
-- player bullet 
 - damage/health system
 - enemy spawn
 - fix playstate collision for multiple targets (checkCollision)

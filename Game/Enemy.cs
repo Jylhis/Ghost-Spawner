@@ -6,6 +6,7 @@
  * Created: 22.02.2016
  */
 using SDL2;
+using System;
 
 namespace src
 {
@@ -28,10 +29,9 @@ namespace src
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 4);
             base.Update();
         }
-
-        public override void Clean()
+        ~Enemy()
         {
-            base.Clean();
+            Console.WriteLine("Enemy Deconstructor");
         }
     }
 }

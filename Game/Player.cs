@@ -6,6 +6,7 @@
  * Created: 22.02.2016
  */
 using SDL2;
+using System;
 
 namespace src
 {
@@ -106,12 +107,13 @@ namespace src
 
         public void Shoot(Direction d)
         {
+            
             SDLGameObject bullet = new Bullet(new LoaderParams((int)position.X + w / 2, (int)position.Y + w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
-
-        public override void Clean()
+        ~Player()
         {
+            Console.WriteLine("Player Deconstructor");
         }
     }
 }

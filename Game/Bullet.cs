@@ -10,11 +10,11 @@ using System;
 
 namespace src
 {
-    
     class Bullet : SDLGameObject
     {
         private UInt32 starttime, ftime;
         private const int maxVel = 5;
+        public int total = 0;
        public bool IsMoving
         {
             get
@@ -29,6 +29,7 @@ namespace src
         public Bullet(LoaderParams pParams, Direction di)
             : base(ref pParams)
         {
+            total++;
             starttime = SDL.SDL_GetTicks();
             switch(di)
             {
@@ -67,9 +68,11 @@ namespace src
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 5);
             base.Update();
         }
-
-        public override void Clean()
+        ~Bullet()
         {
+            total--;
+            Console.WriteLine("Bullet Deconstructor");
         }
+        
     }
 }

@@ -5,6 +5,8 @@
  *
  * Created: 25.02.2016
  */
+using System;
+
 namespace src
 {
     public class MenuButton : SDLGameObject
@@ -60,10 +62,9 @@ namespace src
                 currentFrame = (int)button_state.MOUSE_OUT;
             }
         }
-
-        public override void Clean()
+        ~MenuButton()
         {
-            base.Clean();
+            Console.WriteLine("MenuButton Deconstructor");
         }
     }
 }

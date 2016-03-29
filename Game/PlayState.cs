@@ -32,16 +32,15 @@ namespace src
                     if(!tmp.IsMoving)
                     {
                         gameObjects.Remove(gameObjects[i]);
-                        Console.WriteLine("Bullet");
                     }
                     
                 }
             }
 
-            //if (checkCollision(gameObjects[0], gameObjects[1]))
-          //  {
-          //      Game.Instance.GetStateMachine.Change(new GameOverState());
-          //  }
+            if (checkCollision(gameObjects[0], gameObjects[1]))
+            {
+                Game.Instance.GetStateMachine.Change(new GameOverState());
+            }
 
         }
 
@@ -88,7 +87,7 @@ namespace src
         {
             for (int i = 0; i < gameObjects.Count; i++)
             {
-                gameObjects[i].Clean();
+                gameObjects[i] = null;
             }
             gameObjects.Clear();
             TextureManager.Instance.ClearFromTextureMap("Room");
