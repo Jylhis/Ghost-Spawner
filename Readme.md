@@ -1,6 +1,8 @@
 bitbucket: git@bitbucket.org:fooset/proto.git
 
 # TODO
+- UML relaatiot
+- loppuraportti
 - AI movement
 - player bullet 
 - damage/health system
@@ -9,6 +11,8 @@ bitbucket: git@bitbucket.org:fooset/proto.git
 - enemy explosion throw back
 - Score & wave counter
 - final sounds & graphics
+
+EXTRA
 - Tests
 - Async things example: playSound function
 - GameStateMachine -> Stack

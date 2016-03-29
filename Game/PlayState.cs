@@ -20,7 +20,7 @@ namespace src
         {
             if (InputHandler.Instance.IsKeyDown(SDL2.SDL.SDL_Scancode.SDL_SCANCODE_ESCAPE))
             {
-                Game.Instance.GetStateMachine.PushState(new PauseState());
+                Game.Instance.GetStateMachine.Push(new PauseState());
             }
 
             for (int i = 0; i < gameObjects.Count; i++)
@@ -30,7 +30,7 @@ namespace src
 
             if (checkCollision(gameObjects[0], gameObjects[1]))
             {
-                Game.Instance.GetStateMachine.ChangeState(new GameOverState());
+                Game.Instance.GetStateMachine.Change(new GameOverState());
             }
 
         }

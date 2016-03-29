@@ -18,7 +18,7 @@ namespace src
         private static void menuToPlay()
         {
             Console.WriteLine("Pressed Play");
-            Game.Instance.GetStateMachine.ChangeState(new PlayState());
+            Game.Instance.GetStateMachine.Change(new PlayState());
         }
 
         private static void exitFromMenu()

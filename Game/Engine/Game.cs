@@ -122,7 +122,7 @@ namespace src
             }
 
             gameStateMachine = new GameStateMachine();
-            gameStateMachine.ChangeState(new MenuState());
+            gameStateMachine.Change(new MenuState());
             InputHandler.Instance.InitJoysticks();
             
             TextureManager.Instance.Load("Resources/background_robotron.bmp", "background", renderer);
@@ -137,7 +137,7 @@ namespace src
 
             if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RETURN))
             {
-                gameStateMachine.ChangeState(new PlayState());
+                gameStateMachine.Change(new PlayState());
             }
         }
 

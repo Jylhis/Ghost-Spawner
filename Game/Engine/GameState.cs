@@ -5,9 +5,6 @@
  *
  * Created: 25.02.2016
  */
-using System;
-using SDL2;
-
 namespace src
 {
     public abstract class GameState

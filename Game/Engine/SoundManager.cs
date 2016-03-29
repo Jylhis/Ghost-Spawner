@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace src
 {
-    enum sound_type
+    public enum sound_type
     {
         /// <summary>
         /// Music.

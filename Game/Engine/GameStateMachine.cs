@@ -47,7 +47,7 @@ namespace src
         /// Push the state.
         /// </summary>
         /// <param name="state">State.</param>
-        public void PushState(GameState state)
+        public void Push(GameState state)
         {
             gameStates.Add(state);
             gameStates.Last().OnEnter();
@@ -57,7 +57,7 @@ namespace src
         /// Changes the state.
         /// </summary>
         /// <param name="state">State.</param>
-        public void ChangeState(GameState state)
+        public void Change(GameState state)
         {
             if (gameStates.Count != 0)
             {
@@ -78,7 +78,7 @@ namespace src
         /// <summary>
         /// Pops the state.
         /// </summary>
-        public void PopState()
+        public void Pop()
         {
             if (gameStates.Count != 0)
             {

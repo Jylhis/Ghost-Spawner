@@ -63,7 +63,7 @@ namespace src
         /// <summary>
         /// Normalize this instance.
         /// </summary>
-        public void Normalize()
+       /* public void Normalize()
         {
             double l = 1 / Length;
             if (l > 0)
@@ -71,7 +71,7 @@ namespace src
                 this.X *= l;
                 this.Y *= l;
             }
-        }
+        }*/
 
 
         /// <summary>

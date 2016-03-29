@@ -89,7 +89,6 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="GameOverState.cs" />
     <Compile Include="Engine\Program.cs" />
-    <Compile Include="Engine\AnimatedGraphics.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

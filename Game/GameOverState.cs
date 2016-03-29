@@ -18,13 +18,13 @@ namespace src
         private static void gameOverToMain()
         {
             Console.WriteLine("Pressed main menu");
-            Game.Instance.GetStateMachine.ChangeState(new MenuState());
+            Game.Instance.GetStateMachine.Change(new MenuState());
         }
 
         private static void restartPlay()
         {
             Console.WriteLine("Pressed restart");
-            Game.Instance.GetStateMachine.ChangeState(new PlayState());
+            Game.Instance.GetStateMachine.Change(new PlayState());
         }
 
         public GameOverState()
