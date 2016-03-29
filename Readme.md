@@ -1,5 +1,3 @@
-bitbucket: git@bitbucket.org:fooset/proto.git
-
 # TODO
 - UML relaatiot
 - loppuraportti
