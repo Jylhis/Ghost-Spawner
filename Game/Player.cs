@@ -104,7 +104,7 @@ namespace src
 
         public void Shoot(Direction d)
         {
-            GameObject bullet = new Bullet(new LoaderParams((int)position.X + w / 2, (int)position.Y + w / 2, 4, 4, "bullet"), d);
+            SDLGameObject bullet = new Bullet(new LoaderParams((int)position.X + w / 2, (int)position.Y + w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
 

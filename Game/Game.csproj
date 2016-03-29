@@ -72,7 +72,6 @@
   <ItemGroup>
     <Compile Include="Bullet.cs" />
     <Compile Include="Engine\Game.cs" />
-    <Compile Include="Engine\GameObject.cs" />
     <Compile Include="Engine\InputHandler.cs" />
     <Compile Include="Engine\LoaderParams.cs" />
     <Compile Include="Engine\SoundManager.cs" />

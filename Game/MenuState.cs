@@ -13,7 +13,7 @@ namespace src
     public class MenuState : GameState
     {
         private const string menuID = "MENU";
-        private List<GameObject> gameObjects = new List<GameObject>();
+        private List<SDLGameObject> gameObjects = new List<SDLGameObject>();
 
         private static void menuToPlay()
         {
@@ -53,8 +53,8 @@ namespace src
             {
                 return false;
             }
-            GameObject button1 = new MenuButton(new LoaderParams(320, 100, 380, 203, "playbutton"), menuToPlay);
-            GameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "exitbutton"), exitFromMenu);
+            SDLGameObject button1 = new MenuButton(new LoaderParams(320, 100, 380, 203, "playbutton"), menuToPlay);
+            SDLGameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "exitbutton"), exitFromMenu);
             gameObjects.Add(button1);
             gameObjects.Add(button2);
 

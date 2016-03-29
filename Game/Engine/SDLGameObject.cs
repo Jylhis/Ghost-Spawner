@@ -9,7 +9,7 @@ using SDL2;
 
 namespace src
 {
-    public class SDLGameObject : GameObject
+    public class SDLGameObject
     {
         protected int currentRow, currentFrame;
         protected Vector2D velocity, acceleration;
@@ -62,7 +62,6 @@ namespace src
         /// </summary>
         /// <param name="pParams">Parameters.</param>
         public SDLGameObject(ref LoaderParams pParams)
-            : base(ref pParams)
         {
             position = new Vector2D(pParams.X, pParams.Y);
             velocity = new Vector2D(0, 0);
@@ -78,7 +77,7 @@ namespace src
         /// <summary>
         /// Draw this instance.
         /// </summary>
-        public override void Draw()
+        public virtual void Draw()
         {
             double ang;
             if (velocity.Y < 0 && velocity.X == 0)
@@ -125,7 +124,7 @@ namespace src
         /// <summary>
         /// Update this instance.
         /// </summary>
-        public override void Update()
+        public virtual void Update()
         {
             velocity += acceleration;
 
@@ -171,7 +170,7 @@ namespace src
         /// <summary>
         /// Clean this instance.
         /// </summary>
-        public override void Clean()
+        public virtual void Clean()
         {
         }
     }

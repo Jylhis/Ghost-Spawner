@@ -14,7 +14,7 @@ namespace src
     {
         private const string menuID = "PLAY";
 
-        public static List<GameObject> gameObjects = new List<GameObject>();
+        public static List<SDLGameObject> gameObjects = new List<SDLGameObject>();
 
         public override void Update()
         {
@@ -61,14 +61,14 @@ namespace src
             {
                 return false;
             }
-            GameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
+            SDLGameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
 
             // Add Enemy
             if (!TextureManager.Instance.Load("Resources/spr_suicidebomber_strip4.png", "enemy", Game.Instance.GetRenderer))
             {
                 return false;
             }
-            GameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
+            SDLGameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
 
             // Load bullet
             if (!TextureManager.Instance.Load("Resources/spr_playerbullet.png", "bullet", Game.Instance.GetRenderer))
@@ -97,7 +97,7 @@ namespace src
             return true;
         }
 
-        private bool checkCollision(params GameObject[] list)
+        private bool checkCollision(params SDLGameObject[] list)
         {
             SDLGameObject p1 = (SDLGameObject)list[0];
             SDLGameObject p2 = (SDLGameObject)list[1];
