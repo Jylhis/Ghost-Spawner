@@ -38,10 +38,10 @@ namespace src
                 }
             }
 
-            if (checkCollision(gameObjects[0], gameObjects[1]))
-            {
-                Game.Instance.GetStateMachine.Change(new GameOverState());
-            }
+            //if (checkCollision(gameObjects[0], gameObjects[1]))
+          //  {
+          //      Game.Instance.GetStateMachine.Change(new GameOverState());
+          //  }
 
         }
 
@@ -99,40 +99,28 @@ namespace src
 
         private bool checkCollision(params SDLGameObject[] list)
         {
-            SDLGameObject p1 = (SDLGameObject)list[0];
-            SDLGameObject p2 = (SDLGameObject)list[1];
-            int leftA, leftB;
-            int rightA, rightB;
-            int topA, topB;
-            int bottomA, bottomB;
-
-            leftA = (int)p1.position.X;
-            rightA = (int)(p1.position.X + p1.W);
-            topA = (int)p1.position.Y;
-            bottomA = (int)(p1.position.Y + p1.H);
-
-            leftB = (int)p2.position.X;
-            rightB = (int)(p2.position.X + p2.W);
-            topB = (int)p2.position.Y;
-            bottomB = (int)(p2.position.Y + p2.H);
-
-            if (bottomA <= topB)
+            for (int i = 0; i < list.Length; i++)
             {
-                return false;
+                for (int j = i+1; j < list.Length; j++)
+                {
+                    if ((list[i].position.Y + list[i].H) <= list[j].position.Y)
+                    {
+                        return false;
+                    }
+                    if (list[i].position.Y >= (list[j].position.Y+list[j].H))
+                    {
+                        return false;
+                    }
+                    if ((list[i].position.X+list[i].W) <= list[j].position.X)
+                    {
+                        return false;
+                    }
+                    if (list[i].position.X >= (list[j].position.X+list[j].W))
+                    {
+                        return false;
+                    }    
+                }
             }
-            if (topA >= bottomB)
-            {
-                return false;
-            }
-            if (rightA <= leftB)
-            {
-                return false;
-            }
-            if (leftA >= rightB)
-            {
-                return false;
-            }
-
             return true;
         }
 

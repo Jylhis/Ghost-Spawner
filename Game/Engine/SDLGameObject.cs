@@ -6,6 +6,7 @@
  * Created: 24.02.2016
  */
 using SDL2;
+using System;
 
 namespace src
 {
@@ -165,6 +166,11 @@ namespace src
 
             position += velocity;
 
+        }
+
+        public virtual void OnCollision()
+        {
+            Console.WriteLine(this + "OnCollision");
         }
 
         /// <summary>

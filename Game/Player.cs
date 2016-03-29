@@ -18,6 +18,8 @@ namespace src
     }
     public class Player : SDLGameObject
     {
+        private const int health = 100;
+
         public Player(LoaderParams pParams)
             : base(ref pParams)
         {
