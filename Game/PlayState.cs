@@ -22,10 +22,20 @@ namespace src
             {
                 Game.Instance.GetStateMachine.Push(new PauseState());
             }
-
+            
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Update();
+                if (gameObjects[i] is Bullet)
+                {
+                    Bullet tmp = (Bullet)gameObjects[i];
+                    if(!tmp.IsMoving)
+                    {
+                        gameObjects.Remove(gameObjects[i]);
+                        Console.WriteLine("Bullet");
+                    }
+                    
+                }
             }
 
             if (checkCollision(gameObjects[0], gameObjects[1]))

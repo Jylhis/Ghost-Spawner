@@ -9,6 +9,13 @@ using SDL2;
 
 namespace src
 {
+    public enum Direction
+    {
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
+    }
     public class Player : SDLGameObject
     {
         public Player(LoaderParams pParams)
@@ -54,19 +61,19 @@ namespace src
             // Shoot
             if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_UP))
             {
-                Shoot();
+                Shoot(Direction.UP);
             }
             if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_DOWN))
             {
-                Shoot();
+                Shoot(Direction.DOWN);
             }
             if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_LEFT))
             {
-                Shoot();
+                Shoot(Direction.LEFT);
             }
             if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RIGHT))
             {
-                Shoot();
+                Shoot(Direction.RIGHT);
             }
 
             // Joystick / Controller
@@ -95,9 +102,9 @@ namespace src
             }
         }
 
-        public void Shoot()
+        public void Shoot(Direction d)
         {
-            GameObject bullet = new Bullet(new LoaderParams((int)position.X + w / 2, (int)position.Y + w / 2, 4, 4, "bullet"));
+            GameObject bullet = new Bullet(new LoaderParams((int)position.X + w / 2, (int)position.Y + w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
 
