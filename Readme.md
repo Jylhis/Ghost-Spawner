@@ -12,7 +12,7 @@
 
 EXTRA
 - Tests
-- Async things example: playSound function
+- Async things
 - GameStateMachine -> Stack
 - player acceleration smooth
 - collision box size

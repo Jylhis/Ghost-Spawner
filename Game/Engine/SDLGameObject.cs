@@ -14,7 +14,15 @@ namespace src
     {
         protected int currentRow, currentFrame;
         protected Vector2D velocity, acceleration;
-        protected int w, h;
+        protected SDL.SDL_Rect rect;
+
+        public SDL.SDL_Rect getRect
+        {
+            get
+            {
+                return rect;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the width.
@@ -24,11 +32,11 @@ namespace src
         {
             get
             {
-                return w;
+                return rect.w;
             }
             set
             {
-                w = value;
+                rect.w = value;
             }
         }
 
@@ -40,18 +48,30 @@ namespace src
         {
             get
             {
-                return h;
+                return rect.h;
             }
             set
             {
-                h = value;
+                rect.h = value;
             }
         }
 
         /// <summary>
         /// The position.
         /// </summary>
-        public Vector2D position;
+        public Vector2D Position
+        {
+            get
+            {
+                Vector2D tmp = new Vector2D(rect.x, rect.y);
+                return tmp;
+            }
+            set
+            {
+                rect.x = (int)value.X;
+                rect.y = (int)value.Y;
+            }
+        }
 
         /// <summary>
         /// The identifier.
@@ -64,7 +84,7 @@ namespace src
         /// <param name="pParams">Parameters.</param>
         public SDLGameObject(ref LoaderParams pParams)
         {
-            position = new Vector2D(pParams.X, pParams.Y);
+            Position = new Vector2D(pParams.X, pParams.Y);
             velocity = new Vector2D(0, 0);
             acceleration = new Vector2D(0, 0);
             W = pParams.W;
@@ -103,7 +123,7 @@ namespace src
                     ang = -45;
 
                 TextureManager.Instance.DrawFrame(id,
-                    (int)position.X, (int)position.Y,
+                    (int)Position.X, (int)Position.Y,
                     W, H, currentRow, currentFrame,
                     Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL, ang);
 
@@ -116,7 +136,7 @@ namespace src
                     ang = -315;
 
                 TextureManager.Instance.DrawFrame(id,
-                    (int)position.X, (int)position.Y,
+                    (int)Position.X, (int)Position.Y,
                     W, H, currentRow, currentFrame,
                     Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, ang);
             }
@@ -129,7 +149,7 @@ namespace src
         {
             velocity += acceleration;
 
-            switch ((int)position.X)
+            switch ((int)Position.X)
             {
                 case 10:
                     if (velocity.X < 0)
@@ -146,7 +166,7 @@ namespace src
                 default:
                     break;
             }
-            switch ((int)position.Y)
+            switch ((int)Position.Y)
             {
                 case 10:
                     if (velocity.Y < 0)
@@ -164,15 +184,15 @@ namespace src
                     break;
             }
 
-            position += velocity;
+            Position += velocity;
 
         }
 
         public virtual void OnCollision()
         {
-            Console.WriteLine(this + "OnCollision");
+            Console.WriteLine(this + ": OnCollision");
         }
 
-       
+
     }
 }

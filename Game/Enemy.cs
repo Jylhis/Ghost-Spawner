@@ -12,7 +12,7 @@ namespace src
 {
     public class Enemy : SDLGameObject
     {
-        private const int health = 100;
+        private int health = 100;
 
         public Enemy(LoaderParams pParams)
             : base(ref pParams)
