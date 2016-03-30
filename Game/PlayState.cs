@@ -5,6 +5,7 @@
  *
  * Created: 25.02.2016
  */
+using SDL2;
 using System;
 using System.Collections.Generic;
 
@@ -22,24 +23,26 @@ namespace src
             {
                 Game.Instance.GetStateMachine.Push(new PauseState());
             }
-            
+
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Update();
                 if (gameObjects[i] is Bullet)
                 {
                     Bullet tmp = (Bullet)gameObjects[i];
-                    if(!tmp.IsMoving)
+                    if (!tmp.IsMoving)
                     {
                         gameObjects.Remove(gameObjects[i]);
                     }
-                    
                 }
             }
 
-            if (checkCollision(gameObjects[0], gameObjects[1]))
+            foreach (SDLGameObject enemy in gameObjects.FindAll(x => x.id == "enemy"))
             {
-                Game.Instance.GetStateMachine.Change(new GameOverState());
+                if(checkCollision(enemy, gameObjects.Find(x => x.id == "player")))
+                {
+                    //Game.Instance.GetStateMachine.Change(new GameOverState());
+                }
             }
 
         }
@@ -75,7 +78,6 @@ namespace src
                 return false;
             }
 
-
             gameObjects.Add(player);
             gameObjects.Add(enemy);
 
@@ -96,32 +98,54 @@ namespace src
             return true;
         }
 
-        private bool checkCollision(params SDLGameObject[] list)
+        // NEW
+        private bool checkCollision(SDLGameObject enemy, SDLGameObject other)
+        {
+            SDL.SDL_bool bo = SDL.SDL_bool.SDL_FALSE;
+            SDL.SDL_Rect result;
+            SDL.SDL_Rect enemyRect = enemy.getRect;
+            SDL.SDL_Rect otherRect = other.getRect;
+
+            bo = SDL.SDL_IntersectRect(ref enemyRect, ref otherRect, out result);
+            
+            if(bo == SDL.SDL_bool.SDL_TRUE)
+            {
+                other.OnCollision();
+                return true;
+            } 
+            else
+            {
+                return false;
+            }
+        }
+
+        // OLD
+       /* private bool checkCollision(params SDLGameObject[] list)
         {
             for (int i = 0; i < list.Length; i++)
             {
-                for (int j = i+1; j < list.Length; j++)
+                for (int j = i + 1; j < list.Length; j++)
                 {
-                    if ((list[i].position.Y + list[i].H) <= list[j].position.Y)
+                    if ((list[i].Position.Y + list[i].H) <= list[j].Position.Y)
                     {
                         return false;
                     }
-                    if (list[i].position.Y >= (list[j].position.Y+list[j].H))
+                    if (list[i].Position.Y >= (list[j].Position.Y + list[j].H))
                     {
                         return false;
                     }
-                    if ((list[i].position.X+list[i].W) <= list[j].position.X)
+                    if ((list[i].Position.X + list[i].W) <= list[j].Position.X)
                     {
                         return false;
                     }
-                    if (list[i].position.X >= (list[j].position.X+list[j].W))
+                    if (list[i].Position.X >= (list[j].Position.X + list[j].W))
                     {
                         return false;
-                    }    
+                    }
                 }
             }
             return true;
-        }
+        }*/
 
         public override string GetStateID()
         {

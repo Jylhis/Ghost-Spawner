@@ -15,7 +15,8 @@ namespace src
         private UInt32 starttime, ftime;
         private const int maxVel = 5;
         public int total = 0;
-       public bool IsMoving
+
+        public bool IsMoving
         {
             get
             {
@@ -31,7 +32,7 @@ namespace src
         {
             total++;
             starttime = SDL.SDL_GetTicks();
-            switch(di)
+            switch (di)
             {
                 case Direction.UP:
                     velocity.Y = -maxVel;
@@ -48,7 +49,6 @@ namespace src
                 default:
                     break;
             }
-
         }
 
         public override void Draw()
@@ -59,8 +59,8 @@ namespace src
         public override void Update()
         {
             ftime = SDL.SDL_GetTicks();
-           // Console.WriteLine(ftime - starttime);
-            if(ftime - starttime >= 3000)
+            // Console.WriteLine(ftime - starttime);
+            if (ftime - starttime >= 3000)
             {
                 velocity.X = 0;
                 velocity.Y = 0;
@@ -73,6 +73,5 @@ namespace src
             total--;
             Console.WriteLine("Bullet Deconstructor");
         }
-        
     }
 }

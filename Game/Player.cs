@@ -19,11 +19,21 @@ namespace src
     }
     public class Player : SDLGameObject
     {
-        private const int health = 100;
+        private int health = 100;
 
         public Player(LoaderParams pParams)
             : base(ref pParams)
         {
+        }
+
+        public void TakeDamage(int damage)
+        {
+            Console.WriteLine(health);
+            health -= damage;
+            if(health <= 0)
+            {
+                Game.Instance.GetStateMachine.Change(new GameOverState());
+            }
         }
 
         public override void Draw()
@@ -105,10 +115,16 @@ namespace src
             }
         }
 
+        public override void OnCollision()
+        {
+            rect.x = 100;
+            base.OnCollision();
+        }
+
         public void Shoot(Direction d)
         {
-            
-            SDLGameObject bullet = new Bullet(new LoaderParams((int)position.X + w / 2, (int)position.Y + w / 2, 4, 4, "bullet"), d);
+
+            SDLGameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
         ~Player()
