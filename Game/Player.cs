@@ -240,8 +240,9 @@ namespace src
 
         public override void OnCollision()
         {
-            rect.x = 100;
-            base.OnCollision();
+            
+             rect.x += (int)velocity.X * -30;
+             rect.y += (int)velocity.Y * -30;
         }
 
         public void Shoot(Direction d)

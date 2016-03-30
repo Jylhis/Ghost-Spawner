@@ -44,7 +44,6 @@ namespace src
                     //Game.Instance.GetStateMachine.Change(new GameOverState());
                 }
             }
-
         }
 
         public override void Render()
@@ -54,8 +53,7 @@ namespace src
                 gameObjects[i].Draw();
             }
         }
-
-
+        
         public override bool OnEnter()
         {
             // Add Player
@@ -102,7 +100,6 @@ namespace src
             return true;
         }
 
-        // NEW
         private bool checkCollision(SDLGameObject enemy, SDLGameObject other)
         {
             SDL.SDL_bool bo = SDL.SDL_bool.SDL_FALSE;
@@ -111,10 +108,13 @@ namespace src
             SDL.SDL_Rect otherRect = other.getRect;
 
             bo = SDL.SDL_IntersectRect(ref enemyRect, ref otherRect, out result);
-            
+
+            Console.WriteLine("X: "+result.x+", Y: "+result.y+"\nW: "+result.w+", H: "+result.h);
+
             if(bo == SDL.SDL_bool.SDL_TRUE)
             {
                 other.OnCollision();
+                
                 return true;
             } 
             else
@@ -122,35 +122,7 @@ namespace src
                 return false;
             }
         }
-
-        // OLD
-       /* private bool checkCollision(params SDLGameObject[] list)
-        {
-            for (int i = 0; i < list.Length; i++)
-            {
-                for (int j = i + 1; j < list.Length; j++)
-                {
-                    if ((list[i].Position.Y + list[i].H) <= list[j].Position.Y)
-                    {
-                        return false;
-                    }
-                    if (list[i].Position.Y >= (list[j].Position.Y + list[j].H))
-                    {
-                        return false;
-                    }
-                    if ((list[i].Position.X + list[i].W) <= list[j].Position.X)
-                    {
-                        return false;
-                    }
-                    if (list[i].Position.X >= (list[j].Position.X + list[j].W))
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }*/
-
+        
         public override string GetStateID()
         {
             return menuID;

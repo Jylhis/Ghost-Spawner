@@ -103,7 +103,7 @@ namespace src
             TextureManager.Instance.DrawFrame(id,
                     (int)Position.X, (int)Position.Y,
                     W, H, currentRow, currentFrame,
-                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, 0);
+                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, 0.0);
         }
 
         /// <summary>
@@ -112,44 +112,54 @@ namespace src
         public virtual void Update()
         {
             velocity += acceleration;
-
-            switch ((int)Position.X)
+           
+            if(Position.X <= 10)
             {
-                case 10:
-                    if (velocity.X < 0)
-                    {
-                        velocity.X = 0;
-                    }
-                    break;
-                case 970:
-                    if (velocity.X > 0)
-                    {
-                        velocity.X = 0;
-                    }
-                    break;
-                default:
-                    break;
+                if(velocity.X < 0)
+                {
+                    velocity.X = 0;
+                }
+                else
+                {
+                    rect.x = 11;
+                }
+                
             }
-            switch ((int)Position.Y)
+            else if(Position.X >= 970)
             {
-                case 10:
-                    if (velocity.Y < 0)
-                    {
-                        velocity.Y = 0;
-                    }
-                    break;
-                case 670:
-                    if (velocity.Y > 0)
-                    {
-                        velocity.Y = 0;
-                    }
-                    break;
-                default:
-                    break;
+                if (velocity.X > 0)
+                {
+                    velocity.X = 0;
+                }
+                else
+                {
+                    rect.x = 969;
+                }
             }
 
+            if(Position.Y <= 10)
+            {
+                if(velocity.Y < 0)
+                {
+                    velocity.Y = 0;
+                }
+                else
+                {
+                    rect.y = 11;
+                }
+            }
+            else if(Position.Y >= 670)
+            {
+                if (velocity.Y > 0)
+                {
+                    velocity.Y = 0;
+                }
+                else
+                {
+                    rect.y = 669;
+                }
+            }
             Position += velocity;
-
         }
 
         public virtual void OnCollision()
