@@ -15,11 +15,17 @@ namespace src
         LEFT,
         RIGHT,
         UP,
-        DOWN
+        DOWN,
+        DOLE,
+        DORI,
+        UPLE,
+        UPRI
     }
     public class Player : SDLGameObject
     {
         private const int health = 100;
+        private Vector2D lastVelocity = new Vector2D(0, 0);
+        private UInt32 startTime;
 
         public Player(LoaderParams pParams)
             : base(ref pParams)
@@ -28,7 +34,120 @@ namespace src
 
         public override void Draw()
         {
-            base.Draw();
+            double ang;
+
+            if (velocity.X > 0)
+            {
+
+                if (velocity.Y > 0)
+                {
+                    ang = 45;
+                    lastVelocity.X = 1;
+                    lastVelocity.Y = 1;
+                }
+                else if (velocity.Y == 0)
+                {
+                    ang = 0;
+                    lastVelocity.X = 1;
+                    lastVelocity.Y = 0;
+                }
+                else
+                {
+                    ang = -45;
+                    lastVelocity.X = 1;
+                    lastVelocity.Y = -1;
+                }
+            }
+
+            else if (velocity.X < 0)
+            {
+                if (velocity.Y > 0)
+                {
+                    ang = 135;
+                    lastVelocity.X = -1;
+                    lastVelocity.Y = 1;
+                }
+                else if (velocity.Y == 0)
+                {
+                    ang = 180;
+                    lastVelocity.X = -1;
+                    lastVelocity.Y = 0;
+                }
+                else
+                {
+                    ang = -135;
+                    lastVelocity.X = -1;
+                    lastVelocity.Y = -1;
+                }
+            }
+
+            else
+            {
+                if (velocity.Y > 0)
+                {
+                    ang = 90;
+                    lastVelocity.X = 0;
+                    lastVelocity.Y = 1;
+                }
+                else if (velocity.Y == 0)
+                {
+                    if (lastVelocity.X > 0)
+                    {
+                        ang = 0;
+                        if (lastVelocity.Y > 0)
+                        {
+                            ang = 45;
+                        }
+                        else if (lastVelocity.Y == 0)
+                        {
+                            ang = 0;
+                        }
+                        else
+                        {
+                            ang = -45;
+                        }
+                    }
+                    else if (lastVelocity.X == 0)
+                    {
+                        ang = 0;
+                        if (lastVelocity.Y > 0)
+                        {
+                            ang = 90;
+                        }
+                        else if (lastVelocity.Y < 0)
+                        {
+                            ang = -90;
+                        }
+                    }
+                    else
+                    {
+                        ang = 180;
+                        if (lastVelocity.Y > 0)
+                        {
+                            ang = 135;
+                        }
+                        else if (lastVelocity.Y < 0)
+                        {
+                            ang = -135;
+                        }
+                        else
+                        {
+                            ang = 180;
+                        }
+                    }
+                }
+                else
+                {
+                    ang = -90;
+                    lastVelocity.X = 0;
+                    lastVelocity.Y = -1;
+                }
+            }
+
+            TextureManager.Instance.DrawFrame(id,
+                    (int)position.X, (int)position.Y,
+                    W, H, currentRow, currentFrame,
+                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, ang);
         }
 
         public override void Update()
@@ -62,22 +181,26 @@ namespace src
             }
 
             // Shoot
-            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_UP))
+            if(SDL.SDL_GetTicks() - 100 > startTime)
             {
-                Shoot(Direction.UP);
+                if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_UP))
+                {
+                    Shoot(Direction.UP);
+                }
+                if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_DOWN))
+                {
+                    Shoot(Direction.DOWN);
+                }
+                if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_LEFT))
+                {
+                    Shoot(Direction.LEFT);
+                }
+                if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RIGHT))
+                {
+                    Shoot(Direction.RIGHT);
+                }
             }
-            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_DOWN))
-            {
-                Shoot(Direction.DOWN);
-            }
-            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_LEFT))
-            {
-                Shoot(Direction.LEFT);
-            }
-            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RIGHT))
-            {
-                Shoot(Direction.RIGHT);
-            }
+            
 
             // Joystick / Controller
             if (InputHandler.Instance.JoysticksInitialised)
@@ -107,7 +230,7 @@ namespace src
 
         public void Shoot(Direction d)
         {
-            
+            startTime = SDL.SDL_GetTicks();
             SDLGameObject bullet = new Bullet(new LoaderParams((int)position.X + w / 2, (int)position.Y + w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }

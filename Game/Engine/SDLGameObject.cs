@@ -80,46 +80,10 @@ namespace src
         /// </summary>
         public virtual void Draw()
         {
-            double ang;
-            if (velocity.Y < 0 && velocity.X == 0)
-            {
-                ang = -90.0;
-            }
-            else if (velocity.Y > 0 && velocity.X == 0)
-            {
-                ang = 90.0;
-            }
-            else
-            {
-                ang = 0;
-            }
-
-
-            if (velocity.X < 0)
-            {
-                if (velocity.Y < 0)
-                    ang = 45;
-                if (velocity.Y > 0)
-                    ang = -45;
-
-                TextureManager.Instance.DrawFrame(id,
+            TextureManager.Instance.DrawFrame(id,
                     (int)position.X, (int)position.Y,
                     W, H, currentRow, currentFrame,
-                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL, ang);
-
-            }
-            else
-            {
-                if (velocity.Y < 0 && velocity.X != 0)
-                    ang = 315;
-                if (velocity.Y > 0 && velocity.X != 0)
-                    ang = -315;
-
-                TextureManager.Instance.DrawFrame(id,
-                    (int)position.X, (int)position.Y,
-                    W, H, currentRow, currentFrame,
-                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, ang);
-            }
+                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, 0);
         }
 
         /// <summary>
