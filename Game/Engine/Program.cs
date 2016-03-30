@@ -17,6 +17,12 @@ namespace src
 
         static int Main(string[] args)
         {
+        #if DEBUG
+            Console.WriteLine("DEBUG MODE");
+        #else
+            Console.WriteLine("RELEASE MODE"); 
+        #endif
+
             UInt32 frameStart, frameTime;
             Game.Instance.Init("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 1024, 720, false);
 

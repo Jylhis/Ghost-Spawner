@@ -38,7 +38,46 @@ namespace src
 
         public override void Draw()
         {
-            base.Draw();
+            double ang;
+            if (velocity.Y < 0 && velocity.X == 0)
+            {
+                ang = -90.0;
+            }
+            else if (velocity.Y > 0 && velocity.X == 0)
+            {
+                ang = 90.0;
+            }
+            else
+            {
+                ang = 0;
+            }
+
+
+            if (velocity.X < 0)
+            {
+                if (velocity.Y < 0)
+                    ang = 45;
+                if (velocity.Y > 0)
+                    ang = -45;
+
+                TextureManager.Instance.DrawFrame(id,
+                    (int)Position.X, (int)Position.Y,
+                    W, H, currentRow, currentFrame,
+                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_HORIZONTAL, ang);
+
+            }
+            else
+            {
+                if (velocity.Y < 0 && velocity.X != 0)
+                    ang = 315;
+                if (velocity.Y > 0 && velocity.X != 0)
+                    ang = -315;
+
+                TextureManager.Instance.DrawFrame(id,
+                    (int)Position.X, (int)Position.Y,
+                    W, H, currentRow, currentFrame,
+                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, ang);
+            }
         }
 
         public override void Update()
@@ -117,8 +156,9 @@ namespace src
 
         public override void OnCollision()
         {
-            rect.x = 100;
-            base.OnCollision();
+            
+             rect.x += (int)velocity.X * -30;
+             rect.y += (int)velocity.Y * -30;
         }
 
         public void Shoot(Direction d)
