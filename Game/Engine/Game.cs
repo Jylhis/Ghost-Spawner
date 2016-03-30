@@ -124,7 +124,7 @@ namespace src
             gameStateMachine = new GameStateMachine();
             gameStateMachine.Change(new MenuState());
             InputHandler.Instance.InitJoysticks();
-            
+
             TextureManager.Instance.Load("Resources/background_robotron.bmp", "background", renderer);
         }
 
@@ -158,7 +158,7 @@ namespace src
             SDL.SDL_RenderClear(renderer);
 
             // Background
-            TextureManager.Instance.Draw("background", 0, 0, 1024, 720, renderer);
+            TextureManager.Instance.Draw("background", 0, 0, 1024, 720, ref renderer);
 
             // Loads all objets into renderer
             gameStateMachine.Render();

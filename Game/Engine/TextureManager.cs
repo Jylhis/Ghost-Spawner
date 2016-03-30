@@ -72,7 +72,7 @@ namespace src
         /// <param name="h">The height.</param>
         /// <param name="Renderer">Renderer.</param>
         /// <param name="flip">Flip.</param>
-        public void Draw(string id, int x, int y, int w, int h, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
+        public void Draw(string id, int x, int y, int w, int h,ref IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
         {
             SDL.SDL_Rect srcRect;
             SDL.SDL_Rect destRect;

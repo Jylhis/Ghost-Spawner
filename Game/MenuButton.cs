@@ -39,10 +39,10 @@ namespace src
         public override void Update()
         {
             Vector2D mousePos = InputHandler.Instance.GetMousePosition;
-            if (mousePos.X < (position.X + W)
-                && mousePos.X > position.X
-                && mousePos.Y < (position.Y + H)
-                && mousePos.Y > position.Y)
+            if (mousePos.X < (Position.X + W)
+                && mousePos.X > Position.X
+                && mousePos.Y < (Position.Y + H)
+                && mousePos.Y > Position.Y)
             {
                 if (InputHandler.Instance.GetMouseButtonState(MouseButtons.LEFT)
                     && released)

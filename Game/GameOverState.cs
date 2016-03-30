@@ -54,6 +54,7 @@ namespace src
             {
                 return false;
             }
+
             if (!TextureManager.Instance.Load("Resources/Restart.bmp",
                     "restartbutton", Game.Instance.GetRenderer))
             {
