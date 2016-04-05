@@ -181,7 +181,7 @@ namespace src
             }
 
             // Shoot
-            if(SDL.SDL_GetTicks() - 100 > startTime)
+            if(SDL.SDL_GetTicks() - 170 > startTime)
             {
                 if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_UP))
                 {
@@ -231,6 +231,7 @@ namespace src
         public void Shoot(Direction d)
         {
             startTime = SDL.SDL_GetTicks();
+            SoundManager.Instance.PlaySound("shoot");
             SDLGameObject bullet = new Bullet(new LoaderParams((int)position.X + w / 2, (int)position.Y + w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }

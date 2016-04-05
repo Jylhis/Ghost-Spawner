@@ -74,6 +74,10 @@ namespace src
             {
                 return false;
             }
+            if (!SoundManager.Instance.Load("D:/K1565/proto/proto/Game/Resources/sound/laser1.wav","shoot",sound_type.SOUND_SFX))
+            {
+                return false;
+            }
 
 
             gameObjects.Add(player);
