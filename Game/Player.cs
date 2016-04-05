@@ -155,7 +155,7 @@ namespace src
             }
 
             TextureManager.Instance.DrawFrame(id,
-                    (int)position.X, (int)position.Y,
+                    (int)Position.X, (int)Position.Y,
                     W, H, currentRow, currentFrame,
                     Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, ang);
         }
