@@ -151,7 +151,9 @@
     <Content Include="Resources\sound\idler.wav" />
     <Content Include="Resources\sound\johnnyball1.wav" />
     <Content Include="Resources\sound\johnnyball2.wav" />
-    <Content Include="Resources\sound\laser1.wav" />
+    <Content Include="Resources\sound\laser1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\sound\laser2.wav" />
     <Content Include="Resources\sound\lasor1.wav" />
     <Content Include="Resources\sound\lasor2.wav" />
