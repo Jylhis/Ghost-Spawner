@@ -169,7 +169,5 @@ namespace src
             Console.WriteLine(this+" health: "+health);
 #endif
         }
-
-
     }
 }

@@ -41,9 +41,9 @@ namespace src
 
         public override void Render()
         {
-            for (int i = 0; i < gameObjects.Count; i++)
+            foreach (SDLGameObject obj in gameObjects)
             {
-                gameObjects[i].Draw();
+                obj.Draw();
             }
         }
 
@@ -64,16 +64,11 @@ namespace src
 #if DEBUG
             Console.WriteLine("entering MenuState");
 #endif
-
             return true;
         }
 
         public override bool OnExit()
         {
-            for (int i = 0; i < gameObjects.Count; i++)
-            {
-                gameObjects[i] = null;
-            }
             gameObjects.Clear();
             TextureManager.Instance.ClearFromTextureMap("playbutton");
             TextureManager.Instance.ClearFromTextureMap("exitbutton");

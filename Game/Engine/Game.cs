@@ -14,12 +14,8 @@ namespace src
     {
         private static Game instance;
         private IntPtr window, renderer;
-        private GameStateMachine gameStateMachine;
+        private GameStateMachine gameStateMachine = new GameStateMachine();
         private bool running = false;
-
-        private Game()
-        {
-        }
 
         /// <summary>
         /// Returns true if game is running.
@@ -89,7 +85,6 @@ namespace src
             {
                 flags = SDL.SDL_WindowFlags.SDL_WINDOW_FULLSCREEN;
             }
-            // Start SDL
             if (SDL.SDL_Init(SDL.SDL_INIT_VIDEO) != 0)
             {
                 Console.WriteLine("Could not start SDL: " + SDL.SDL_GetError());
@@ -99,7 +94,6 @@ namespace src
 #if DEBUG
                 Console.WriteLine("SDL started");
 #endif
-                // Create window
                 window = SDL.SDL_CreateWindow(title, x, y, w, h, flags);
                 if (window == IntPtr.Zero)
                 {
@@ -110,7 +104,6 @@ namespace src
 #if DEBUG
                     Console.WriteLine("Window started");
 #endif
-                    // Create Renderer
                     renderer = SDL.SDL_CreateRenderer(window, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
                     if (renderer == IntPtr.Zero)
                     {
@@ -126,8 +119,7 @@ namespace src
                     }
                 }
             }
-
-            gameStateMachine = new GameStateMachine();
+            
             gameStateMachine.Change(new MenuState());
             InputHandler.Instance.InitJoysticks();
 
@@ -161,16 +153,12 @@ namespace src
         /// </summary>
         public void Render()
         {
-            // Render to window
             SDL.SDL_RenderClear(renderer);
-
-            // Background
+            
             TextureManager.Instance.Draw("background", 0, 0, 1024, 720, ref renderer);
-
-            // Loads all objets into renderer
+            
             gameStateMachine.Render();
-
-            // Render everything
+            
             SDL.SDL_RenderPresent(renderer);
         }
 

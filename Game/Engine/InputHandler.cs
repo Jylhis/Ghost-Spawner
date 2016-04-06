@@ -26,7 +26,7 @@ namespace src
         /// </summary>
         MIDDLE,
         /// <summary>
-        /// Mouse right mouse.
+        /// Mouse right button.
         /// </summary>
         RIGHT
     }
@@ -52,7 +52,6 @@ namespace src
         {
             get
             {
-                //Console.WriteLine("x:" + mousePosition.X);
                 return mousePosition;
             }
         }
@@ -151,7 +150,6 @@ namespace src
                     break;
                 default:
                     break;
-
             }
         }
 
@@ -174,7 +172,6 @@ namespace src
                         joystickValues[whichOne].Item1.X = 0;
                     }
                     break;
-
                 case 1:  // left stick move up or down
                     if (events.jaxis.axisValue > joystickDeadZone)
                     {
@@ -189,7 +186,6 @@ namespace src
                         joystickValues[whichOne].Item1.Y = 0;
                     }
                     break;
-
                 case 3:  // right stick move left or right
                     if (events.jaxis.axisValue > joystickDeadZone)
                     {
@@ -204,7 +200,6 @@ namespace src
                         joystickValues[whichOne].Item2.X = 0;
                     }
                     break;
-
                 case 4:  // right stick move up or down
                     if (events.jaxis.axisValue > joystickDeadZone)
                     {
@@ -219,7 +214,6 @@ namespace src
                         joystickValues[whichOne].Item1.Y = 0;
                     }
                     break;
-
                 default:
                     break;
             }
@@ -371,7 +365,6 @@ namespace src
             {
                 joysticksInit = false;
             }
-
         }
 
         /// <summary>

@@ -15,13 +15,6 @@ namespace src
         private List<GameState> gameStates = new List<GameState>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="src.GameStateMachine"/> class.
-        /// </summary>
-        public GameStateMachine()
-        {
-        }
-
-        /// <summary>
         /// Update this instance.
         /// </summary>
         public void Update()
@@ -88,7 +81,6 @@ namespace src
                 }
             }
         }
-
     }
 }
 

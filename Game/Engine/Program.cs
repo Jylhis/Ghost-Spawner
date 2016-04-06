@@ -22,7 +22,6 @@ namespace src
 #else
             Console.WriteLine("RELEASE MODE"); 
 #endif
-
             UInt32 frameStart, frameTime;
             Game.Instance.Init("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 1024, 720, false);
 
@@ -41,9 +40,7 @@ namespace src
                     SDL.SDL_Delay(DELAY_TIME - frameTime);
                 }
             }
-
             Game.Instance.Close();
-
             return 0;
         }
     }

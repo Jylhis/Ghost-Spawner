@@ -32,10 +32,6 @@ namespace src
             }
         }
 
-        private TextureManager()
-        {
-        }
-
         /// <summary>
         /// Load the texture and puts it into dictionary.
         /// </summary>
@@ -45,23 +41,7 @@ namespace src
         public bool Load(string path, string id, IntPtr Renderer)
         {
             IntPtr tempSurface = IntPtr.Zero;
-            // http://stackoverflow.com/questions/22886500/rendering-text-sdl2
-            /*if (id == "text")
-            {
-                IntPtr font = SDL_ttf.TTF_OpenFont("Resources/font.ttf", 12);
-                SDL.SDL_Color color;
-                color.r = 255;
-                color.b = 255;
-                color.g = 255;
-                color.a = 0;
-                tempSurface = SDL_ttf.TTF_RenderText_Solid(font, path, color);
-            }
-            else
-            {*/
             tempSurface = SDL_image.IMG_Load(path);
-
-            // }
-
             if (tempSurface == IntPtr.Zero)
             {
                 Console.WriteLine(" - SDL_Load Error: " + SDL.SDL_GetError());

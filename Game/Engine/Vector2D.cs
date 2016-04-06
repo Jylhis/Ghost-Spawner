@@ -90,6 +90,6 @@ namespace src
         /// Gets the length.
         /// </summary>
         /// <value>The length.</value>
-        public double Length { get { return Math.Sqrt(x * x + y * y); } }
+        // public double Length { get { return Math.Sqrt(x * x + y * y); } }
     }
 }

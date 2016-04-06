@@ -35,8 +35,6 @@ namespace src
 
         public override void Update()
         {
-
-
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Update();
@@ -75,10 +73,6 @@ namespace src
 
         public override bool OnExit()
         {
-            for (int i = 0; i < gameObjects.Count; i++)
-            {
-                gameObjects[i] = null;
-            }
             gameObjects.Clear();
             TextureManager.Instance.ClearFromTextureMap("resumebutton");
             TextureManager.Instance.ClearFromTextureMap("mainmenubutton");

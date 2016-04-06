@@ -50,7 +50,6 @@ namespace src
 
             if (velocity.X > 0)
             {
-
                 if (velocity.Y > 0)
                 {
                     ang = 45;
@@ -70,7 +69,6 @@ namespace src
                     lastVelocity.Y = -1;
                 }
             }
-
             else if (velocity.X < 0)
             {
                 if (velocity.Y > 0)
@@ -242,9 +240,11 @@ namespace src
 
         public override void OnCollision(int damage = 0)
         {
+#if DEBUG
             Console.WriteLine("Player: " + health);
+#endif
             health -= damage;
-            if (health < 0)
+            if (health <= 0)
             {
                 Game.Instance.GetStateMachine.Change(new GameOverState());
             }
@@ -259,11 +259,13 @@ namespace src
             SDLGameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
+#if DEBUG
         ~Player()
         {
-#if DEBUG
+
             Console.WriteLine("Player Deconstructor");
-#endif
+
         }
+#endif
     }
 }

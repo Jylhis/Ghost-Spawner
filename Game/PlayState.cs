@@ -23,8 +23,8 @@ namespace src
             {
                 Game.Instance.GetStateMachine.Push(new PauseState());
             }
-
-            for (int i = 0; i < gameObjects.Count; i++)
+            
+           for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Update();
                 if (gameObjects[i] is Bullet)
@@ -36,9 +36,7 @@ namespace src
                     }
                 }
             }
-
-            // check if player is alive
-
+           
             foreach (SDLGameObject enemy in gameObjects.FindAll(x => x.id == "enemy"))
             {
                 if (checkCollision(enemy, gameObjects.Find(x => x.id == "player")))

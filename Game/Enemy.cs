@@ -12,8 +12,6 @@ namespace src
 {
     public class Enemy : SDLGameObject
     {
-        
-
         public Enemy(LoaderParams pParams)
             : base(ref pParams)
         {

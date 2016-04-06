@@ -33,17 +33,17 @@ namespace src
 
         public override void Update()
         {
-            for (int i = 0; i < gameObjects.Count; i++)
+            foreach(SDLGameObject obj in gameObjects)
             {
-                gameObjects[i].Update();
+                obj.Update();
             }
         }
 
         public override void Render()
         {
-            for (int i = 0; i < gameObjects.Count; i++)
+            foreach (SDLGameObject obj in gameObjects)
             {
-                gameObjects[i].Draw();
+                obj.Draw();
             }
         }
 
@@ -74,10 +74,6 @@ namespace src
 
         public override bool OnExit()
         {
-            for (int i = 0; i < gameObjects.Count; i++)
-            {
-                gameObjects[i] = null;
-            }
             gameObjects.Clear();
             TextureManager.Instance.ClearFromTextureMap("mainbutton");
             TextureManager.Instance.ClearFromTextureMap("restartbutton");
