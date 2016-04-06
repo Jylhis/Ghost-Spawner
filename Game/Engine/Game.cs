@@ -119,7 +119,7 @@ namespace src
                     }
                 }
             }
-            
+
             gameStateMachine.Change(new MenuState());
             InputHandler.Instance.InitJoysticks();
 
@@ -154,11 +154,11 @@ namespace src
         public void Render()
         {
             SDL.SDL_RenderClear(renderer);
-            
+
             TextureManager.Instance.Draw("background", 0, 0, 1024, 720, ref renderer);
-            
+
             gameStateMachine.Render();
-            
+
             SDL.SDL_RenderPresent(renderer);
         }
 

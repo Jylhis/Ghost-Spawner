@@ -23,8 +23,8 @@ namespace src
             {
                 Game.Instance.GetStateMachine.Push(new PauseState());
             }
-            
-           for (int i = 0; i < gameObjects.Count; i++)
+
+            for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Update();
                 if (gameObjects[i] is Bullet)
@@ -36,9 +36,13 @@ namespace src
                     }
                 }
             }
-           
+
             foreach (SDLGameObject enemy in gameObjects.FindAll(x => x.id == "enemy"))
             {
+                if (gameObjects.Find(x => x.id == "player") == null)
+                {
+                    break;
+                }
                 if (checkCollision(enemy, gameObjects.Find(x => x.id == "player")))
                 {
                     //Game.Instance.GetStateMachine.Change(new GameOverState());
@@ -69,8 +73,6 @@ namespace src
                 return false;
             }
             SDLGameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
-
-            
             SDLGameObject enemy1 = new Enemy(new LoaderParams(400, 400, 40, 40, "enemy"));
 
             // Load bullet

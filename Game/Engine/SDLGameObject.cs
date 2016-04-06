@@ -166,7 +166,7 @@ namespace src
         public virtual void OnCollision(int damage = 0)
         {
 #if DEBUG
-            Console.WriteLine(this+" health: "+health);
+            Console.WriteLine(this + " health: " + health);
 #endif
         }
     }

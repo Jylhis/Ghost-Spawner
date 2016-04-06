@@ -33,17 +33,17 @@ namespace src
 
         public override void Update()
         {
-            foreach(SDLGameObject obj in gameObjects)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                obj.Update();
+                gameObjects[i].Update();
             }
         }
 
         public override void Render()
         {
-            foreach (SDLGameObject obj in gameObjects)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                obj.Draw();
+                gameObjects[i].Draw();
             }
         }
 
