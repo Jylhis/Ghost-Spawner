@@ -3,9 +3,7 @@
 - UML relaatiot
 - loppuraportti
 - AI movement
-- damage/health system
 - enemy spawn
-- fix playstate collision for multiple targets
 - Text on screen !!!
 - Score & wave counter
 - final sounds & graphics
