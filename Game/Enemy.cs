@@ -31,7 +31,9 @@ namespace src
         }
         ~Enemy()
         {
+#if DEBUG
             Console.WriteLine("Enemy Deconstructor");
+#endif
         }
     }
 }

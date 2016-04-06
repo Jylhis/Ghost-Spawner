@@ -112,10 +112,10 @@ namespace src
         public virtual void Update()
         {
             velocity += acceleration;
-           
-            if(Position.X <= 10)
+
+            if (Position.X <= 10)
             {
-                if(velocity.X < 0)
+                if (velocity.X < 0)
                 {
                     velocity.X = 0;
                 }
@@ -123,9 +123,9 @@ namespace src
                 {
                     rect.x = 11;
                 }
-                
+
             }
-            else if(Position.X >= 970)
+            else if (Position.X >= 970)
             {
                 if (velocity.X > 0)
                 {
@@ -137,9 +137,9 @@ namespace src
                 }
             }
 
-            if(Position.Y <= 10)
+            if (Position.Y <= 10)
             {
-                if(velocity.Y < 0)
+                if (velocity.Y < 0)
                 {
                     velocity.Y = 0;
                 }
@@ -148,7 +148,7 @@ namespace src
                     rect.y = 11;
                 }
             }
-            else if(Position.Y >= 670)
+            else if (Position.Y >= 670)
             {
                 if (velocity.Y > 0)
                 {
@@ -164,7 +164,9 @@ namespace src
 
         public virtual void OnCollision()
         {
+#if DEBUG
             Console.WriteLine(this + ": OnCollision");
+#endif
         }
 
 

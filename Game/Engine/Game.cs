@@ -96,7 +96,9 @@ namespace src
             }
             else
             {
+#if DEBUG
                 Console.WriteLine("SDL started");
+#endif
                 // Create window
                 window = SDL.SDL_CreateWindow(title, x, y, w, h, flags);
                 if (window == IntPtr.Zero)
@@ -105,7 +107,9 @@ namespace src
                 }
                 else
                 {
+#if DEBUG
                     Console.WriteLine("Window started");
+#endif
                     // Create Renderer
                     renderer = SDL.SDL_CreateRenderer(window, -1, SDL.SDL_RendererFlags.SDL_RENDERER_ACCELERATED | SDL.SDL_RendererFlags.SDL_RENDERER_PRESENTVSYNC);
                     if (renderer == IntPtr.Zero)
@@ -114,7 +118,9 @@ namespace src
                     }
                     else
                     {
+#if DEBUG
                         Console.WriteLine("Renderer started");
+#endif
                         Game.Instance.IsRunning = true;
                         SDL.SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
                     }
@@ -173,8 +179,9 @@ namespace src
         /// </summary>
         public void Close()
         {
+#if DEBUG
             Console.WriteLine("Closing game");
-
+#endif
             InputHandler.Instance.Clean();
             SDL.SDL_DestroyWindow(window);
             SDL.SDL_DestroyRenderer(renderer);

@@ -17,13 +17,17 @@ namespace src
 
         private static void menuToPlay()
         {
+#if DEBUG
             Console.WriteLine("Pressed Play");
+#endif
             Game.Instance.GetStateMachine.Change(new PlayState());
         }
 
         private static void exitFromMenu()
         {
+#if DEBUG
             Console.WriteLine("Pressed Exit");
+#endif
             Game.Instance.IsRunning = false;
         }
 
@@ -57,8 +61,9 @@ namespace src
             SDLGameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "exitbutton"), exitFromMenu);
             gameObjects.Add(button1);
             gameObjects.Add(button2);
-
+#if DEBUG
             Console.WriteLine("entering MenuState");
+#endif
 
             return true;
         }
@@ -72,8 +77,9 @@ namespace src
             gameObjects.Clear();
             TextureManager.Instance.ClearFromTextureMap("playbutton");
             TextureManager.Instance.ClearFromTextureMap("exitbutton");
-
+#if DEBUG
             Console.WriteLine("Exiting Menustate");
+#endif
             return true;
         }
 

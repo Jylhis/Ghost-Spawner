@@ -88,7 +88,7 @@ namespace src
 
         private InputHandler()
         {
-            // FIXME: Init keyboard
+            // Init keyboard
             IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
             keystates = new byte[numkeys];
             tmpKeystates = IntPtr.Zero;

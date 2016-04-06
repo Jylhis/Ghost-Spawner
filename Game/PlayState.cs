@@ -39,7 +39,7 @@ namespace src
 
             foreach (SDLGameObject enemy in gameObjects.FindAll(x => x.id == "enemy"))
             {
-                if(checkCollision(enemy, gameObjects.Find(x => x.id == "player")))
+                if (checkCollision(enemy, gameObjects.Find(x => x.id == "player")))
                 {
                     //Game.Instance.GetStateMachine.Change(new GameOverState());
                 }
@@ -53,7 +53,7 @@ namespace src
                 gameObjects[i].Draw();
             }
         }
-        
+
         public override bool OnEnter()
         {
             // Add Player
@@ -75,15 +75,16 @@ namespace src
             {
                 return false;
             }
-            if (!SoundManager.Instance.Load("Resources/sound/laser1.wav", "shoot",sound_type.SOUND_SFX))
+            if (!SoundManager.Instance.Load("Resources/sound/laser1.wav", "shoot", sound_type.SOUND_SFX))
             {
                 return false;
             }
 
             gameObjects.Add(player);
             gameObjects.Add(enemy);
-
+#if DEBUG
             Console.WriteLine("Entering Playstate");
+#endif
             return true;
         }
 
@@ -95,8 +96,9 @@ namespace src
             }
             gameObjects.Clear();
             TextureManager.Instance.ClearFromTextureMap("Room");
-
+#if DEBUG
             Console.WriteLine("Exiting Playstate");
+#endif
             return true;
         }
 
@@ -108,21 +110,22 @@ namespace src
             SDL.SDL_Rect otherRect = other.getRect;
 
             bo = SDL.SDL_IntersectRect(ref enemyRect, ref otherRect, out result);
+#if DEBUG
+            // Console.WriteLine("X: "+result.x+", Y: "+result.y+"\nW: "+result.w+", H: "+result.h);
+#endif
 
-            Console.WriteLine("X: "+result.x+", Y: "+result.y+"\nW: "+result.w+", H: "+result.h);
-
-            if(bo == SDL.SDL_bool.SDL_TRUE)
+            if (bo == SDL.SDL_bool.SDL_TRUE)
             {
                 other.OnCollision();
-                
+
                 return true;
-            } 
+            }
             else
             {
                 return false;
             }
         }
-        
+
         public override string GetStateID()
         {
             return menuID;

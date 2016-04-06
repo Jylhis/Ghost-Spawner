@@ -34,9 +34,11 @@ namespace src
 
         public void TakeDamage(int damage)
         {
+#if DEBUG
             Console.WriteLine(health);
+#endif
             health -= damage;
-            if(health <= 0)
+            if (health <= 0)
             {
                 Game.Instance.GetStateMachine.Change(new GameOverState());
             }
@@ -191,7 +193,7 @@ namespace src
             }
 
             // Shoot
-            if(SDL.SDL_GetTicks() - 170 > startTime)
+            if (SDL.SDL_GetTicks() - 170 > startTime)
             {
                 if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_UP))
                 {
@@ -210,7 +212,7 @@ namespace src
                     Shoot(Direction.RIGHT);
                 }
             }
-            
+
 
             // Joystick / Controller
             if (InputHandler.Instance.JoysticksInitialised)
@@ -240,21 +242,23 @@ namespace src
 
         public override void OnCollision()
         {
-            
-             rect.x += (int)velocity.X * -30;
-             rect.y += (int)velocity.Y * -30;
+
+            rect.x += (int)velocity.X * -30;
+            rect.y += (int)velocity.Y * -30;
         }
 
         public void Shoot(Direction d)
         {
             startTime = SDL.SDL_GetTicks();
-			SoundManager.Instance.PlaySound("shoot");
+            SoundManager.Instance.PlaySound("shoot");
             SDLGameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
         ~Player()
         {
+#if DEBUG
             Console.WriteLine("Player Deconstructor");
+#endif
         }
     }
 }

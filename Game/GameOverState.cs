@@ -66,7 +66,9 @@ namespace src
 
             gameObjects.Add(button1);
             gameObjects.Add(button2);
+#if DEBUG
             Console.WriteLine("Entering GameOverState");
+#endif
             return true;
         }
 
@@ -81,8 +83,9 @@ namespace src
             TextureManager.Instance.ClearFromTextureMap("restartbutton");
 
             InputHandler.Instance.Reset();
-
+#if DEBUG
             Console.WriteLine("Exiting GameOverState");
+#endif
             return true;
         }
 

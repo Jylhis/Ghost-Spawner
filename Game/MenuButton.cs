@@ -64,7 +64,9 @@ namespace src
         }
         ~MenuButton()
         {
+#if DEBUG
             Console.WriteLine("MenuButton Deconstructor");
+#endif
         }
     }
 }

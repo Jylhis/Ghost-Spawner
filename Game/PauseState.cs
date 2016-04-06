@@ -17,7 +17,9 @@ namespace src
 
         private static void pauseToMain()
         {
-            Console.WriteLine("PLAY!");
+#if DEBUG
+            Console.WriteLine("to Main");
+#endif
             Game.Instance.GetStateMachine.Pop();
             Game.Instance.GetStateMachine.Change(new MenuState());
 
@@ -25,7 +27,9 @@ namespace src
 
         private static void resumePlay()
         {
-            Console.WriteLine("Exit!");
+#if DEBUG
+            Console.WriteLine("Resume!");
+#endif
             Game.Instance.GetStateMachine.Pop();
         }
 
@@ -63,8 +67,9 @@ namespace src
             SDLGameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "mainmenubutton"), pauseToMain);
             gameObjects.Add(button1);
             gameObjects.Add(button2);
-
+#if DEBUG
             Console.WriteLine("entering PauseState");
+#endif
             return true;
         }
 
@@ -79,8 +84,9 @@ namespace src
             TextureManager.Instance.ClearFromTextureMap("mainmenubutton");
 
             InputHandler.Instance.Reset();
-
+#if DEBUG
             Console.WriteLine("Exiting Menustate");
+#endif
             return true;
         }
 

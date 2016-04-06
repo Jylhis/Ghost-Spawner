@@ -59,7 +59,6 @@ namespace src
         public override void Update()
         {
             ftime = SDL.SDL_GetTicks();
-            // Console.WriteLine(ftime - starttime);
             if (ftime - starttime >= 3000)
             {
                 velocity.X = 0;
@@ -71,7 +70,9 @@ namespace src
         ~Bullet()
         {
             total--;
+#if DEBUG
             Console.WriteLine("Bullet Deconstructor");
+#endif
         }
     }
 }
