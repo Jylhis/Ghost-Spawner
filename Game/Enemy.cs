@@ -14,10 +14,11 @@ namespace src
     {
         Random rnd;
         UInt32 tTime;
+
         public Enemy(LoaderParams pParams)
             : base(ref pParams)
         {
-            rnd = new Random((int)(DateTime.Now.TimeOfDay.Ticks +SDL.SDL_GetTicks()-(pParams.W*pParams.X)*pParams.Y));
+            rnd = new Random((int)(DateTime.Now.TimeOfDay.Ticks + SDL.SDL_GetTicks() - (pParams.W * pParams.X) * pParams.Y));
             health = 100;
             damage = 10;
         }
@@ -29,7 +30,7 @@ namespace src
 
         public override void Update()
         {
-            if(500 <= (int)SDL.SDL_GetTicks() - tTime)
+            if (500 <= (int)SDL.SDL_GetTicks() - tTime)
             {
                 tTime = SDL.SDL_GetTicks();
 
@@ -71,12 +72,12 @@ namespace src
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 4);
             base.Update();
         }
-#if DEBUG
+        #if DEBUG
         ~Enemy()
         {
             Console.WriteLine("Enemy Deconstructor");
         }
-#endif
+        #endif
     }
 }
 

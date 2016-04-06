@@ -27,6 +27,7 @@ namespace src
                 return true;
             }
         }
+
         public Bullet(LoaderParams pParams, Direction di)
             : base(ref pParams)
         {
@@ -67,6 +68,7 @@ namespace src
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 5);
             base.Update();
         }
+
         ~Bullet()
         {
             total--;

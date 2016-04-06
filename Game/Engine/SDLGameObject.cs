@@ -15,8 +15,18 @@ namespace src
         protected int currentRow, currentFrame;
         protected Vector2D velocity, acceleration;
         protected SDL.SDL_Rect rect;
+        /// <summary>
+        /// The damage.
+        /// </summary>
+        /// <summary>
+        /// The health.
+        /// </summary>
         public int health, damage;
 
+        /// <summary>
+        /// Gets the get rect.
+        /// </summary>
+        /// <value>The get rect.</value>
         public SDL.SDL_Rect getRect
         {
             get
@@ -102,9 +112,9 @@ namespace src
         public virtual void Draw()
         {
             TextureManager.Instance.DrawFrame(id,
-                    (int)Position.X, (int)Position.Y,
-                    W, H, currentRow, currentFrame,
-                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, 0.0);
+                (int)Position.X, (int)Position.Y,
+                W, H, currentRow, currentFrame,
+                Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, 0.0);
         }
 
         /// <summary>
@@ -163,6 +173,10 @@ namespace src
             Position += velocity;
         }
 
+        /// <summary>
+        /// Raises the collision event.
+        /// </summary>
+        /// <param name="damage">Damage.</param>
         public virtual void OnCollision(int damage = 0)
         {
 #if DEBUG

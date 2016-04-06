@@ -88,9 +88,8 @@ namespace src
         private InputHandler()
         {
             // Init keyboard
-            IntPtr tmpKeystates = SDL.SDL_GetKeyboardState(out numkeys);
+            SDL.SDL_GetKeyboardState(out numkeys);
             keystates = new byte[numkeys];
-            tmpKeystates = IntPtr.Zero;
 
             // Init mouse
             for (int i = 0; i < 3; i++)

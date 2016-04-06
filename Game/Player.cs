@@ -21,9 +21,10 @@ namespace src
         UPLE,
         UPRI
     }
+
     public class Player : SDLGameObject
     {
-        private int health = 100;
+        private new int health = 100;
         private Vector2D lastVelocity = new Vector2D(0, 0);
         private UInt32 startTime;
 
@@ -90,7 +91,6 @@ namespace src
                     lastVelocity.Y = -1;
                 }
             }
-
             else
             {
                 if (velocity.Y > 0)
@@ -155,9 +155,9 @@ namespace src
             }
 
             TextureManager.Instance.DrawFrame(id,
-                    (int)Position.X, (int)Position.Y,
-                    W, H, currentRow, currentFrame,
-                    Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, ang);
+                (int)Position.X, (int)Position.Y,
+                W, H, currentRow, currentFrame,
+                Game.Instance.GetRenderer, SDL.SDL_RendererFlip.SDL_FLIP_NONE, ang);
         }
 
         public override void Update()
@@ -259,13 +259,13 @@ namespace src
             SDLGameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
-#if DEBUG
+        #if DEBUG
         ~Player()
         {
 
             Console.WriteLine("Player Deconstructor");
 
         }
-#endif
+        #endif
     }
 }

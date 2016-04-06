@@ -146,7 +146,7 @@ namespace src
         {
             gameStateMachine.Update();
         }
-        
+
         /// <summary>
         /// Render.
         /// </summary>

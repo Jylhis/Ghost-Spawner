@@ -2,7 +2,6 @@
 # TODO
 - UML relaatiot
 - loppuraportti
-- AI movement
 - enemy spawn
 - Text on screen !!!
 - Score & wave counter
