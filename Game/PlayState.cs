@@ -27,6 +27,7 @@ namespace src
             for (int i = 0; i < gameObjects.Count; i++)
             {
                 gameObjects[i].Update();
+
                 if (gameObjects[i] is Bullet)
                 {
                     Bullet tmp = (Bullet)gameObjects[i];
