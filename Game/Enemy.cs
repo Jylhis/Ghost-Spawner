@@ -12,11 +12,13 @@ namespace src
 {
     public class Enemy : SDLGameObject
     {
-        private int health = 100;
+        
 
         public Enemy(LoaderParams pParams)
             : base(ref pParams)
         {
+            health = 100;
+            damage = 10;
         }
 
         public override void Draw()

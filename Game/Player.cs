@@ -240,9 +240,14 @@ namespace src
             }
         }
 
-        public override void OnCollision()
+        public override void OnCollision(int damage = 0)
         {
-
+            Console.WriteLine("Player: " + health);
+            health -= damage;
+            if (health < 0)
+            {
+                Game.Instance.GetStateMachine.Change(new GameOverState());
+            }
             rect.x += (int)velocity.X * -30;
             rect.y += (int)velocity.Y * -30;
         }

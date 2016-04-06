@@ -37,6 +37,8 @@ namespace src
                 }
             }
 
+            // check if player is alive
+
             foreach (SDLGameObject enemy in gameObjects.FindAll(x => x.id == "enemy"))
             {
                 if (checkCollision(enemy, gameObjects.Find(x => x.id == "player")))
@@ -70,6 +72,9 @@ namespace src
             }
             SDLGameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
 
+            
+            SDLGameObject enemy1 = new Enemy(new LoaderParams(400, 400, 40, 40, "enemy"));
+
             // Load bullet
             if (!TextureManager.Instance.Load("Resources/spr_playerbullet.png", "bullet", Game.Instance.GetRenderer))
             {
@@ -82,6 +87,7 @@ namespace src
 
             gameObjects.Add(player);
             gameObjects.Add(enemy);
+            gameObjects.Add(enemy1);
 #if DEBUG
             Console.WriteLine("Entering Playstate");
 #endif
@@ -116,7 +122,7 @@ namespace src
 
             if (bo == SDL.SDL_bool.SDL_TRUE)
             {
-                other.OnCollision();
+                other.OnCollision(enemy.damage);
 
                 return true;
             }

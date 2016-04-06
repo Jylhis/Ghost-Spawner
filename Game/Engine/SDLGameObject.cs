@@ -15,6 +15,7 @@ namespace src
         protected int currentRow, currentFrame;
         protected Vector2D velocity, acceleration;
         protected SDL.SDL_Rect rect;
+        public int health, damage;
 
         public SDL.SDL_Rect getRect
         {
@@ -162,10 +163,10 @@ namespace src
             Position += velocity;
         }
 
-        public virtual void OnCollision()
+        public virtual void OnCollision(int damage = 0)
         {
 #if DEBUG
-            Console.WriteLine(this + ": OnCollision");
+            Console.WriteLine(this+" health: "+health);
 #endif
         }
 
