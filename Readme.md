@@ -2,12 +2,13 @@
 # TODO
 - UML relaatiot
 - loppuraportti
-- enemy spawn
-- Text on screen !!!
-- Score & wave counter
+- enemy spawner
+- Bullet - Enemy collision
 - final sounds & graphics
 
 EXTRA
+- Score & wave counter
+- Text on screen !!!
 - Better throwback
 - Tests
 - Async things

@@ -89,6 +89,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="GameOverState.cs" />
     <Compile Include="Engine\Program.cs" />
+    <Compile Include="EnemySpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -243,6 +244,7 @@
           <XmlFormattingPolicy inheritsSet="null" scope="application/config+xml" />
           <TextStylePolicy inheritsSet="null" scope="application/xml" />
           <XmlFormattingPolicy inheritsSet="Mono" inheritsScope="application/xml" scope="application/xml" />
+          <StandardHeader Text="&#xA;Copyright ${Year} ${CopyrightHolder}&#xA;&#xA;Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.&#xA;&#xA;Created: ${Day}.${Month}.${Year}&#xA; " IncludeInNewFiles="True" />
         </Policies>
       </Properties>
     </MonoDevelop>
