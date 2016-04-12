@@ -2,7 +2,8 @@
 # TODO
 - UML relaatiot
 - loppuraportti
-- Bullet - Enemy collision
+- Shoot one way
+- Shoot diagonally
 - final sounds & graphics
 --------------------------
 - Playsound try catch

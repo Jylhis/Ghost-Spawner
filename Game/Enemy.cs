@@ -71,14 +71,14 @@ namespace src
                         break;
                 }
             }
-            
+
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 4);
             base.Update();
         }
         public override void OnCollision(int damage = 0)
         {
             health -= damage;
-            if(health<=0)
+            if (health <= 0)
             {
                 IsKill = true;
             }
@@ -88,7 +88,7 @@ namespace src
         {
             Console.WriteLine("Enemy Deconstructor");
         }
-        #endif
+#endif
     }
 }
 

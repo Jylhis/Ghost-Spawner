@@ -259,13 +259,13 @@ namespace src
             SDLGameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
-        #if DEBUG
+#if DEBUG
         ~Player()
         {
 
             Console.WriteLine("Player Deconstructor");
 
         }
-        #endif
+#endif
     }
 }

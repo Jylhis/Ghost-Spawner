@@ -88,10 +88,10 @@ namespace src
         public void PlaySound(string id, int loop = 0)
         {
             try
-           {
+            {
                 SDL_mixer.Mix_PlayChannel(-1, sounds[id], loop);
             }
-            catch(KeyNotFoundException)
+            catch (KeyNotFoundException)
             {
                 Console.WriteLine("Something went wrong with sounds");
             }
@@ -110,7 +110,7 @@ namespace src
             }
             catch (KeyNotFoundException)
             {
-                Console.WriteLine("Something went wrong with sounds");
+                Console.WriteLine("Something went wrong with music");
             }
         }
 

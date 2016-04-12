@@ -46,25 +46,26 @@ namespace src
                 }
                 if (checkCollision(enemy, gameObjects.Find(x => x.id == "player")))
                 {
-                    //Game.Instance.GetStateMachine.Change(new GameOverState());
+                   
                 }
-                if(gameObjects.Find(x => x.id == "bullet") != null)
+                if (gameObjects.Find(x => x.id == "bullet") != null)
                 {
                     foreach (var bullet in gameObjects.FindAll(x => x.id == "bullet"))
                     {
                         if (checkCollision(bullet, enemy))
                         {
+#if DEBUG
                             Console.WriteLine("Bullet - Enemy Collision");
+#endif
                             gameObjects.Remove(bullet);
                             Enemy tmpE = (Enemy)enemy;
-                            if(tmpE.IsKill)
+                            if (tmpE.IsKill)
                             {
                                 gameObjects.Remove(enemy);
                             }
                         }
                     }
                 }
-                
             }
         }
 
@@ -90,8 +91,6 @@ namespace src
             {
                 return false;
             }
-            //SDLGameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
-            //SDLGameObject enemy1 = new Enemy(new LoaderParams(400, 400, 40, 40, "enemy"));
 
             // Load bullet texture and sound
             if (!TextureManager.Instance.Load("Resources/spr_playerbullet.png", "bullet", Game.Instance.GetRenderer))
@@ -113,8 +112,6 @@ namespace src
 
             gameObjects.Add(player);
             gameObjects.Add(spawner);
-            //gameObjects.Add(enemy);
-            //gameObjects.Add(enemy1);
 #if DEBUG
             Console.WriteLine("Entering Playstate");
 #endif
@@ -128,7 +125,6 @@ namespace src
                 gameObjects[i] = null;
             }
             gameObjects.Clear();
-            TextureManager.Instance.ClearFromTextureMap("Room");
 #if DEBUG
             Console.WriteLine("Exiting Playstate");
 #endif
