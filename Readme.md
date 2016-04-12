@@ -4,7 +4,7 @@
 # TODO
 - UML relaatiot
 - loppuraportti
-- Shoot one way
+- Bigger bullets
 - Shoot diagonally
 - final sounds & graphics
 --------------------------
