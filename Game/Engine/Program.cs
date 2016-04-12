@@ -24,7 +24,7 @@ namespace src
             Console.WriteLine("RELEASE MODE"); 
 #endif
             UInt32 frameStart, frameTime;
-            Game.Instance.Init("Peli", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 1024, 720, false);
+            Game.Instance.Init("Ghost Spawner", SDL.SDL_WINDOWPOS_UNDEFINED, SDL.SDL_WINDOWPOS_UNDEFINED, 1024, 720, false);
 
             while (Game.Instance.IsRunning)
             {
