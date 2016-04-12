@@ -68,15 +68,15 @@ namespace src
             }
             SDLGameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
 
-            // Add Enemy
+            // Load Enemy textures
             if (!TextureManager.Instance.Load("Resources/spr_suicidebomber_strip4.png", "enemy", Game.Instance.GetRenderer))
             {
                 return false;
             }
-            SDLGameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
-            SDLGameObject enemy1 = new Enemy(new LoaderParams(400, 400, 40, 40, "enemy"));
+            //SDLGameObject enemy = new Enemy(new LoaderParams(300, 300, 40, 40, "enemy"));
+            //SDLGameObject enemy1 = new Enemy(new LoaderParams(400, 400, 40, 40, "enemy"));
 
-            // Load bullet
+            // Load bullet texture and sound
             if (!TextureManager.Instance.Load("Resources/spr_playerbullet.png", "bullet", Game.Instance.GetRenderer))
             {
                 return false;
@@ -86,9 +86,17 @@ namespace src
                 return false;
             }
 
+            // Load enemy spawner textures
+            if (!TextureManager.Instance.Load("Resources/spr_antspawner_strip44.png", "spawner", Game.Instance.GetRenderer))
+            {
+                return false;
+            }
+            SDLGameObject spawner = new EnemySpawner(new LoaderParams(400, 400, 38, 36, "spawner"));
+
             gameObjects.Add(player);
-            gameObjects.Add(enemy);
-            gameObjects.Add(enemy1);
+            gameObjects.Add(spawner);
+            //gameObjects.Add(enemy);
+            //gameObjects.Add(enemy1);
 #if DEBUG
             Console.WriteLine("Entering Playstate");
 #endif

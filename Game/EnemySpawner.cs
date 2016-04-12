@@ -13,9 +13,12 @@ namespace src
 {
     public class EnemySpawner : SDLGameObject
     {
+        private UInt32 starttime, ftime;
+
         public EnemySpawner(LoaderParams pParams)
             : base(ref pParams)
         {
+            starttime = SDL.SDL_GetTicks();
         }
 
         public override void Draw()
@@ -28,8 +31,30 @@ namespace src
 
         public override void Update()
         {
-            currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 8);
+
+            ftime = SDL.SDL_GetTicks();
+            currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 44);
+#if DEBUG
+            Console.WriteLine("ftime: " + ftime + "\nstarttime: " + starttime+ "\nTime: "+ (ftime - starttime));
+#endif
+            if (ftime - starttime >= 3000)
+            {
+                Spawn();
+                starttime = SDL.SDL_GetTicks();
+            }
+            
             base.Update();
+        }
+       /* public void Spawn(int x, int y, int width, int height)
+        {
+
+            SDLGameObject enemy = new Enemy(new LoaderParams(x, y, width, height, "enemy"));
+            PlayState.gameObjects.Add(enemy);
+        }*/
+        public void Spawn()
+        {
+            SDLGameObject enemy = new Enemy(new LoaderParams(rect.x, rect.y, 40, 40, "enemy"));
+            PlayState.gameObjects.Add(enemy);
         }
     }
 }
