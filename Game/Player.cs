@@ -25,6 +25,7 @@ namespace src
     public class Player : SDLGameObject
     {
         private new int health = 100;
+        private int direction;
         private Vector2D lastVelocity = new Vector2D(0, 0);
         private UInt32 startTime;
 
@@ -191,24 +192,46 @@ namespace src
             }
 
             // Shoot
-            if (SDL.SDL_GetTicks() - 170 > startTime)
+            if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_UP))
             {
-                if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_UP))
+                direction = (int)Direction.UP;
+            }
+            else if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_DOWN))
+            {
+                direction = (int)Direction.DOWN;
+            }
+            else if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_LEFT))
+            {
+                direction = (int)Direction.LEFT;
+            }
+            else if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RIGHT))
+            {
+                direction = (int)Direction.RIGHT;
+            }
+            else
+            {
+                direction = 10;
+            }
+             if (SDL.SDL_GetTicks() - 170 > startTime)
+            {
+                switch (direction)
                 {
-                    Shoot(Direction.UP);
+                    default:
+                        break;
+                    case 0:
+                        Shoot(Direction.LEFT);
+                        break;
+                    case 1:
+                        Shoot(Direction.RIGHT);
+                        break;
+                    case 2:
+                        Shoot(Direction.UP);
+                        break;
+                    case 3:
+                        Shoot(Direction.DOWN);
+                        break;
                 }
-                if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_DOWN))
-                {
-                    Shoot(Direction.DOWN);
-                }
-                if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_LEFT))
-                {
-                    Shoot(Direction.LEFT);
-                }
-                if (InputHandler.Instance.IsKeyDown(SDL.SDL_Scancode.SDL_SCANCODE_RIGHT))
-                {
-                    Shoot(Direction.RIGHT);
-                }
+                
             }
 
 
