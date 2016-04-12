@@ -32,6 +32,7 @@ namespace src
         public Bullet(LoaderParams pParams, Direction di)
             : base(ref pParams)
         {
+            SoundManager.Instance.PlaySound("shoot");
             total++;
             damage = 20;
             starttime = SDL.SDL_GetTicks();

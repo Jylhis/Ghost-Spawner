@@ -212,7 +212,7 @@ namespace src
             {
                 direction = 10;
             }
-             if (SDL.SDL_GetTicks() - 170 > startTime)
+            if (SDL.SDL_GetTicks() - 170 > startTime)
             {
                 switch (direction)
                 {
@@ -278,17 +278,17 @@ namespace src
         public void Shoot(Direction d)
         {
             startTime = SDL.SDL_GetTicks();
-            SoundManager.Instance.PlaySound("shoot");
             SDLGameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 4, 4, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
-#if DEBUG
+
+        #if DEBUG
         ~Player()
         {
 
             Console.WriteLine("Player Deconstructor");
 
         }
-#endif
+        #endif
     }
 }

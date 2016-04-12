@@ -63,14 +63,14 @@ namespace src
                 currentFrame = (int)button_state.MOUSE_OUT;
             }
         }
-#if DEBUG
+        #if DEBUG
         ~MenuButton()
         {
 
             Console.WriteLine("MenuButton Deconstructor");
 
         }
-#endif
+        #endif
     }
 }
 

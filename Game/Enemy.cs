@@ -14,7 +14,9 @@ namespace src
     public class Enemy : SDLGameObject
     {
         private new int health = 100;
+
         public bool IsKill { get; set; }
+
         Random rnd;
         UInt32 tTime;
 
@@ -75,6 +77,7 @@ namespace src
 
             base.Update();
         }
+
         public override void OnCollision(int damage = 0)
         {
             health -= damage;
@@ -83,12 +86,12 @@ namespace src
                 IsKill = true;
             }
         }
-#if DEBUG
+        #if DEBUG
         ~Enemy()
         {
             Console.WriteLine("Enemy Deconstructor");
         }
-#endif
+        #endif
     }
 }
 

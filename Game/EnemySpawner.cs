@@ -35,9 +35,7 @@ namespace src
 
             ftime = SDL.SDL_GetTicks();
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 44);
-#if DEBUG
-            Console.WriteLine("ftime: " + ftime + "\nstarttime: " + starttime + "\nTime: " + (ftime - starttime));
-#endif
+
             if (ftime - starttime >= 3000)
             {
                 Spawn();
@@ -46,6 +44,7 @@ namespace src
 
             base.Update();
         }
+
         public void Spawn()
         {
             SDLGameObject enemy = new Enemy(new LoaderParams(rect.x, rect.y, 40, 40, "enemy"));

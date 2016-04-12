@@ -88,14 +88,14 @@ namespace src
         /// <param name="loop">Loop.</param>
         public void PlaySound(string id, int loop = 0)
         {
-            try
-            {
+            /*try
+            {*/
                 SDL_mixer.Mix_PlayChannel(-1, sounds[id], loop);
-            }
+           /* }
             catch (KeyNotFoundException)
             {
                 Console.WriteLine("Something went wrong with sounds");
-            }
+            }*/
         }
 
         /// <summary>
