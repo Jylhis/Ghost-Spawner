@@ -1,7 +1,8 @@
 ﻿/*
- * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen, Veeti Karttunen
+ * Copyright 2016 Markus Jylhänkangas, Pauli Kokkonen & Veeti Karttunen
  *
- * Tämä tiedosto on osa Olio- ja käyttöliittymien ohjelmointi kurssin harjoitustyötä.
+ * This is part of Object-Oriented and GUI Programming course assignment
+ * and is licensed under MIT license, see LICENSE file.
  *
  * Created: 26.02.2016
  */
