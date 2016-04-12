@@ -62,6 +62,7 @@ namespace src
                             Enemy tmpE = (Enemy)enemy;
                             if (tmpE.IsKill)
                             {
+                                SoundManager.Instance.PlaySound("die");
                                 gameObjects.Remove(enemy);
                             }
                         }
@@ -93,13 +94,8 @@ namespace src
                 return false;
             }
 
-            // Load bullet texture and sound
+            // Load bullet texture
             if (!TextureManager.Instance.Load("Resources/spr_playerbullet.png", "bullet", Game.Instance.GetRenderer))
-            {
-                return false;
-            }
-
-            if (!SoundManager.Instance.Load("Resources/sound/laser1.wav", "shoot", sound_type.SOUND_SFX))
             {
                 return false;
             }
@@ -110,6 +106,24 @@ namespace src
                 return false;
             }
             SDLGameObject spawner = new EnemySpawner(new LoaderParams(400, 400, 38, 36, "spawner"));
+
+            // Sounds
+            if (!SoundManager.Instance.Load("Resources/sound/laser2.wav", "shoot", sound_type.SOUND_SFX))
+            {
+                return false;
+            }
+            if (!SoundManager.Instance.Load("Resources/sound/explode1.wav", "getHit", sound_type.SOUND_SFX))
+            {
+                return false;
+            }
+            if (!SoundManager.Instance.Load("Resources/sound/singlespawn1.wav", "die", sound_type.SOUND_SFX))
+            {
+                return false;
+            }
+            if (!SoundManager.Instance.Load("Resources/sound/idler.wav", "spawn", sound_type.SOUND_SFX))
+            {
+                return false;
+            }
 
             gameObjects.Add(player);
             gameObjects.Add(spawner);

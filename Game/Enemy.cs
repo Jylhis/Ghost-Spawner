@@ -80,6 +80,7 @@ namespace src
 
         public override void OnCollision(int damage = 0)
         {
+            SoundManager.Instance.PlaySound("getHit");
             health -= damage;
             if (health <= 0)
             {

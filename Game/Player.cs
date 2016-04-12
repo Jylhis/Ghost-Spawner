@@ -212,7 +212,7 @@ namespace src
             {
                 direction = 10;
             }
-            if (SDL.SDL_GetTicks() - 170 > startTime)
+            if (SDL.SDL_GetTicks() - 396 > startTime)
             {
                 switch (direction)
                 {

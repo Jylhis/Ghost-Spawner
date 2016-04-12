@@ -34,7 +34,7 @@ namespace src
         {
             SoundManager.Instance.PlaySound("shoot");
             total++;
-            damage = 20;
+            damage = 40;
             starttime = SDL.SDL_GetTicks();
             switch (di)
             {

@@ -141,7 +141,9 @@
     <Content Include="Resources\sound\antspawn2.wav" />
     <Content Include="Resources\sound\enemy1.wav" />
     <Content Include="Resources\sound\enemy3.wav" />
-    <Content Include="Resources\sound\explode1.wav" />
+    <Content Include="Resources\sound\explode1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\sound\explode2.wav" />
     <Content Include="Resources\sound\explode3.wav" />
     <Content Include="Resources\sound\gameover1.wav" />
@@ -149,13 +151,15 @@
     <Content Include="Resources\sound\gemcollect1.wav" />
     <Content Include="Resources\sound\gemcollect2.wav" />
     <Content Include="Resources\sound\gemcollect_voice.wav" />
-    <Content Include="Resources\sound\idler.wav" />
-    <Content Include="Resources\sound\johnnyball1.wav" />
-    <Content Include="Resources\sound\johnnyball2.wav" />
-    <Content Include="Resources\sound\laser1.wav">
+    <Content Include="Resources\sound\idler.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\sound\laser2.wav" />
+    <Content Include="Resources\sound\johnnyball1.wav" />
+    <Content Include="Resources\sound\johnnyball2.wav" />
+    <Content Include="Resources\sound\laser1.wav" />
+    <Content Include="Resources\sound\laser2.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\sound\lasor1.wav" />
     <Content Include="Resources\sound\lasor2.wav" />
     <Content Include="Resources\sound\otherlanding.wav" />
@@ -163,7 +167,9 @@
     <Content Include="Resources\sound\playerspawn.wav" />
     <Content Include="Resources\sound\robot.wav" />
     <Content Include="Resources\sound\select.wav" />
-    <Content Include="Resources\sound\singlespawn1.wav" />
+    <Content Include="Resources\sound\singlespawn1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\sound\singlespawn2.wav" />
     <Content Include="Resources\sound\teleportin.wav" />
     <Content Include="Resources\sound\teleportin2.wav" />

@@ -47,6 +47,7 @@ namespace src
 
         public void Spawn()
         {
+            SoundManager.Instance.PlaySound("spawn");
             SDLGameObject enemy = new Enemy(new LoaderParams(rect.x, rect.y, 40, 40, "enemy"));
             PlayState.gameObjects.Add(enemy);
         }
