@@ -48,6 +48,23 @@ namespace src
                 {
                     //Game.Instance.GetStateMachine.Change(new GameOverState());
                 }
+                if(gameObjects.Find(x => x.id == "bullet") != null)
+                {
+                    foreach (var bullet in gameObjects.FindAll(x => x.id == "bullet"))
+                    {
+                        if (checkCollision(bullet, enemy))
+                        {
+                            Console.WriteLine("Bullet - Enemy Collision");
+                            gameObjects.Remove(bullet);
+                            Enemy tmpE = (Enemy)enemy;
+                            if(tmpE.IsKill)
+                            {
+                                gameObjects.Remove(enemy);
+                            }
+                        }
+                    }
+                }
+                
             }
         }
 
@@ -81,9 +98,10 @@ namespace src
             {
                 return false;
             }
-            if (!SoundManager.Instance.Load("Resources/sound/laser1.wav", "shoot", sound_type.SOUND_SFX))
+
+            if (SoundManager.Instance.Load("Resources/sound/laser2.wav", "shoot", sound_type.SOUND_SFX))
             {
-                return false;
+                return true;
             }
 
             // Load enemy spawner textures

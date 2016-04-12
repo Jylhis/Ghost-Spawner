@@ -12,12 +12,15 @@ namespace src
 {
     public class Enemy : SDLGameObject
     {
+        private new int health = 100;
+        public bool IsKill { get; set; }
         Random rnd;
         UInt32 tTime;
 
         public Enemy(LoaderParams pParams)
             : base(ref pParams)
         {
+            IsKill = false;
             rnd = new Random((int)(DateTime.Now.TimeOfDay.Ticks + SDL.SDL_GetTicks() - (pParams.W * pParams.X) * pParams.Y));
             health = 100;
             damage = 10;
@@ -72,7 +75,15 @@ namespace src
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 4);
             base.Update();
         }
-        #if DEBUG
+        public override void OnCollision(int damage = 0)
+        {
+            health -= damage;
+            if(health<=0)
+            {
+                IsKill = true;
+            }
+        }
+#if DEBUG
         ~Enemy()
         {
             Console.WriteLine("Enemy Deconstructor");

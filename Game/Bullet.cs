@@ -13,7 +13,7 @@ namespace src
     class Bullet : SDLGameObject
     {
         private UInt32 starttime, ftime;
-        private const int maxVel = 5;
+        private const int maxVel = 7;
         public int total = 0;
 
         public bool IsMoving
@@ -32,6 +32,7 @@ namespace src
             : base(ref pParams)
         {
             total++;
+            damage = 20;
             starttime = SDL.SDL_GetTicks();
             switch (di)
             {

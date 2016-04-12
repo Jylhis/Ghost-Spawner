@@ -87,7 +87,14 @@ namespace src
         /// <param name="loop">Loop.</param>
         public void PlaySound(string id, int loop = 0)
         {
-            SDL_mixer.Mix_PlayChannel(-1, sounds[id], loop);
+            try
+           {
+                SDL_mixer.Mix_PlayChannel(-1, sounds[id], loop);
+            }
+            catch(KeyNotFoundException)
+            {
+                Console.WriteLine("Something went wrong with sounds");
+            }
         }
 
         /// <summary>
@@ -97,7 +104,14 @@ namespace src
         /// <param name="loop">Loop.</param>
         public void PlayMusic(string id, int loop = 0)
         {
-            SDL_mixer.Mix_PlayMusic(musics[id], loop);
+            try
+            {
+                SDL_mixer.Mix_PlayMusic(musics[id], loop);
+            }
+            catch (KeyNotFoundException)
+            {
+                Console.WriteLine("Something went wrong with sounds");
+            }
         }
 
         private SoundManager()
