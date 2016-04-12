@@ -36,7 +36,6 @@ namespace src
             if (500 <= (int)SDL.SDL_GetTicks() - tTime)
             {
                 tTime = SDL.SDL_GetTicks();
-
                 switch ((Direction)rnd.Next(0, 9))
                 {
                     case Direction.LEFT:
@@ -71,8 +70,8 @@ namespace src
                         break;
                 }
             }
-
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 4);
+
             base.Update();
         }
         public override void OnCollision(int damage = 0)
