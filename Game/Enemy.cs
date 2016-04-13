@@ -106,6 +106,7 @@ namespace src
             if (health <= 0)
             {
                 currentRow = 2;
+                currentFrame = 1;
             }
         }
 #if DEBUG

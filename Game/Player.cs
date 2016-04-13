@@ -278,7 +278,7 @@ namespace src
         public void Shoot(Direction d)
         {
             startTime = SDL.SDL_GetTicks();
-            SDLGameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 4, 4, "bullet"), d);
+            SDLGameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 16, 16, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
 

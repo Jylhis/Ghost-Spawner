@@ -40,7 +40,7 @@ namespace src
                 else if (gameObjects[i] is Enemy)
                 {
                     Enemy tmpEne = (Enemy)gameObjects[i];
-                    if(tmpEne.IsKill)
+                    if (tmpEne.IsKill)
                     {
                         SoundManager.Instance.PlaySound("die");
                         gameObjects.Remove(gameObjects[i]);
@@ -59,13 +59,21 @@ namespace src
                         {
                             foreach (var bullet in gameObjects.FindAll(x => x.id == "bullet"))
                             {
-                                if (checkCollision(bullet, gameObjects[i]))
+                                if (i <= gameObjects.Count)
                                 {
+                                    if (checkCollision(bullet, gameObjects[i]))
+                                    {
 #if DEBUG
-                                    Console.WriteLine("Bullet - Enemy Collision");
+                                        Console.WriteLine("Bullet - Enemy Collision");
 #endif
-                                    gameObjects.Remove(bullet);
+                                        gameObjects.Remove(bullet);
 
+                                    }
+
+                                }
+                                else
+                                {
+                                    break;
                                 }
                             }
                         }
@@ -92,7 +100,6 @@ namespace src
             SDLGameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
 
             // Load Enemy textures
-            // if (!TextureManager.Instance.Load("Resources/spr_suicidebomber_strip4.png", "enemy", Game.Instance.GetRenderer))
             if (!TextureManager.Instance.Load("Resources/tmpEne.png", "enemy", Game.Instance.GetRenderer))
             {
                 return false;

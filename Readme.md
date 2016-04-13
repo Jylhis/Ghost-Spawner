@@ -4,13 +4,14 @@
 # TODO
 - UML relaatiot
 - loppuraportti
-- Bigger bullets
-- Shoot diagonally
-- final sounds & graphics
+- Text on screen
+- highscore
+- bullet damage
+- player speed
+- player stationary collision throwback bug
+- final sounds
 --------------------------
-- Playsound try catch
 - Score & wave counter
-- Text on screen !!!
 - Better throwback
 - Tests
 - Async things
