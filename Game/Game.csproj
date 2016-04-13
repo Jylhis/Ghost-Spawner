@@ -171,6 +171,9 @@
     <Content Include="Resources\sound\playerboom.wav" />
     <Content Include="Resources\sound\playerspawn.wav" />
     <Content Include="Resources\sound\robot.wav" />
+    <Content Include="Resources\sound\sabaton.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\sound\select.wav" />
     <Content Include="Resources\sound\singlespawn1.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

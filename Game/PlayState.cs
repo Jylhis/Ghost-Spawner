@@ -135,11 +135,15 @@ namespace src
             {
                 return false;
             }
-
+            if (!SoundManager.Instance.Load("Resources/sound/sabaton.wav" , "music", sound_type.SOUND_MUSIC))
+            {
+                return false;
+            }
             gameObjects.Add(player);
             gameObjects.Add(spawner);
 #if DEBUG
             Console.WriteLine("Entering Playstate");
+           // SoundManager.Instance.PlayMusic("music");
 #endif
             return true;
         }
