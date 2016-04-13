@@ -31,39 +31,42 @@ namespace src
 
                 if (gameObjects[i] is Bullet)
                 {
-                    Bullet tmp = (Bullet)gameObjects[i];
-                    if (!tmp.IsMoving)
+                    Bullet tmpBul = (Bullet)gameObjects[i];
+                    if (!tmpBul.IsMoving)
                     {
                         gameObjects.Remove(gameObjects[i]);
                     }
                 }
-            }
-
-            foreach (SDLGameObject enemy in gameObjects.FindAll(x => x.id == "enemy"))
-            {
-                if (gameObjects.Find(x => x.id == "player") == null)
+                else if (gameObjects[i] is Enemy)
                 {
-                    break;
-                }
-                if (checkCollision(enemy, gameObjects.Find(x => x.id == "player")))
-                {
-                   
-                }
-                if (gameObjects.Find(x => x.id == "bullet") != null)
-                {
-                    foreach (var bullet in gameObjects.FindAll(x => x.id == "bullet"))
+                    Enemy tmpEne = (Enemy)gameObjects[i];
+                    if(tmpEne.IsKill)
                     {
-                        if (checkCollision(bullet, enemy))
+                        SoundManager.Instance.PlaySound("die");
+                        gameObjects.Remove(gameObjects[i]);
+                    }
+                    else
+                    {
+                        if (gameObjects.Find(x => x.id == "player") == null)
                         {
-#if DEBUG
-                            Console.WriteLine("Bullet - Enemy Collision");
-#endif
-                            gameObjects.Remove(bullet);
-                            Enemy tmpE = (Enemy)enemy;
-                            if (tmpE.IsKill)
+                            break;
+                        }
+                        if (checkCollision(gameObjects[i], gameObjects.Find(x => x.id == "player")))
+                        {
+
+                        }
+                        if (gameObjects.Find(x => x.id == "bullet") != null)
+                        {
+                            foreach (var bullet in gameObjects.FindAll(x => x.id == "bullet"))
                             {
-                                SoundManager.Instance.PlaySound("die");
-                                gameObjects.Remove(enemy);
+                                if (checkCollision(bullet, gameObjects[i]))
+                                {
+#if DEBUG
+                                    Console.WriteLine("Bullet - Enemy Collision");
+#endif
+                                    gameObjects.Remove(bullet);
+
+                                }
                             }
                         }
                     }
@@ -89,7 +92,8 @@ namespace src
             SDLGameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
 
             // Load Enemy textures
-            if (!TextureManager.Instance.Load("Resources/spr_suicidebomber_strip4.png", "enemy", Game.Instance.GetRenderer))
+            // if (!TextureManager.Instance.Load("Resources/spr_suicidebomber_strip4.png", "enemy", Game.Instance.GetRenderer))
+            if (!TextureManager.Instance.Load("Resources/tmpEne.png", "enemy", Game.Instance.GetRenderer))
             {
                 return false;
             }

@@ -36,45 +36,66 @@ namespace src
 
         public override void Update()
         {
-            if (500 <= (int)SDL.SDL_GetTicks() - tTime)
+            if (currentRow == 1)
             {
-                tTime = SDL.SDL_GetTicks();
-                switch ((Direction)rnd.Next(0, 9))
+                if (500 <= (int)SDL.SDL_GetTicks() - tTime)
                 {
-                    case Direction.LEFT:
-                        velocity.X = -2;
-                        break;
-                    case Direction.RIGHT:
-                        velocity.X = 2;
-                        break;
-                    case Direction.UP:
-                        velocity.Y = 2;
-                        break;
-                    case Direction.DOWN:
-                        velocity.Y = -2;
-                        break;
-                    case Direction.UPLE:
-                        velocity.Y = 2;
-                        velocity.X = -2;
-                        break;
-                    case Direction.UPRI:
-                        velocity.Y = 2;
-                        velocity.X = 2;
-                        break;
-                    case Direction.DOLE:
-                        velocity.Y = -2;
-                        velocity.X = -2;
-                        break;
-                    case Direction.DORI:
-                        velocity.Y = -2;
-                        velocity.X = 2;
-                        break;
-                    default:
-                        break;
+                    tTime = SDL.SDL_GetTicks();
+                    switch ((Direction)rnd.Next(0, 9))
+                    {
+                        case Direction.LEFT:
+                            velocity.X = -2;
+                            break;
+                        case Direction.RIGHT:
+                            velocity.X = 2;
+                            break;
+                        case Direction.UP:
+                            velocity.Y = 2;
+                            break;
+                        case Direction.DOWN:
+                            velocity.Y = -2;
+                            break;
+                        case Direction.UPLE:
+                            velocity.Y = 2;
+                            velocity.X = -2;
+                            break;
+                        case Direction.UPRI:
+                            velocity.Y = 2;
+                            velocity.X = 2;
+                            break;
+                        case Direction.DOLE:
+                            velocity.Y = -2;
+                            velocity.X = -2;
+                            break;
+                        case Direction.DORI:
+                            velocity.Y = -2;
+                            velocity.X = 2;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
-            currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 4);
+            else
+            {
+                velocity.X = 0;
+                velocity.Y = 0;
+            }
 
+            if (currentRow == 2)
+            {
+                
+                currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 10);
+                if(currentFrame == 9)
+                {
+                    IsKill = true;
+                }
+
+            }
+            else
+            {
+                currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 4);
+            }
             base.Update();
         }
 
@@ -84,15 +105,15 @@ namespace src
             health -= damage;
             if (health <= 0)
             {
-                IsKill = true;
+                currentRow = 2;
             }
         }
-        #if DEBUG
+#if DEBUG
         ~Enemy()
         {
             Console.WriteLine("Enemy Deconstructor");
         }
-        #endif
+#endif
     }
 }
 

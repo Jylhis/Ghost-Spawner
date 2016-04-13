@@ -93,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\Restart.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -128,7 +131,9 @@
     <Content Include="Resources\glowoverlay.bmp" />
     <Content Include="Resources\GRS2ROC.bmp" />
     <Content Include="Resources\KITCHEN.GIF" />
-    <Content Include="Resources\license.txt" />
+    <None Include="Resources\LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\menubackground.bmp" />
     <Content Include="Resources\menubackgroundscroller.bmp" />
     <Content Include="Resources\mine.bmp" />
@@ -211,6 +216,9 @@
     <Content Include="Resources\spr_tank_strip3.png" />
     <Content Include="Resources\SYNSObullet.bmp" />
     <Content Include="Resources\TABLE1.GIF" />
+    <Content Include="Resources\tmpEne.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\TOWNBOT.bmp" />
     <Content Include="Resources\TOWNBOT2.bmp" />
     <Content Include="Resources\TOWNDOOR.bmp" />
