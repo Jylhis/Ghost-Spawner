@@ -84,9 +84,9 @@ namespace src
 
             if (currentRow == 2)
             {
-                
+
                 currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 10);
-                if(currentFrame == 9)
+                if (currentFrame == 9)
                 {
                     IsKill = true;
                 }
@@ -105,16 +105,11 @@ namespace src
             health -= damage;
             if (health <= 0)
             {
+                PlayState.score++;
                 currentRow = 2;
                 currentFrame = 1;
             }
         }
-#if DEBUG
-        ~Enemy()
-        {
-            Console.WriteLine("Enemy Deconstructor");
-        }
-#endif
     }
 }
 

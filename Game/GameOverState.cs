@@ -8,6 +8,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace src
 {
@@ -50,6 +51,12 @@ namespace src
 
         public override bool OnEnter()
         {
+            /* Stream scoreFile = new FileStream("scores.db", FileMode.Open, FileAccess.Read, FileShare.None);
+             int lastHighScore = scoreFile.ReadByte();
+             scoreFile.Close();
+
+             Console.WriteLine(lastHighScore);*/
+
             if (!TextureManager.Instance.Load("Resources/Main.bmp",
                     "mainbutton", Game.Instance.GetRenderer))
             {

@@ -231,7 +231,7 @@ namespace src
                         Shoot(Direction.DOWN);
                         break;
                 }
-                
+
             }
 
 
@@ -282,13 +282,13 @@ namespace src
             PlayState.gameObjects.Add(bullet);
         }
 
-        #if DEBUG
+#if DEBUG
         ~Player()
         {
 
             Console.WriteLine("Player Deconstructor");
 
         }
-        #endif
+#endif
     }
 }

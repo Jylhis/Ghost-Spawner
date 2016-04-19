@@ -9,6 +9,7 @@
 using SDL2;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace src
 {
@@ -17,6 +18,8 @@ namespace src
         private const string menuID = "PLAY";
 
         public static List<SDLGameObject> gameObjects = new List<SDLGameObject>();
+
+        public static int score = 0;
 
         public override void Update()
         {
@@ -27,6 +30,10 @@ namespace src
 
             for (int i = 0; i < gameObjects.Count; i++)
             {
+                if (i >= gameObjects.Count + 1)
+                {
+                    break;
+                }
                 gameObjects[i].Update();
 
                 if (gameObjects[i] is Bullet)
@@ -59,21 +66,18 @@ namespace src
                         {
                             foreach (var bullet in gameObjects.FindAll(x => x.id == "bullet"))
                             {
-                                if (i <= gameObjects.Count)
+                                try
                                 {
                                     if (checkCollision(bullet, gameObjects[i]))
                                     {
-#if DEBUG
-                                        Console.WriteLine("Bullet - Enemy Collision");
-#endif
                                         gameObjects.Remove(bullet);
-
                                     }
-
                                 }
-                                else
+                                catch (ArgumentOutOfRangeException e)
                                 {
-                                    break;
+#if DEBUG
+                                    Console.WriteLine("ERROR: " + e + "\ni: " + i + "\nGameobjcets: " + gameObjects.Count);
+#endif
                                 }
                             }
                         }
@@ -92,6 +96,7 @@ namespace src
 
         public override bool OnEnter()
         {
+            score = 0;
             // Add Player
             if (!TextureManager.Instance.Load("Resources/spr_player_strip8.png", "player", Game.Instance.GetRenderer))
             {
@@ -135,16 +140,24 @@ namespace src
             {
                 return false;
             }
-            if (!SoundManager.Instance.Load("Resources/sound/sabaton.wav" , "music", sound_type.SOUND_MUSIC))
+            if (!SoundManager.Instance.Load("Resources/sound/sabaton.wav", "music", sound_type.SOUND_MUSIC))
             {
                 return false;
             }
+
+            /* if (!TextureManager.Instance.renderText("asdf", 100, 100, Game.Instance.GetRenderer))
+             {
+                 return false;
+             }*/
+            //TextureManager.Instance.Draw("as", 100, 100, 50, 50, Game.Instance.GetRenderer);
+
             gameObjects.Add(player);
             gameObjects.Add(spawner);
 #if DEBUG
             Console.WriteLine("Entering Playstate");
-           // SoundManager.Instance.PlayMusic("music");
 #endif
+            SoundManager.Instance.PlayMusic("music");
+
             return true;
         }
 
@@ -156,8 +169,22 @@ namespace src
             }
             gameObjects.Clear();
 #if DEBUG
+            Console.WriteLine("SCORE END: " + score);
             Console.WriteLine("Exiting Playstate");
 #endif
+
+            /* Stream scoreFile = new FileStream("scores", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+             if (score > scoreFile.ReadByte())
+              {
+             Console.WriteLine("SCORE_ " + score);
+             Console.WriteLine("Position: "+scoreFile.Position);
+             scoreFile.WriteByte((byte)score);
+             Console.WriteLine("Position: " + scoreFile.Position);
+             Console.WriteLine("READ: " + scoreFile.ReadByte());
+              scoreFile.WriteByte((byte)score);
+             }
+             scoreFile.Close();*/
+
             return true;
         }
 

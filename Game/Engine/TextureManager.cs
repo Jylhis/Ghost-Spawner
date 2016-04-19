@@ -17,6 +17,8 @@ namespace src
         private static TextureManager instance;
         private Dictionary<string, IntPtr> textureDict = new Dictionary<string, IntPtr>();
 
+        SDL.SDL_Color white;
+
         /// <summary>
         /// Gets the instance.
         /// </summary>
@@ -33,6 +35,46 @@ namespace src
             }
         }
 
+        public bool renderText(string text, int x, int y, IntPtr Renderer)
+        {
+            white.g = 255; white.r = 255; white.b = 255; //white.a = 0;
+            IntPtr defFont = SDL_ttf.TTF_OpenFont("Resources/goodTimes.ttf", 30);
+            if (defFont == IntPtr.Zero)
+            {
+                Console.WriteLine(" - Error loading font: " + SDL.SDL_GetError());
+                return false;
+            }
+
+            IntPtr surfaceMessage = SDL_ttf.TTF_RenderText_Solid(defFont, text, white);
+            if (surfaceMessage == IntPtr.Zero)
+            {
+                Console.WriteLine(" - Error creating surface from font: " + SDL.SDL_GetError());
+                return false;
+            }
+
+            IntPtr Message = SDL.SDL_CreateTextureFromSurface(Renderer, surfaceMessage);
+            if (Message != IntPtr.Zero)
+            {
+                //textureDict[text] = Message;
+                SDL.SDL_Rect Message_rect, src_rect;
+                src_rect.y = 0;
+                src_rect.x = 0;
+                Message_rect.x = x;
+                Message_rect.y = y;
+                src_rect.w = Message_rect.w = 100;
+                src_rect.h = Message_rect.h = 100;
+                SDL.SDL_RenderCopyEx(Renderer, Message, ref src_rect, ref Message_rect, 0.0, IntPtr.Zero, SDL.SDL_RendererFlip.SDL_FLIP_NONE);
+
+
+                return true;
+            }
+            SDL.SDL_FreeSurface(surfaceMessage);
+            Console.WriteLine(" - Error creating message: " + SDL.SDL_GetError());
+
+
+            return false;
+        }
+
         /// <summary>
         /// Load the texture and puts it into dictionary.
         /// </summary>
@@ -41,8 +83,7 @@ namespace src
         /// <param name="Renderer">Renderer.</param>
         public bool Load(string path, string id, IntPtr Renderer)
         {
-            IntPtr tempSurface = IntPtr.Zero;
-            tempSurface = SDL_image.IMG_Load(path);
+            IntPtr tempSurface = SDL_image.IMG_Load(path);
             if (tempSurface == IntPtr.Zero)
             {
                 Console.WriteLine(" - SDL_Load Error: " + SDL.SDL_GetError());
@@ -71,13 +112,11 @@ namespace src
         /// <param name="h">The height.</param>
         /// <param name="Renderer">Renderer.</param>
         /// <param name="flip">Flip.</param>
-        public void Draw(string id, int x, int y, int w, int h, ref IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
+        public void Draw(string id, int x, int y, int w, int h, IntPtr Renderer, SDL.SDL_RendererFlip flip = SDL.SDL_RendererFlip.SDL_FLIP_NONE)
         {
-            SDL.SDL_Rect srcRect;
-            SDL.SDL_Rect destRect;
+            SDL.SDL_Rect srcRect, destRect;
 
-            srcRect.x = 0;
-            srcRect.y = 0;
+            srcRect.x = srcRect.y = 0;
             srcRect.w = destRect.w = w;
             srcRect.h = destRect.h = h;
             destRect.x = x;
@@ -110,7 +149,9 @@ namespace src
             destRect.x = x;
             destRect.y = y;
 
+
             SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, angle, IntPtr.Zero, flip);
+
         }
 
         /// <summary>

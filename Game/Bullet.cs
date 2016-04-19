@@ -15,7 +15,6 @@ namespace src
     {
         private UInt32 starttime, ftime;
         private const int maxVel = 7;
-        public int total = 0;
 
         public bool IsMoving
         {
@@ -33,7 +32,6 @@ namespace src
             : base(ref pParams)
         {
             SoundManager.Instance.PlaySound("shoot");
-            total++;
             damage = 400;
             starttime = SDL.SDL_GetTicks();
             switch (di)
@@ -70,14 +68,6 @@ namespace src
             }
             currentFrame = (int)(((SDL.SDL_GetTicks()) / 100) % 5);
             base.Update();
-        }
-
-        ~Bullet()
-        {
-            total--;
-#if DEBUG
-            Console.WriteLine("Bullet Deconstructor");
-#endif
         }
     }
 }

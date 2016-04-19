@@ -23,7 +23,6 @@ namespace src
 #endif
             Game.Instance.GetStateMachine.Pop();
             Game.Instance.GetStateMachine.Change(new MenuState());
-
         }
 
         private static void resumePlay()
