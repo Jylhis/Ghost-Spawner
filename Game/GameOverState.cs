@@ -14,7 +14,7 @@ namespace src
 {
     public class GameOverState : GameState
     {
-        private List<SDLGameObject> gameObjects = new List<SDLGameObject>();
+        private List<GameObject> gameObjects = new List<GameObject>();
         private const string menuID = "GAMEOVER";
 
         private static void gameOverToMain()
@@ -27,10 +27,6 @@ namespace src
         {
             Console.WriteLine("Pressed restart");
             Game.Instance.GetStateMachine.Change(new PlayState());
-        }
-
-        public GameOverState()
-        {
         }
 
         public override void Update()
@@ -69,8 +65,8 @@ namespace src
                 return false;
             }
 
-            SDLGameObject button1 = new MenuButton(new LoaderParams(320, 400, 380, 203, "mainbutton"), gameOverToMain);
-            SDLGameObject button2 = new MenuButton(new LoaderParams(320, 100, 380, 203, "restartbutton"), restartPlay);
+            GameObject button1 = new MenuButton(new LoaderParams(320, 400, 380, 203, "mainbutton"), gameOverToMain);
+            GameObject button2 = new MenuButton(new LoaderParams(320, 100, 380, 203, "restartbutton"), restartPlay);
 
             gameObjects.Add(button1);
             gameObjects.Add(button2);

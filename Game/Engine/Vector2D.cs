@@ -33,46 +33,47 @@ namespace src
             v1.Y += v2.Y;
             return v1;
         }
+        /*
+                /// <param name="v1">V1.</param>
+                /// <param name="scalar">Scalar.</param>
+                public static Vector2D operator *(Vector2D v1, float scalar)
+                {
+                    v1.X *= scalar;
+                    v1.Y *= scalar;
+                    return v1;
+                }
 
-        /// <param name="v1">V1.</param>
-        /// <param name="scalar">Scalar.</param>
-        public static Vector2D operator *(Vector2D v1, float scalar)
-        {
-            v1.X *= scalar;
-            v1.Y *= scalar;
-            return v1;
-        }
+                /// <param name="v1">V1.</param>
+                /// <param name="v2">V2.</param>
+                public static Vector2D operator -(Vector2D v1, Vector2D v2)
+                {
+                    v1.X -= v2.X;
+                    v1.Y -= v2.Y;
+                    return v1;
+                }
 
-        /// <param name="v1">V1.</param>
-        /// <param name="v2">V2.</param>
-        public static Vector2D operator -(Vector2D v1, Vector2D v2)
-        {
-            v1.X -= v2.X;
-            v1.Y -= v2.Y;
-            return v1;
-        }
+                /// <param name="v1">V1.</param>
+                /// <param name="scalar">Scalar.</param>
+                public static Vector2D operator /(Vector2D v1, float scalar)
+                {
+                    v1.X /= scalar;
+                    v1.Y /= scalar;
+                    return v1;
+                }
 
-        /// <param name="v1">V1.</param>
-        /// <param name="scalar">Scalar.</param>
-        public static Vector2D operator /(Vector2D v1, float scalar)
-        {
-            v1.X /= scalar;
-            v1.Y /= scalar;
-            return v1;
-        }
-
-        /// <summary>
-        /// Normalize this instance.
-        /// </summary>
-       /* public void Normalize()
-        {
-            double l = 1 / Length;
-            if (l > 0)
-            {
-                this.X *= l;
-                this.Y *= l;
-            }
-        }*/
+                /// <summary>
+                /// Normalize this instance.
+                /// </summary>
+                public void Normalize()
+                {
+                    double l = 1 / Length;
+                    if (l > 0)
+                    {
+                        this.X *= l;
+                        this.Y *= l;
+                    }
+                }
+                */
 
 
         /// <summary>

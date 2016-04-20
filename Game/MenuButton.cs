@@ -10,7 +10,7 @@ using System;
 
 namespace src
 {
-    public class MenuButton : SDLGameObject
+    public class MenuButton : GameObject
     {
         private bool released;
 
@@ -18,7 +18,7 @@ namespace src
 
         callback call;
 
-        private enum button_state
+        private enum buttonState
         {
             MOUSE_OUT,
             MOUSE_OVER,
@@ -29,12 +29,7 @@ namespace src
             : base(ref pParams)
         {
             call = new callback(incall);
-            currentFrame = (int)button_state.MOUSE_OUT;
-        }
-
-        public override void Draw()
-        {
-            base.Draw();
+            currentFrame = (int)buttonState.MOUSE_OUT;
         }
 
         public override void Update()
@@ -48,19 +43,19 @@ namespace src
                 if (InputHandler.Instance.GetMouseButtonState(MouseButtons.LEFT)
                     && released)
                 {
-                    currentFrame = (int)button_state.CLICKED;
+                    currentFrame = (int)buttonState.CLICKED;
                     call();
                     released = false;
                 }
                 else if (InputHandler.Instance.GetMouseButtonState(MouseButtons.LEFT))
                 {
                     released = true;
-                    currentFrame = (int)button_state.MOUSE_OVER;
+                    currentFrame = (int)buttonState.MOUSE_OVER;
                 }
             }
             else
             {
-                currentFrame = (int)button_state.MOUSE_OUT;
+                currentFrame = (int)buttonState.MOUSE_OUT;
             }
         }
     }

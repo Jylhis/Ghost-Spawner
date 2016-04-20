@@ -12,7 +12,7 @@ using SDL2;
 
 namespace src
 {
-    public class EnemySpawner : SDLGameObject
+    public class EnemySpawner : GameObject
     {
         private UInt32 starttime, ftime;
 
@@ -48,7 +48,7 @@ namespace src
         public void Spawn()
         {
             SoundManager.Instance.PlaySound("spawn");
-            SDLGameObject enemy = new Enemy(new LoaderParams(rect.x, rect.y, 40, 40, "enemy"));
+            GameObject enemy = new Enemy(new LoaderParams(rect.x, rect.y, 40, 40, "enemy"));
             PlayState.gameObjects.Add(enemy);
         }
     }

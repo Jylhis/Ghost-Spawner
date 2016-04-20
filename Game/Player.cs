@@ -22,7 +22,7 @@ namespace src
         UPRI
     }
 
-    public class Player : SDLGameObject
+    public class Player : GameObject
     {
         private new int health = 100;
         private int direction;
@@ -233,32 +233,6 @@ namespace src
                 }
 
             }
-
-
-            // Joystick / Controller
-            if (InputHandler.Instance.JoysticksInitialised)
-            {
-                if (InputHandler.Instance.Xvalue(0, 1) > 0 ||
-                    InputHandler.Instance.Xvalue(0, 1) < 0)
-                {
-                    velocity.X = 2 * InputHandler.Instance.Xvalue(0, 1);
-                }
-                if (InputHandler.Instance.Yvalue(0, 1) > 0 ||
-                    InputHandler.Instance.Yvalue(0, 1) < 0)
-                {
-                    velocity.Y = 2 * InputHandler.Instance.Yvalue(0, 1);
-                }
-                if (InputHandler.Instance.Xvalue(0, 2) > 0 ||
-                    InputHandler.Instance.Xvalue(0, 2) < 0)
-                {
-                    velocity.X = 2 * InputHandler.Instance.Xvalue(0, 1);
-                }
-                if (InputHandler.Instance.Yvalue(0, 2) > 0 ||
-                    InputHandler.Instance.Yvalue(0, 2) < 0)
-                {
-                    velocity.Y = 2 * InputHandler.Instance.Yvalue(0, 1);
-                }
-            }
         }
 
         public override void OnCollision(int damage = 0)
@@ -278,16 +252,14 @@ namespace src
         public void Shoot(Direction d)
         {
             startTime = SDL.SDL_GetTicks();
-            SDLGameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 16, 16, "bullet"), d);
+            GameObject bullet = new Bullet(new LoaderParams((int)Position.X + rect.w / 2, (int)Position.Y + rect.w / 2, 16, 16, "bullet"), d);
             PlayState.gameObjects.Add(bullet);
         }
 
 #if DEBUG
         ~Player()
         {
-
             Console.WriteLine("Player Deconstructor");
-
         }
 #endif
     }

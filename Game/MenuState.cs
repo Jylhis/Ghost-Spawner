@@ -14,7 +14,7 @@ namespace src
     public class MenuState : GameState
     {
         private const string menuID = "MENU";
-        private List<SDLGameObject> gameObjects = new List<SDLGameObject>();
+        private List<GameObject> gameObjects = new List<GameObject>();
 
         private static void menuToPlay()
         {
@@ -42,9 +42,9 @@ namespace src
 
         public override void Render()
         {
-            foreach (SDLGameObject obj in gameObjects)
+            for (int i = 0; i < gameObjects.Count; i++)
             {
-                obj.Draw();
+                gameObjects[i].Draw();
             }
         }
 
@@ -58,8 +58,8 @@ namespace src
             {
                 return false;
             }
-            SDLGameObject button1 = new MenuButton(new LoaderParams(320, 100, 380, 203, "playbutton"), menuToPlay);
-            SDLGameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "exitbutton"), exitFromMenu);
+            GameObject button1 = new MenuButton(new LoaderParams(320, 100, 380, 203, "playbutton"), menuToPlay);
+            GameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "exitbutton"), exitFromMenu);
             gameObjects.Add(button1);
             gameObjects.Add(button2);
 #if DEBUG

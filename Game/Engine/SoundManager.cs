@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace src
 {
-    public enum sound_type
+    public enum SoundType
     {
         /// <summary>
         /// Music.
@@ -53,9 +53,9 @@ namespace src
         /// <param name="fileName">File name.</param>
         /// <param name="id">Identifier.</param>
         /// <param name="type">Type.</param>
-        public bool Load(string fileName, string id, sound_type type)
+        public bool Load(string fileName, string id, SoundType type)
         {
-            if (type == sound_type.SOUND_MUSIC)
+            if (type == SoundType.SOUND_MUSIC)
             {
                 IntPtr music = SDL_mixer.Mix_LoadMUS(fileName);
 
@@ -67,7 +67,7 @@ namespace src
                 musics[id] = music;
                 return true;
             }
-            else if (type == sound_type.SOUND_SFX)
+            else if (type == SoundType.SOUND_SFX)
             {
                 IntPtr pChunk = SDL_mixer.Mix_LoadWAV(fileName);
                 if (pChunk == IntPtr.Zero)

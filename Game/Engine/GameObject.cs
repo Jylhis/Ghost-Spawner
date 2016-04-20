@@ -11,7 +11,7 @@ using System;
 
 namespace src
 {
-    public class SDLGameObject
+    public class GameObject
     {
         protected int currentRow, currentFrame;
         protected Vector2D velocity, acceleration;
@@ -91,10 +91,10 @@ namespace src
         public string id;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="src.SDLGameObject"/> class.
+        /// Initializes a new instance of the <see cref="src.GameObject"/> class.
         /// </summary>
         /// <param name="pParams">Parameters.</param>
-        public SDLGameObject(ref LoaderParams pParams)
+        public GameObject(ref LoaderParams pParams)
         {
             Position = new Vector2D(pParams.X, pParams.Y);
             velocity = new Vector2D(0, 0);

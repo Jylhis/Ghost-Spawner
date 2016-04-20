@@ -14,7 +14,7 @@ namespace src
     public class PauseState : GameState
     {
         private const string menuID = "PAUSE";
-        private List<SDLGameObject> gameObjects = new List<SDLGameObject>();
+        private List<GameObject> gameObjects = new List<GameObject>();
 
         private static void pauseToMain()
         {
@@ -61,8 +61,8 @@ namespace src
             {
                 return false;
             }
-            SDLGameObject button1 = new MenuButton(new LoaderParams(320, 100, 380, 203, "resumebutton"), resumePlay);
-            SDLGameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "mainmenubutton"), pauseToMain);
+            GameObject button1 = new MenuButton(new LoaderParams(320, 100, 380, 203, "resumebutton"), resumePlay);
+            GameObject button2 = new MenuButton(new LoaderParams(320, 400, 380, 203, "mainmenubutton"), pauseToMain);
             gameObjects.Add(button1);
             gameObjects.Add(button2);
 #if DEBUG

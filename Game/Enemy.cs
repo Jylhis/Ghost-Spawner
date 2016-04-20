@@ -11,14 +11,14 @@ using System;
 
 namespace src
 {
-    public class Enemy : SDLGameObject
+    public class Enemy : GameObject
     {
         private new int health = 100;
 
         public bool IsKill { get; set; }
 
-        Random rnd;
-        UInt32 tTime;
+        private Random rnd;
+        private UInt32 tTime;
 
         public Enemy(LoaderParams pParams)
             : base(ref pParams)

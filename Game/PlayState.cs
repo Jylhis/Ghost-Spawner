@@ -17,7 +17,7 @@ namespace src
     {
         private const string menuID = "PLAY";
 
-        public static List<SDLGameObject> gameObjects = new List<SDLGameObject>();
+        public static List<GameObject> gameObjects = new List<GameObject>();
 
         public static int score = 0;
 
@@ -102,7 +102,7 @@ namespace src
             {
                 return false;
             }
-            SDLGameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
+            GameObject player = new Player(new LoaderParams(100, 100, 40, 40, "player"));
 
             // Load Enemy textures
             if (!TextureManager.Instance.Load("Resources/tmpEne.png", "enemy", Game.Instance.GetRenderer))
@@ -121,26 +121,26 @@ namespace src
             {
                 return false;
             }
-            SDLGameObject spawner = new EnemySpawner(new LoaderParams(400, 400, 38, 36, "spawner"));
+            GameObject spawner = new EnemySpawner(new LoaderParams(400, 400, 38, 36, "spawner"));
 
             // Sounds
-            if (!SoundManager.Instance.Load("Resources/sound/laser2.wav", "shoot", sound_type.SOUND_SFX))
+            if (!SoundManager.Instance.Load("Resources/sound/laser2.wav", "shoot", SoundType.SOUND_SFX))
             {
                 return false;
             }
-            if (!SoundManager.Instance.Load("Resources/sound/explode1.wav", "getHit", sound_type.SOUND_SFX))
+            if (!SoundManager.Instance.Load("Resources/sound/explode1.wav", "getHit", SoundType.SOUND_SFX))
             {
                 return false;
             }
-            if (!SoundManager.Instance.Load("Resources/sound/singlespawn1.wav", "die", sound_type.SOUND_SFX))
+            if (!SoundManager.Instance.Load("Resources/sound/singlespawn1.wav", "die", SoundType.SOUND_SFX))
             {
                 return false;
             }
-            if (!SoundManager.Instance.Load("Resources/sound/idler.wav", "spawn", sound_type.SOUND_SFX))
+            if (!SoundManager.Instance.Load("Resources/sound/idler.wav", "spawn", SoundType.SOUND_SFX))
             {
                 return false;
             }
-            if (!SoundManager.Instance.Load("Resources/sound/sabaton.wav", "music", sound_type.SOUND_MUSIC))
+            if (!SoundManager.Instance.Load("Resources/sound/sabaton.wav", "music", SoundType.SOUND_MUSIC))
             {
                 return false;
             }
@@ -188,7 +188,7 @@ namespace src
             return true;
         }
 
-        private bool checkCollision(SDLGameObject enemy, SDLGameObject other)
+        private bool checkCollision(GameObject enemy, GameObject other)
         {
             SDL.SDL_bool bo = SDL.SDL_bool.SDL_FALSE;
             SDL.SDL_Rect result;

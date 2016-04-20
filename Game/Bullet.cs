@@ -11,7 +11,7 @@ using System;
 
 namespace src
 {
-    class Bullet : SDLGameObject
+    class Bullet : GameObject
     {
         private UInt32 starttime, ftime;
         private const int maxVel = 7;
