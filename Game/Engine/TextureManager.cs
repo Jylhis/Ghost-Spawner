@@ -55,7 +55,6 @@ namespace src
             IntPtr Message = SDL.SDL_CreateTextureFromSurface(Renderer, surfaceMessage);
             if (Message != IntPtr.Zero)
             {
-                //textureDict[text] = Message;
                 SDL.SDL_Rect Message_rect, src_rect;
                 src_rect.y = 0;
                 src_rect.x = 0;
@@ -65,12 +64,10 @@ namespace src
                 src_rect.h = Message_rect.h = 100;
                 SDL.SDL_RenderCopyEx(Renderer, Message, ref src_rect, ref Message_rect, 0.0, IntPtr.Zero, SDL.SDL_RendererFlip.SDL_FLIP_NONE);
 
-
                 return true;
             }
             SDL.SDL_FreeSurface(surfaceMessage);
             Console.WriteLine(" - Error creating message: " + SDL.SDL_GetError());
-
 
             return false;
         }
@@ -100,7 +97,6 @@ namespace src
             Console.WriteLine(" - Something Wrong in loadTexture");
             return false;
         }
-
 
         /// <summary>
         /// Draw texture.
