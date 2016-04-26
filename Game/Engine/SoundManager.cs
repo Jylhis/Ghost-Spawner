@@ -24,7 +24,7 @@ namespace src
         SOUND_SFX
     }
 
-    class SoundManager
+    public class SoundManager
     {
         private static SoundManager instance;
         private Dictionary<string, IntPtr> sounds = new Dictionary<string, IntPtr>();

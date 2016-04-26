@@ -194,6 +194,9 @@ UpgradeLog*.htm
 *.bim.layout
 *.bim_*.settings
 
+# Properties
+Game/Properties
+
 # Microsoft Fakes
 FakesAssemblies/
 

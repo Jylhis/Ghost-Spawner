@@ -90,6 +90,7 @@
     <Compile Include="GameOverState.cs" />
     <Compile Include="Engine\Program.cs" />
     <Compile Include="EnemySpawner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
