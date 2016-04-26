@@ -17,7 +17,7 @@ namespace src
         private static TextureManager instance;
         private Dictionary<string, IntPtr> textureDict = new Dictionary<string, IntPtr>();
 
-        SDL.SDL_Color white;
+        //SDL.SDL_Color white;
 
         /// <summary>
         /// Gets the instance.
@@ -35,7 +35,7 @@ namespace src
             }
         }
 
-        public bool renderText(string text, int x, int y, IntPtr Renderer)
+       /* public bool renderText(string text, int x, int y, IntPtr Renderer)
         {
             white.g = 255; white.r = 255; white.b = 255; //white.a = 0;
             IntPtr defFont = SDL_ttf.TTF_OpenFont("Resources/goodTimes.ttf", 30);
@@ -70,7 +70,7 @@ namespace src
             Console.WriteLine(" - Error creating message: " + SDL.SDL_GetError());
 
             return false;
-        }
+        }*/
 
         /// <summary>
         /// Load the texture and puts it into dictionary.
@@ -118,7 +118,9 @@ namespace src
             destRect.x = x;
             destRect.y = y;
 
-            SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, IntPtr.Zero, flip);
+            SDL.SDL_Point center;
+            center.x = center.y = 0;
+            SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, 0.0, ref center, flip);
         }
 
         /// <summary>
@@ -145,8 +147,10 @@ namespace src
             destRect.x = x;
             destRect.y = y;
 
+            SDL.SDL_Point center;
+            center.x = center.y = 0;
 
-            SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, angle, IntPtr.Zero, flip);
+            SDL.SDL_RenderCopyEx(Renderer, textureDict[id], ref srcRect, ref destRect, angle,ref center, flip);
 
         }
 
