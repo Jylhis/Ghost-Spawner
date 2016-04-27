@@ -88,26 +88,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libFLAC-8.dll" />
-    <Content Include="libfreetype-6.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libjpeg-9.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="libfreetype-6.dll" />
+    <Content Include="libjpeg-9.dll" />
     <Content Include="libmikmod-2.dll" />
     <Content Include="libmodplug-1.dll" />
     <Content Include="libogg-0.dll" />
     <Content Include="libpng16-16.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="libtiff-5.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="libtiff-5.dll" />
     <Content Include="libvorbis-0.dll" />
     <Content Include="libvorbisfile-3.dll" />
-    <Content Include="libwebp-4.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="libwebp-4.dll" />
     <Content Include="SDL2.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -117,9 +109,7 @@
     <Content Include="SDL2_mixer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="SDL2_ttf.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="SDL2_ttf.dll" />
     <Content Include="smpeg2.dll" />
     <Content Include="zlib1.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

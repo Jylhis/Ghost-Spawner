@@ -117,7 +117,7 @@ namespace src
 #endif
                         Game.Instance.IsRunning = true;
                         SDL.SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-
+                        /*
                         if (SDL_ttf.TTF_Init() == -1)
                         {
                             Console.WriteLine("Could not init TFF: " + SDL.SDL_GetError());
@@ -125,6 +125,7 @@ namespace src
 #if DEBUG
                         Console.WriteLine("TFF started");
 #endif
+*/
                     }
                 }
             }
@@ -179,7 +180,7 @@ namespace src
             Console.WriteLine("Closing game");
 #endif
             InputHandler.Instance.Clean();
-            SDL_ttf.TTF_Quit();
+            //SDL_ttf.TTF_Quit();
             SDL.SDL_DestroyWindow(window);
             SDL.SDL_DestroyRenderer(renderer);
             SDL.SDL_Quit();
