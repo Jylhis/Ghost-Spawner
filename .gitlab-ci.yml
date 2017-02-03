@@ -1,0 +1,9 @@
+image: mono
+
+# before_script:
+    # - nuget restore -NonInteractive
+    # - nuget restore "GhostSpawner.sln"
+    
+build:
+    script:
+        - xbuild "GhostSpawner.sln"
