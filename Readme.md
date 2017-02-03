@@ -1,4 +1,4 @@
-# Ghost Spawner [![Build Status](https://travis-ci.org/Jylhis/Ghost-Spawner.svg?branch=master)](https://travis-ci.org/Jylhis/Ghost-Spawner)
+# Ghost Spawner 
 ![screenshot](Doc/screenshot.png)
 
 # TODO
